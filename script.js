@@ -766,7 +766,9 @@ function updateAllTranslations() {
 
 // ===== Initialization =====
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Content Loaded")
   currentLanguage = localStorage.getItem("language") || "fr"
+  console.log("Current language:", currentLanguage)
   updateLanguageButtons()
   updateAllTranslations()
   initializeApp()
@@ -1846,7 +1848,10 @@ function changeSpeed() {
 // ===== Language Button Listeners =====
 function setupLanguageListeners() {
   console.log("Setting up language listeners")
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
+  const langButtons = document.querySelectorAll(".lang-btn")
+  console.log("Found language buttons:", langButtons.length)
+  
+  langButtons.forEach((btn) => {
     console.log("Adding listener to button:", btn.dataset.lang)
     btn.addEventListener("click", (e) => {
       e.preventDefault()
@@ -1854,5 +1859,11 @@ function setupLanguageListeners() {
       setLanguage(btn.dataset.lang)
     })
   })
+  
+  // Test function to manually switch language
+  window.testLanguageSwitch = function(lang) {
+    console.log("Manual language switch test to:", lang)
+    setLanguage(lang)
+  }
 }
 

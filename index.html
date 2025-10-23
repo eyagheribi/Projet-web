@@ -157,7 +157,7 @@
             
             <!-- Search Bar -->
             <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours..." data-translate-placeholder="search-placeholder">
+                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours..." data-translate-placeholder="search-courses">
                 <button class="search-btn">🔍</button>
             </div>
             
@@ -176,12 +176,12 @@
             
             <!-- User Menu -->
             <div class="user-menu">
-                <button class="cart-btn" id="cartBtn">
+                <button class="cart-btn" id="cartBtn" title="Panier">
                     <span class="cart-icon">🛒</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </button>
                 
-                <button class="wishlist-btn" id="wishlistBtn">
+                <button class="wishlist-btn" id="wishlistBtn" title="Favoris">
                     <span class="wishlist-icon">❤️</span>
                     <span class="wishlist-count" id="wishlistCount">0</span>
                 </button>
@@ -340,7 +340,7 @@
         <!-- Course Detail Page -->
         <section id="courseDetailPage" class="page">
             <div class="course-detail-container">
-                <button class="btn-back" onclick="navigateTo('courses')">← Retour</button>
+                <button class="btn-back" onclick="navigateTo('courses')" data-translate="back">← Retour</button>
                 
                 <div class="course-header">
                     <div class="course-hero">
@@ -358,29 +358,29 @@
                             <span class="price" id="coursePrice"></span>
                         </div>
                         <p id="courseDescription"></p>
-                        <button class="btn btn-primary btn-large" id="addToCartBtn">Ajouter au Panier</button>
-                        <button class="btn btn-outline" id="addToWishlistBtn">❤️ Ajouter aux Favoris</button>
+                        <button class="btn btn-primary btn-large" id="addToCartBtn" data-translate="add-to-cart">Ajouter au Panier</button>
+                        <button class="btn btn-outline" id="addToWishlistBtn" data-translate="add-to-favorites">❤️ Ajouter aux Favoris</button>
                     </div>
                 </div>
 
                 <div class="course-content">
                     <!-- Tabs -->
                     <div class="tabs">
-                        <button class="tab-btn active" data-tab="overview">Aperçu</button>
-                        <button class="tab-btn" data-tab="curriculum">Curriculum</button>
-                        <button class="tab-btn" data-tab="reviews">Avis</button>
-                        <button class="tab-btn" data-tab="qa">Q&A</button>
+                        <button class="tab-btn active" data-tab="overview" data-translate="overview">Aperçu</button>
+                        <button class="tab-btn" data-tab="curriculum" data-translate="curriculum">Curriculum</button>
+                        <button class="tab-btn" data-tab="reviews" data-translate="reviews">Avis</button>
+                        <button class="tab-btn" data-tab="qa" data-translate="qa">Q&A</button>
                     </div>
 
                     <!-- Overview Tab -->
                     <div class="tab-content active" id="overviewTab">
-                        <h3>À propos de ce cours</h3>
+                        <h3 data-translate="about-course">À propos de ce cours</h3>
                         <p id="courseFullDescription"></p>
                         
-                        <h3>Ce que vous apprendrez</h3>
+                        <h3 data-translate="what-you-learn">Ce que vous apprendrez</h3>
                         <ul id="learningPoints"></ul>
                         
-                        <h3>Instructeur</h3>
+                        <h3 data-translate="instructor">Instructeur</h3>
                         <div class="instructor-card" id="instructorCard"></div>
                     </div>
 

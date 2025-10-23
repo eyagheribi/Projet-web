@@ -213,6 +213,25 @@ const translations = {
     "signup-google": "Continuer avec Google",
     "signup-facebook": "Continuer avec Facebook",
     "nav-home": "Accueil",
+    "search-courses": "Rechercher des cours...",
+    "cart": "Panier",
+    "wishlist": "Favoris",
+    "add-to-cart": "Ajouter au Panier",
+    "add-to-favorites": "Ajouter aux Favoris",
+    "remove-from-favorites": "Retirer des Favoris",
+    "back": "Retour",
+    "overview": "Aperçu",
+    "curriculum": "Curriculum",
+    "reviews": "Avis",
+    "qa": "Q&A",
+    "about-course": "À propos de ce cours",
+    "what-you-learn": "Ce que vous apprendrez",
+    "course-content": "Ce cours comprend des vidéos, des exercices pratiques et des ressources téléchargeables.",
+    "create-react-components": "Créer des composants React",
+    "use-hooks": "Utiliser les hooks React",
+    "context-api": "Gérer l'état avec Context API",
+    "best-practices": "Appliquer les meilleures pratiques",
+    "instructor": "Instructeur",
     "nav-courses": "Cours",
     "nav-dashboard": "Mon Tableau de Bord",
 
@@ -378,6 +397,25 @@ const translations = {
     "signup-google": "Continue with Google",
     "signup-facebook": "Continue with Facebook",
     "nav-home": "Home",
+    "search-courses": "Search courses...",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "add-to-cart": "Add to Cart",
+    "add-to-favorites": "Add to Favorites",
+    "remove-from-favorites": "Remove from Favorites",
+    "back": "Back",
+    "overview": "Overview",
+    "curriculum": "Curriculum",
+    "reviews": "Reviews",
+    "qa": "Q&A",
+    "about-course": "About this course",
+    "what-you-learn": "What you will learn",
+    "course-content": "This course includes videos, practical exercises and downloadable resources.",
+    "create-react-components": "Create React components",
+    "use-hooks": "Use React hooks",
+    "context-api": "Manage state with Context API",
+    "best-practices": "Apply best practices",
+    "instructor": "Instructor",
     "nav-courses": "Courses",
     "nav-dashboard": "My Dashboard",
 
@@ -609,6 +647,19 @@ function updateAllTranslations() {
       element.placeholder = translations[currentLanguage][key]
     }
   })
+  
+  // Update title attributes
+  document.querySelectorAll("[title]").forEach(element => {
+    const title = element.getAttribute("title")
+    if (title === "Panier" && translations[currentLanguage]["cart"]) {
+      element.title = translations[currentLanguage]["cart"]
+    } else if (title === "Favoris" && translations[currentLanguage]["wishlist"]) {
+      element.title = translations[currentLanguage]["wishlist"]
+    }
+  })
+  
+  // Update document language
+  document.documentElement.lang = currentLanguage
   
   // Header & Navigation
   const searchInput = document.getElementById("searchInput")

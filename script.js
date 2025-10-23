@@ -1473,10 +1473,25 @@ function setupAuthListeners() {
   document.querySelectorAll(".auth-tab-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const tabName = e.target.dataset.authTab
+      
+      // Remove active class from all tabs and forms
       document.querySelectorAll(".auth-tab-btn").forEach((b) => b.classList.remove("active"))
       document.querySelectorAll(".auth-form").forEach((f) => f.classList.remove("active"))
+      
+      // Add active class to clicked tab and corresponding form
       e.target.classList.add("active")
-      document.getElementById(tabName + "Form").classList.add("active")
+      const formId = tabName + "Form"
+      const targetForm = document.getElementById(formId)
+      if (targetForm) {
+        targetForm.classList.add("active")
+      }
+      
+      // Clear form inputs when switching tabs
+      if (tabName === "login") {
+        document.getElementById("signupForm").reset()
+      } else if (tabName === "signup") {
+        document.getElementById("loginForm").reset()
+      }
     })
   })
 

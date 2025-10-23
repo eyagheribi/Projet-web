@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plateforme de cours en ligne - Apprenez de nouvelles compétences">
+    <title>EduLearn - Plateforme de Cours en Ligne</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Added authentication modal and theme toggle -->
+    <!-- Authentication Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-modal">
+            <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" data-auth-tab="login">Se Connecter</button>
+                <button class="auth-tab-btn" data-auth-tab="signup">S'Inscrire</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <button type="submit" class="btn btn-primary">Se Connecter</button>
+            </form>
+            
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form">
+                <input type="text" placeholder="Nom complet" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mot de passe" required>
+                <input type="password" placeholder="Confirmer le mot de passe" required>
+                <button type="submit" class="btn btn-primary">S'Inscrire</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">EduLearn</span>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours...">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-desktop">
+                <a href="#" class="nav-link" data-page="home">Accueil</a>
+                <a href="#" class="nav-link" data-page="courses">Cours</a>
+                <a href="#" class="nav-link" data-page="dashboard">Mon Tableau de Bord</a>
+            </nav>
+            
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            
+            <!-- User Menu -->
+            <div class="user-menu">
+                <button class="cart-btn" id="cartBtn">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="wishlist-btn" id="wishlistBtn">
+                    ❤️ <span class="wishlist-count" id="wishlistCount">0</span>
+                </button>
+                <!-- Added theme toggle and settings button -->
+                <button class="theme-toggle" id="themeToggle" title="Mode sombre/clair">🌙</button>
+                <button class="settings-btn" id="settingsBtn" title="Paramètres">⚙️</button>
+                <button class="profile-btn" id="profileBtn">👤</button>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="nav-mobile" id="navMobile">
+            <a href="#" class="nav-link" data-page="home">Accueil</a>
+            <a href="#" class="nav-link" data-page="courses">Cours</a>
+            <a href="#" class="nav-link" data-page="dashboard">Mon Tableau de Bord</a>
+        </nav>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="homePage" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Apprenez de Nouvelles Compétences</h1>
+                    <p>Accédez à des milliers de cours en ligne de qualité</p>
+                    <button class="btn btn-primary" onclick="navigateTo('courses')">Explorer les Cours</button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=500&h=400&fit=crop" alt="Apprentissage en ligne">
+                </div>
+            </section>
+
+            <!-- Featured Courses -->
+            <section class="featured-section">
+                <h2>Cours en Vedette</h2>
+                <div class="courses-grid" id="featuredCourses"></div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories-section">
+                <h2>Parcourir par Catégorie</h2>
+                <div class="categories-grid" id="categoriesGrid"></div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <h3>10,000+</h3>
+                    <p>Cours disponibles</p>
+                </div>
+                <div class="stat-card">
+                    <h3>500K+</h3>
+                    <p>Étudiants actifs</p>
+                </div>
+                <div class="stat-card">
+                    <h3>4.8/5</h3>
+                    <p>Note moyenne</p>
+                </div>
+                <div class="stat-card">
+                    <h3>24/7</h3>
+                    <p>Support disponible</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Courses Catalog Page -->
+        <section id="coursesPage" class="page">
+            <div class="courses-container">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <h3>Filtres</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Catégorie</h4>
+                        <div id="categoryFilters"></div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Prix</h4>
+                        <label><input type="checkbox" class="price-filter" value="free"> Gratuit</label>
+                        <label><input type="checkbox" class="price-filter" value="paid"> Payant</label>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Note</h4>
+                        <label><input type="checkbox" class="rating-filter" value="4"> 4+ étoiles</label>
+                        <label><input type="checkbox" class="rating-filter" value="3"> 3+ étoiles</label>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="resetFilters()">Réinitialiser</button>
+                </aside>
+
+                <!-- Courses List -->
+                <div class="courses-main">
+                    <div class="sort-bar">
+                        <label>Trier par:
+                            <select id="sortSelect">
+                                <option value="popular">Populaire</option>
+                                <option value="newest">Récent</option>
+                                <option value="rating">Note</option>
+                                <option value="price-low">Prix: Bas à Haut</option>
+                                <option value="price-high">Prix: Haut à Bas</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="courses-grid" id="coursesGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Detail Page -->
+        <section id="courseDetailPage" class="page">
+            <div class="course-detail-container">
+                <button class="btn-back" onclick="navigateTo('courses')">← Retour</button>
+                
+                <div class="course-header">
+                    <div class="course-hero">
+                        <img id="courseImage" src="/placeholder.svg" alt="Course image">
+                    </div>
+                    <div class="course-info">
+                        <h1 id="courseTitle"></h1>
+                        <div class="course-meta">
+                            <span class="rating" id="courseRating"></span>
+                            <span class="students" id="courseStudents"></span>
+                            <span class="price" id="coursePrice"></span>
+                        </div>
+                        <p id="courseDescription"></p>
+                        <button class="btn btn-primary btn-large" id="addToCartBtn">Ajouter au Panier</button>
+                        <button class="btn btn-outline" id="addToWishlistBtn">❤️ Ajouter aux Favoris</button>
+                    </div>
+                </div>
+
+                <div class="course-content">
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="overview">Aperçu</button>
+                        <button class="tab-btn" data-tab="curriculum">Curriculum</button>
+                        <button class="tab-btn" data-tab="reviews">Avis</button>
+                        <button class="tab-btn" data-tab="qa">Q&A</button>
+                    </div>
+
+                    <!-- Overview Tab -->
+                    <div class="tab-content active" id="overviewTab">
+                        <h3>À propos de ce cours</h3>
+                        <p id="courseFullDescription"></p>
+                        
+                        <h3>Ce que vous apprendrez</h3>
+                        <ul id="learningPoints"></ul>
+                        
+                        <h3>Instructeur</h3>
+                        <div class="instructor-card" id="instructorCard"></div>
+                    </div>
+
+                    <!-- Curriculum Tab -->
+                    <div class="tab-content" id="curriculumTab">
+                        <h3>Contenu du Cours</h3>
+                        <div class="curriculum-intro">
+                            <p>Ce cours contient des vidéos, des ressources téléchargeables et des exercices pratiques.</p>
+                        </div>
+                        <div id="curriculumList"></div>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-content" id="reviewsTab">
+                        <h3>Avis des Étudiants</h3>
+                        <div class="reviews-summary" id="reviewsSummary"></div>
+                        <div class="reviews-list" id="reviewsList"></div>
+                    </div>
+
+                    <!-- Q&A Tab -->
+                    <div class="tab-content" id="qaTab">
+                        <h3>Questions et Réponses</h3>
+                        <div class="qa-section" id="qaSection"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboardPage" class="page">
+            <div class="dashboard-container">
+                <h1>Mon Tableau de Bord</h1>
+                
+                <div class="dashboard-grid">
+                    <!-- User Profile Card -->
+                    <div class="profile-card">
+                        <h2>Mon Profil</h2>
+                        <div class="profile-info">
+                            <div class="avatar">👤</div>
+                            <div>
+                                <p><strong id="userName">Utilisateur</strong></p>
+                                <p id="userEmail">email@example.com</p>
+                                <button class="btn btn-secondary" onclick="editProfile()">Modifier</button>
+                                <!-- Added logout button -->
+                                <button class="btn btn-danger" onclick="logout()">Se Déconnecter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Stats -->
+                    <div class="stats-card">
+                        <h2>Mes Statistiques</h2>
+                        <div class="stat-item">
+                            <span>Cours Suivis:</span>
+                            <strong id="enrolledCount">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Cours Complétés:</span>
+                            <strong id="completedCount">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Heures d'Apprentissage:</span>
+                            <strong id="learningHours">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Courses -->
+                <section class="my-courses-section">
+                    <h2>Mes Cours</h2>
+                    <div class="courses-grid" id="myCoursesGrid"></div>
+                </section>
+
+                <!-- Wishlist -->
+                <section class="wishlist-section">
+                    <h2>Mes Favoris</h2>
+                    <div class="courses-grid" id="wishlistGrid"></div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section id="cartPage" class="page">
+            <div class="cart-container">
+                <h1>Mon Panier</h1>
+                <div class="cart-content">
+                    <div class="cart-items" id="cartItems"></div>
+                    <div class="cart-summary">
+                        <h3>Résumé</h3>
+                        <div class="summary-row">
+                            <span>Sous-total:</span>
+                            <span id="subtotal">0 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Réduction:</span>
+                            <span id="discount">0 €</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="total">0 €</span>
+                        </div>
+                        <button class="btn btn-primary btn-large" onclick="checkout()">Procéder au Paiement</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('courses')">Continuer les Achats</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Player Page -->
+        <section id="coursePlayerPage" class="page">
+            <div class="course-player-container">
+                <button class="btn-back" onclick="navigateTo('dashboard')">← Retour</button>
+                
+                <div class="player-layout">
+                    <!-- Video Player -->
+                    <div class="video-player">
+                        <!-- Added YouTube video player with controls -->
+                        <div class="youtube-player" id="youtubePlayer">
+                            <iframe id="videoFrame" width="100%" height="500" src="/placeholder.svg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="player-controls">
+                            <button onclick="previousLesson()">← Leçon Précédente</button>
+                            <button onclick="nextLesson()">Leçon Suivante →</button>
+                        </div>
+                        <!-- Added video controls info -->
+                        <div class="video-info">
+                            <p id="videoTitle"></p>
+                            <div class="video-controls-info">
+                                <span>Vitesse: <select id="speedControl" onchange="changeSpeed()"><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.25">1.25x</option><option value="1.5">1.5x</option></select></span>
+                                <span>Sous-titres: <input type="checkbox" id="captionToggle"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Sidebar -->
+                    <aside class="player-sidebar">
+                        <h3 id="playerCourseTitle"></h3>
+                        <!-- Added progress percentage -->
+                        <div class="course-progress">
+                            <div class="progress-bar-small" id="courseProgressBar"></div>
+                            <span id="progressText">0%</span>
+                        </div>
+
+                        <!-- Sections and Lessons -->
+                        <div class="sections-list" id="sectionsList"></div>
+
+                        <!-- Resources -->
+                        <div class="resources-section">
+                            <h4>📥 Ressources</h4>
+                            <div id="resourcesList">
+                                <div class="resource-item">
+                                    <a href="#" download>📄 Slides du Cours</a>
+                                </div>
+                                <div class="resource-item">
+                                    <a href="#" download>📝 Notes de Cours</a>
+                                </div>
+                                <div class="resource-item">
+                                    <a href="#" download>💻 Code Source</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q&A in Player -->
+                        <div class="qa-player">
+                            <h4>Questions</h4>
+                            <div id="qaPlayerList"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
+            <h2>Mon Profil</h2>
+            <form id="profileForm">
+                <input type="text" id="profileName" placeholder="Nom" required>
+                <input type="email" id="profileEmail" placeholder="Email" required>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <!-- Added settings modal for theme, language, and payment -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content settings-modal">
+            <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
+            <h2>Paramètres</h2>
+            
+            <div class="settings-section">
+                <h3>Apparence</h3>
+                <label>
+                    <input type="radio" name="theme" value="light" onchange="setTheme('light')"> Mode Clair
+                </label>
+                <label>
+                    <input type="radio" name="theme" value="dark" onchange="setTheme('dark')"> Mode Sombre
+                </label>
+                <label>
+                    <input type="radio" name="theme" value="auto" onchange="setTheme('auto')"> Auto
+                </label>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Langue</h3>
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Paiement</h3>
+                <label>
+                    Méthode de paiement préférée:
+                    <select id="paymentMethod">
+                        <option value="card">Carte Bancaire</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="wallet">Portefeuille</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" id="autoRenew"> Renouvellement automatique
+                </label>
+            </div>
+            
+            <button class="btn btn-primary" onclick="saveSettings()">Enregistrer les Paramètres</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>À Propos</h4>
+                <p>EduLearn est une plateforme d'apprentissage en ligne moderne.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Liens Utiles</h4>
+                <ul>
+                    <li><a href="#">Conditions d'Utilisation</a></li>
+                    <li><a href="#">Politique de Confidentialité</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EduLearn. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

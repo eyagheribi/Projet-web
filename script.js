@@ -1090,7 +1090,7 @@ function showCourseDetail(courseId) {
 
   // Populate course detail
   document.getElementById("courseTitle").textContent = currentCourse.title
-  document.getElementById("courseImage").src = currentCourse.image
+  document.getElementById("courseVideo").poster = currentCourse.image
   document.getElementById("courseDescription").textContent = currentCourse.description
   document.getElementById("courseFullDescription").textContent = currentCourse.fullDescription
   document.getElementById("courseRating").innerHTML =

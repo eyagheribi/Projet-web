@@ -723,9 +723,9 @@ function setupEventListeners() {
     navigateTo("dashboard")
   })
 
-  // Profile Button
+  // Profile Button - Redirect to auth modal instead of profile
   document.getElementById("profileBtn").addEventListener("click", () => {
-    openModal("profileModal")
+    openModal("authModal")
   })
 
   // Search
@@ -1564,7 +1564,7 @@ function checkAuthStatus() {
 function updateAuthUI() {
   if (isLoggedIn) {
     document.getElementById("profileBtn").textContent = "👤"
-    document.getElementById("profileBtn").onclick = () => openModal("profileModal")
+    document.getElementById("profileBtn").onclick = () => openModal("authModal")
   }
 }
 

@@ -806,10 +806,6 @@ function setupEventListeners() {
   })
 
 
-  document.getElementById("burgerSettings").addEventListener("click", () => {
-    openModal("settingsModal")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
 
   document.getElementById("burgerProfile").addEventListener("click", () => {
     document.getElementById("profileDropdown").classList.toggle("active")

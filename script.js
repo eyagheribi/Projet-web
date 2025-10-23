@@ -758,22 +758,6 @@ function setupEventListeners() {
   })
 
   // Burger Menu Items
-  // Navigation
-  document.getElementById("burgerHome").addEventListener("click", () => {
-    navigateTo("home")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
-
-  document.getElementById("burgerCourses").addEventListener("click", () => {
-    navigateTo("courses")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
-
-  document.getElementById("burgerDashboard").addEventListener("click", () => {
-    navigateTo("dashboard")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
-
   // Cart and Wishlist buttons in navbar
   document.getElementById("cartBtn").addEventListener("click", () => {
     navigateTo("cart")
@@ -781,19 +765,6 @@ function setupEventListeners() {
 
   document.getElementById("wishlistBtn").addEventListener("click", () => {
     navigateTo("wishlist")
-  })
-
-  // Authentication
-  document.getElementById("burgerLogin").addEventListener("click", () => {
-    document.getElementById("authModal").classList.add("active")
-    document.getElementById("authModal").classList.add("login-active")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
-
-  document.getElementById("burgerSignup").addEventListener("click", () => {
-    document.getElementById("authModal").classList.add("active")
-    document.getElementById("authModal").classList.add("signup-active")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
   // Settings
@@ -804,8 +775,6 @@ function setupEventListeners() {
     updateThemeToggle()
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
-
-
 
   document.getElementById("burgerProfile").addEventListener("click", () => {
     document.getElementById("profileDropdown").classList.toggle("active")

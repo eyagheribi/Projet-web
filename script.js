@@ -202,6 +202,16 @@ const translations = {
   fr: {
     // Header & Navigation
     "search-placeholder": "Rechercher des cours...",
+    "login-subtitle": "Connectez-vous à votre compte EduLearn",
+    "signup-subtitle": "Créez votre compte EduLearn",
+    "remember-me": "Se souvenir de moi",
+    "forgot-password": "Mot de passe oublié?",
+    "terms-agreement": "J'accepte les conditions d'utilisation et la politique de confidentialité",
+    "or": "ou",
+    "login-google": "Continuer avec Google",
+    "login-facebook": "Continuer avec Facebook",
+    "signup-google": "Continuer avec Google",
+    "signup-facebook": "Continuer avec Facebook",
     "nav-home": "Accueil",
     "nav-courses": "Cours",
     "nav-dashboard": "Mon Tableau de Bord",
@@ -357,6 +367,16 @@ const translations = {
   en: {
     // Header & Navigation
     "search-placeholder": "Search courses...",
+    "login-subtitle": "Sign in to your EduLearn account",
+    "signup-subtitle": "Create your EduLearn account",
+    "remember-me": "Remember me",
+    "forgot-password": "Forgot password?",
+    "terms-agreement": "I accept the terms of use and privacy policy",
+    "or": "or",
+    "login-google": "Continue with Google",
+    "login-facebook": "Continue with Facebook",
+    "signup-google": "Continue with Google",
+    "signup-facebook": "Continue with Facebook",
     "nav-home": "Home",
     "nav-courses": "Courses",
     "nav-dashboard": "My Dashboard",
@@ -781,6 +801,34 @@ function setupEventListeners() {
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
+  // Authentication Page Forms
+  document.getElementById("loginPageForm").addEventListener("submit", (e) => {
+    e.preventDefault()
+    // Handle login logic here
+    alert("Login functionality will be implemented")
+    navigateTo("home")
+  })
+
+  document.getElementById("signupPageForm").addEventListener("submit", (e) => {
+    e.preventDefault()
+    // Handle signup logic here
+    alert("Signup functionality will be implemented")
+    navigateTo("home")
+  })
+
+  // Navigation between auth pages
+  document.querySelectorAll('.auth-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      const text = link.textContent.trim()
+      if (text === 'S\'inscrire' || text === 'Sign Up') {
+        navigateTo("signup")
+      } else if (text === 'Se Connecter' || text === 'Login') {
+        navigateTo("login")
+      }
+    })
+  })
+
   // Profile Button - Toggle dropdown
   document.getElementById("profileBtn").addEventListener("click", (e) => {
     e.stopPropagation()
@@ -791,18 +839,14 @@ function setupEventListeners() {
   // Profile Dropdown Items
   document.getElementById("dropdownLogin").addEventListener("click", (e) => {
     e.preventDefault()
+    navigateTo("login")
     document.getElementById("profileDropdown").classList.remove("active")
-    openModal("authModal")
-    // Set login tab as active
-    document.querySelector('[data-auth-tab="login"]').click()
   })
 
   document.getElementById("dropdownSignup").addEventListener("click", (e) => {
     e.preventDefault()
+    navigateTo("signup")
     document.getElementById("profileDropdown").classList.remove("active")
-    openModal("authModal")
-    // Set signup tab as active
-    document.querySelector('[data-auth-tab="signup"]').click()
   })
 
   // Close dropdown when clicking outside
@@ -870,13 +914,15 @@ function navigateTo(page) {
     pageElement.classList.add("active")
   }
 
-  // Update active nav link
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.classList.remove("active")
-    if (link.dataset.page === page) {
-      link.classList.add("active")
-    }
-  })
+  // Update active nav link (only for main navigation pages)
+  if (['home', 'courses', 'dashboard'].includes(page)) {
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.classList.remove("active")
+      if (link.dataset.page === page) {
+        link.classList.add("active")
+      }
+    })
+  }
 
   // Close mobile menu
   document.getElementById("navMobile").classList.remove("active")

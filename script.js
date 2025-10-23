@@ -742,21 +742,59 @@ function setupEventListeners() {
   })
 
   // Burger Menu Items
+  // Navigation
+  document.getElementById("burgerHome").addEventListener("click", () => {
+    navigateTo("home")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerCourses").addEventListener("click", () => {
+    navigateTo("courses")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerDashboard").addEventListener("click", () => {
+    navigateTo("dashboard")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  // Cart and Wishlist
   document.getElementById("burgerCart").addEventListener("click", () => {
     navigateTo("cart")
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
   document.getElementById("burgerWishlist").addEventListener("click", () => {
-    navigateTo("dashboard")
+    navigateTo("wishlist")
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
+  // Authentication
+  document.getElementById("burgerLogin").addEventListener("click", () => {
+    document.getElementById("authModal").classList.add("active")
+    document.getElementById("authModal").classList.add("login-active")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerSignup").addEventListener("click", () => {
+    document.getElementById("authModal").classList.add("active")
+    document.getElementById("authModal").classList.add("signup-active")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  // Settings
   document.getElementById("burgerTheme").addEventListener("click", () => {
     currentTheme = currentTheme === "light" ? "dark" : "light"
     localStorage.setItem("theme", currentTheme)
     document.documentElement.setAttribute("data-theme", currentTheme)
     updateThemeToggle()
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerLanguage").addEventListener("click", () => {
+    currentLanguage = currentLanguage === "fr" ? "en" : "fr"
+    localStorage.setItem("language", currentLanguage)
+    updateLanguage()
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 

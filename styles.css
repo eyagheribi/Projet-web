@@ -2325,6 +2325,13 @@ body {
   font-weight: 600;
 }
 
+.burger-menu-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0.8rem 0;
+  opacity: 0.3;
+}
+
 /* Dark theme support for burger menu */
 [data-theme="dark"] .burger-menu-content {
   background: #1e293b;

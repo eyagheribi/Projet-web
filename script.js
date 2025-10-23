@@ -731,13 +731,20 @@ function setupEventListeners() {
   })
 
   // Profile Dropdown Items
-  document.querySelectorAll(".dropdown-item").forEach((item) => {
-    item.addEventListener("click", (e) => {
-      e.preventDefault()
-      const page = e.target.closest(".dropdown-item").dataset.page
-      navigateTo(page)
-      document.getElementById("profileDropdown").classList.remove("active")
-    })
+  document.getElementById("dropdownLogin").addEventListener("click", (e) => {
+    e.preventDefault()
+    document.getElementById("profileDropdown").classList.remove("active")
+    openModal("authModal")
+    // Set login tab as active
+    document.querySelector('[data-auth-tab="login"]').click()
+  })
+
+  document.getElementById("dropdownSignup").addEventListener("click", (e) => {
+    e.preventDefault()
+    document.getElementById("profileDropdown").classList.remove("active")
+    openModal("authModal")
+    // Set signup tab as active
+    document.querySelector('[data-auth-tab="signup"]').click()
   })
 
   // Close dropdown when clicking outside
@@ -751,40 +758,6 @@ function setupEventListeners() {
       dropdown.classList.remove("active")
     }
   })
-
-  // Login Page Form
-  const loginPageForm = document.getElementById("loginPageForm")
-  if (loginPageForm) {
-    loginPageForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      const email = document.getElementById("loginEmail").value
-      const password = document.getElementById("loginPassword").value
-      console.log("Login attempt:", email, password)
-      alert("Connexion réussie !")
-      navigateTo("dashboard")
-    })
-  }
-
-  // Signup Page Form
-  const signupPageForm = document.getElementById("signupPageForm")
-  if (signupPageForm) {
-    signupPageForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      const name = document.getElementById("signupName").value
-      const email = document.getElementById("signupEmail").value
-      const password = document.getElementById("signupPassword").value
-      const confirmPassword = document.getElementById("signupConfirmPassword").value
-      
-      if (password !== confirmPassword) {
-        alert("Les mots de passe ne correspondent pas !")
-        return
-      }
-      
-      console.log("Signup attempt:", name, email, password)
-      alert("Inscription réussie !")
-      navigateTo("dashboard")
-    })
-  }
 
 
   // Search
@@ -899,6 +872,40 @@ function renderCategoryFilters() {
   document.querySelectorAll(".category-filter").forEach((filter) => {
     filter.addEventListener("change", applyFilters)
   })
+
+  // Login Page Form
+  const loginPageForm = document.getElementById("loginPageForm")
+  if (loginPageForm) {
+    loginPageForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const email = document.getElementById("loginEmail").value
+      const password = document.getElementById("loginPassword").value
+      console.log("Login attempt:", email, password)
+      alert("Connexion réussie !")
+      navigateTo("dashboard")
+    })
+  }
+
+  // Signup Page Form
+  const signupPageForm = document.getElementById("signupPageForm")
+  if (signupPageForm) {
+    signupPageForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const name = document.getElementById("signupName").value
+      const email = document.getElementById("signupEmail").value
+      const password = document.getElementById("signupPassword").value
+      const confirmPassword = document.getElementById("signupConfirmPassword").value
+      
+      if (password !== confirmPassword) {
+        alert("Les mots de passe ne correspondent pas !")
+        return
+      }
+      
+      console.log("Signup attempt:", name, email, password)
+      alert("Inscription réussie !")
+      navigateTo("dashboard")
+    })
+  }
 }
 
 function renderCoursesGrid() {

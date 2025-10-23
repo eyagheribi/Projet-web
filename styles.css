@@ -2216,7 +2216,11 @@ body {
 
 /* Enhanced authentication modal styles */
 .auth-modal {
-  display: none !important;
+  max-width: 450px;
+  background: linear-gradient(135deg, var(--bg-white) 0%, #f8fafc 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .auth-tabs {

@@ -758,15 +758,13 @@ function setupEventListeners() {
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
-  // Cart and Wishlist
-  document.getElementById("burgerCart").addEventListener("click", () => {
+  // Cart and Wishlist buttons in navbar
+  document.getElementById("cartBtn").addEventListener("click", () => {
     navigateTo("cart")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
-  document.getElementById("burgerWishlist").addEventListener("click", () => {
+  document.getElementById("wishlistBtn").addEventListener("click", () => {
     navigateTo("wishlist")
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
   // Authentication
@@ -1337,11 +1335,6 @@ function saveCart() {
 function updateCartCount() {
   const count = cart.length
   document.getElementById("cartCount").textContent = count
-  // Update burger menu cart count
-  const burgerCartCount = document.getElementById("burgerCartCount")
-  if (burgerCartCount) {
-    burgerCartCount.textContent = count
-  }
 }
 
 function renderCartPage() {
@@ -1451,11 +1444,6 @@ function saveWishlist() {
 function updateWishlistCount() {
   const count = wishlist.length
   document.getElementById("wishlistCount").textContent = count
-  // Update burger menu wishlist count
-  const burgerWishlistCount = document.getElementById("burgerWishlistCount")
-  if (burgerWishlistCount) {
-    burgerWishlistCount.textContent = count
-  }
 }
 
 // ===== Dashboard =====

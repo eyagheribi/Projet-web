@@ -574,6 +574,22 @@ function switchLanguage(lang) {
 }
 
 function updateAllTranslations() {
+  // Update all elements with data-translate attribute
+  document.querySelectorAll("[data-translate]").forEach(element => {
+    const key = element.getAttribute("data-translate")
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+      element.textContent = translations[currentLanguage][key]
+    }
+  })
+  
+  // Update placeholder texts
+  document.querySelectorAll("[data-translate-placeholder]").forEach(element => {
+    const key = element.getAttribute("data-translate-placeholder")
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+      element.placeholder = translations[currentLanguage][key]
+    }
+  })
+  
   // Header & Navigation
   const searchInput = document.getElementById("searchInput")
   if (searchInput) searchInput.placeholder = t("search-placeholder")
@@ -789,12 +805,6 @@ function setupEventListeners() {
     document.getElementById("burgerMenuOverlay").classList.remove("active")
   })
 
-  document.getElementById("burgerLanguage").addEventListener("click", () => {
-    currentLanguage = currentLanguage === "fr" ? "en" : "fr"
-    localStorage.setItem("language", currentLanguage)
-    updateLanguage()
-    document.getElementById("burgerMenuOverlay").classList.remove("active")
-  })
 
   document.getElementById("burgerSettings").addEventListener("click", () => {
     openModal("settingsModal")

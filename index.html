@@ -14,24 +14,24 @@
         <div class="modal-content auth-modal">
             <button class="modal-close" onclick="closeModal('authModal')">✕</button>
             <div class="auth-tabs">
-                <button class="auth-tab-btn active" data-auth-tab="login">Se Connecter</button>
-                <button class="auth-tab-btn" data-auth-tab="signup">S'Inscrire</button>
+                <button class="auth-tab-btn active" data-auth-tab="login" data-translate="auth-login">Se Connecter</button>
+                <button class="auth-tab-btn" data-auth-tab="signup" data-translate="auth-signup">S'Inscrire</button>
             </div>
             
             <!-- Login Form -->
             <form id="loginForm" class="auth-form active">
                 <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" required>
-                <button type="submit" class="btn btn-primary">Se Connecter</button>
+                <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
+                <button type="submit" class="btn btn-primary" data-translate="auth-login">Se Connecter</button>
             </form>
             
             <!-- Signup Form -->
             <form id="signupForm" class="auth-form">
-                <input type="text" placeholder="Nom complet" required>
+                <input type="text" placeholder="Nom complet" data-translate-placeholder="fullname" required>
                 <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" required>
-                <input type="password" placeholder="Confirmer le mot de passe" required>
-                <button type="submit" class="btn btn-primary">S'Inscrire</button>
+                <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
+                <input type="password" placeholder="Confirmer le mot de passe" data-translate-placeholder="confirm-password" required>
+                <button type="submit" class="btn btn-primary" data-translate="auth-signup">S'Inscrire</button>
             </form>
         </div>
     </div>
@@ -41,20 +41,20 @@
         <div class="header-container">
             <div class="logo">
                 <span class="logo-icon">📚</span>
-                <span class="logo-text">EduLearn</span>
+                <span class="logo-text" data-translate="logo">EduLearn</span>
             </div>
             
             <!-- Search Bar -->
             <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours..." data-translate-placeholder="search-placeholder">
                 <button class="search-btn">🔍</button>
             </div>
             
             <!-- Navigation Links -->
             <nav class="nav-desktop">
-                <a href="#" class="nav-link" data-page="home">Accueil</a>
-                <a href="#" class="nav-link" data-page="courses">Cours</a>
-                <a href="#" class="nav-link" data-page="dashboard">Mon Tableau de Bord</a>
+                <a href="#" class="nav-link" data-page="home" data-translate="nav-home">Accueil</a>
+                <a href="#" class="nav-link" data-page="courses" data-translate="nav-courses">Cours</a>
+                <a href="#" class="nav-link" data-page="dashboard" data-translate="nav-dashboard">Mon Tableau de Bord</a>
             </nav>
             
             <!-- Language Selector -->
@@ -102,51 +102,47 @@
                 <div class="burger-menu-items">
                     <button class="burger-menu-item" id="burgerHome">
                         <span class="burger-icon">🏠</span>
-                        <span class="burger-text">Accueil</span>
+                        <span class="burger-text" data-translate="nav-home">Accueil</span>
                     </button>
                     
                     <button class="burger-menu-item" id="burgerCourses">
                         <span class="burger-icon">📚</span>
-                        <span class="burger-text">Cours</span>
+                        <span class="burger-text" data-translate="nav-courses">Cours</span>
                     </button>
                     
                     <button class="burger-menu-item" id="burgerDashboard">
                         <span class="burger-icon">📊</span>
-                        <span class="burger-text">Tableau de Bord</span>
+                        <span class="burger-text" data-translate="nav-dashboard">Tableau de Bord</span>
                     </button>
                     
                     <div class="burger-menu-divider"></div>
                     
                     <button class="burger-menu-item" id="burgerLogin">
                         <span class="burger-icon">🔐</span>
-                        <span class="burger-text">Se Connecter</span>
+                        <span class="burger-text" data-translate="auth-login">Se Connecter</span>
                     </button>
                     
                     <button class="burger-menu-item" id="burgerSignup">
                         <span class="burger-icon">📝</span>
-                        <span class="burger-text">S'inscrire</span>
+                        <span class="burger-text" data-translate="auth-signup">S'inscrire</span>
                     </button>
                     
                     <div class="burger-menu-divider"></div>
                     
                     <button class="burger-menu-item" id="burgerTheme">
                         <span class="burger-icon">🌙</span>
-                        <span class="burger-text">Mode Sombre</span>
+                        <span class="burger-text" data-translate="theme-toggle">Mode Sombre</span>
                     </button>
                     
-                    <button class="burger-menu-item" id="burgerLanguage">
-                        <span class="burger-icon">🌍</span>
-                        <span class="burger-text">Langue</span>
-                    </button>
                     
                     <button class="burger-menu-item" id="burgerSettings">
                         <span class="burger-icon">⚙️</span>
-                        <span class="burger-text">Paramètres</span>
+                        <span class="burger-text" data-translate="settings">Paramètres</span>
                     </button>
                     
                     <button class="burger-menu-item" id="burgerProfile">
                         <span class="burger-icon">👤</span>
-                        <span class="burger-text">Profil</span>
+                        <span class="burger-text" data-translate="profile">Profil</span>
                     </button>
                 </div>
             </div>

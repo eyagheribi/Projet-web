@@ -1,161 +1,148 @@
 # EduLearn - Plateforme de Cours en Ligne
 
-EduLearn est une plateforme d'apprentissage en ligne moderne et intuitive, inspirée d'Udemy, qui permet aux utilisateurs de découvrir, acheter et suivre des cours en ligne.
+## 📚 Description
+EduLearn est une plateforme de cours en ligne moderne et responsive qui permet aux utilisateurs de découvrir, explorer et s'inscrire à des cours de qualité.
 
-## 🌟 Fonctionnalités
+## ✨ Fonctionnalités
 
-### Interface Utilisateur
-- **Design Responsive** : Interface adaptée à tous les appareils (desktop, tablette, mobile)
-- **Mode Sombre/Clair** : Basculement entre les thèmes pour un confort visuel optimal
-- **Multi-langues** : Support du français et de l'anglais
-- **Navigation Intuitive** : Menu de navigation simple et efficace
+### 🏠 Page d'accueil
+- Hero section attrayante
+- Cours en vedette
+- Catégories de cours
+- Navigation intuitive
 
-### Gestion des Cours
-- **Catalogue de Cours** : Plus de 10,000 cours disponibles dans diverses catégories
-- **Système de Filtres** : Filtrage par catégorie, prix, note et popularité
-- **Recherche Avancée** : Recherche rapide dans la base de données des cours
-- **Détails Complets** : Pages détaillées avec aperçu, curriculum, avis et Q&A
+### 📖 Fiches de cours
+- Lecteur vidéo intégré
+- Informations détaillées du cours
+- Onglets (Aperçu, Curriculum, Avis, Q&A)
+- Boutons d'action (Ajouter au panier, Favoris)
 
-### Fonctionnalités Utilisateur
-- **Authentification** : Système de connexion et d'inscription
-- **Tableau de Bord** : Suivi des cours suivis, progression et statistiques
-- **Panier d'Achats** : Gestion des achats avec résumé détaillé
-- **Liste de Souhaits** : Sauvegarde des cours favoris
-- **Lecteur Vidéo Intégré** : Player vidéo avec contrôles avancés
+### 🎯 Interface utilisateur
+- Barre de progression animée avec effet shimmer
+- Menu burger avec options (Thème, Profil)
+- Panier et favoris avec compteurs
+- Pages d'authentification dédiées (Connexion/Inscription)
 
-### Contenu Interactif
-- **Lecteur Vidéo YouTube** : Intégration de vidéos YouTube pour les cours
-- **Contrôles Vidéo** : Vitesse de lecture, sous-titres, navigation entre leçons
-- **Ressources Téléchargeables** : Accès aux documents et ressources du cours
-- **Système de Progression** : Suivi automatique de l'avancement dans les cours
+### 📱 Responsive Design
+- **Mobile** (≤768px) : Interface optimisée pour smartphones
+- **Tablette** (769px-1024px) : Layout adapté pour tablettes
+- **Desktop** (≥1025px) : Expérience complète sur ordinateur
 
-## 🚀 Technologies Utilisées
+## 🛠️ Technologies utilisées
 
-- **Frontend** : HTML5, CSS3, JavaScript (ES6+)
-- **Design** : CSS Grid, Flexbox, Animations CSS
-- **Intégrations** : YouTube API pour les vidéos
-- **Responsive** : Mobile-first design approach
+### Frontend
+- **HTML5** : Structure sémantique
+- **CSS3** : Styles modernes avec Flexbox/Grid
+- **JavaScript** : Interactivité et gestion d'état
+- **Responsive Design** : Media queries pour tous les écrans
 
-## 📁 Structure du Projet
+### Fonctionnalités avancées
+- **Animations CSS** : Transitions fluides et effets visuels
+- **Local Storage** : Sauvegarde des préférences utilisateur
+- **Dark Mode** : Support du thème sombre
+- **Progress Bar** : Barre de progression animée
+
+## 📁 Structure du projet
 
 ```
 udemy-like-lms/
 ├── index.html          # Page principale
 ├── styles.css          # Styles CSS
 ├── script.js           # Logique JavaScript
-├── package.json        # Configuration du projet
-├── public/             # Images et ressources
-│   ├── css-styling-web.jpg
-│   ├── javascript-programming.png
-│   ├── nodejs-backend-server.jpg
-│   ├── python-programming-concept.png
-│   ├── react-web-development.png
-│   └── web-design-ui-ux.jpg
-├── .gitignore          # Fichiers à ignorer par Git
-└── README.md           # Documentation du projet
+├── public/             # Ressources statiques
+│   ├── *.jpg          # Images des cours
+│   └── *.png          # Icônes et illustrations
+└── README.md          # Documentation
 ```
 
-## 🛠️ Installation et Utilisation
+## 🚀 Installation et utilisation
 
 ### Prérequis
-- Un navigateur web moderne (Chrome, Firefox, Safari, Edge)
-- Serveur web local (optionnel, pour éviter les restrictions CORS)
+- Navigateur web moderne (Chrome, Firefox, Safari, Edge)
+- Serveur web local (optionnel)
 
-### Installation
-
-1. **Cloner le repository**
+### Lancement
+1. **Cloner le projet** :
    ```bash
-   git clone https://github.com/votre-username/udemy-like-lms.git
+   git clone https://github.com/eyagheribi/Projet-web.git
    cd udemy-like-lms
    ```
 
-2. **Ouvrir dans un navigateur**
-   - Option 1 : Ouvrir directement `index.html` dans votre navigateur
-   - Option 2 : Utiliser un serveur local :
-     ```bash
-     # Avec Python
-     python -m http.server 8000
-     
-     # Avec Node.js (si vous avez http-server installé)
-     npx http-server
-     
-     # Avec PHP
-     php -S localhost:8000
-     ```
+2. **Lancer un serveur local** :
+   ```bash
+   python -m http.server 8000
+   # ou
+   npx serve .
+   ```
 
-3. **Accéder à l'application**
-   - Ouvrez votre navigateur et allez à `http://localhost:8000`
-   - Ou ouvrez directement le fichier `index.html`
+3. **Ouvrir dans le navigateur** :
+   ```
+   http://localhost:8000
+   ```
 
-## 🎯 Utilisation
+## 🎨 Fonctionnalités détaillées
 
 ### Navigation
-- **Accueil** : Page d'accueil avec cours en vedette et catégories
-- **Cours** : Catalogue complet avec filtres et tri
-- **Tableau de Bord** : Gestion des cours suivis et progression
-- **Panier** : Gestion des achats
+- **Header responsive** avec logo, recherche et menu utilisateur
+- **Menu burger** pour mobile avec options essentielles
+- **Navigation fluide** avec barre de progression
 
-### Fonctionnalités Principales
-1. **Explorer les Cours** : Parcourez le catalogue et utilisez les filtres
-2. **Voir les Détails** : Cliquez sur un cours pour voir toutes les informations
-3. **Ajouter au Panier** : Ajoutez des cours à votre panier d'achats
-4. **Suivre un Cours** : Accédez au lecteur vidéo et suivez votre progression
+### Cours
+- **Galerie de cours** avec filtres par catégorie
+- **Page de détail** avec lecteur vidéo et informations complètes
+- **Système de favoris** et panier d'achat
 
-## 🎨 Personnalisation
+### Authentification
+- **Pages dédiées** pour connexion et inscription
+- **Design moderne** avec options sociales
+- **Validation de formulaire** côté client
 
-### Thèmes
-- Basculement entre mode clair et sombre
-- Thème automatique basé sur les préférences système
+## 📱 Responsive Breakpoints
 
-### Langues
-- Support français/anglais
-- Interface entièrement traduite
+- **Mobile** : ≤ 768px
+  - Layout en colonne unique
+  - Menu burger en plein écran
+  - Vidéos adaptées (250px)
 
-### Paramètres
-- Configuration des préférences utilisateur
-- Gestion des méthodes de paiement
-- Paramètres de notification
+- **Tablette** : 769px - 1024px
+  - Layout en 2 colonnes
+  - Vidéos moyennes (300px)
+  - Navigation optimisée
 
-## 📱 Responsive Design
+- **Desktop** : ≥ 1025px
+  - Layout complet (2fr 1fr)
+  - Vidéos grandes (400px)
+  - Toutes les fonctionnalités
 
-L'application est entièrement responsive et s'adapte à tous les écrans :
-- **Desktop** : Interface complète avec sidebar
-- **Tablette** : Layout adapté avec navigation optimisée
-- **Mobile** : Interface tactile avec menu hamburger
+## 🎯 Conformité aux exigences
 
-## 🔮 Fonctionnalités Futures
+✅ **Page d'accueil + fiches de cours** : Complètement implémentées  
+✅ **Barre de progression + menu burger** : Fonctionnels et animés  
+✅ **Fichiers HTML/CSS/JS séparés** : Architecture claire  
+✅ **Version mobile, tablette et desktop** : Responsive design complet  
 
-- [ ] Système de paiement intégré
-- [ ] Certificats de complétion
-- [ ] Chat en direct avec les instructeurs
-- [ ] Application mobile native
-- [ ] API backend pour la gestion des données
-- [ ] Système de recommandations IA
+## 🔧 Personnalisation
 
-## 🤝 Contribution
+### Couleurs
+Les couleurs sont définies dans les variables CSS :
+```css
+:root {
+  --primary-color: #6366f1;
+  --accent-color: #8b5cf6;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+}
+```
 
-Les contributions sont les bienvenues ! N'hésitez pas à :
-
-1. Fork le projet
-2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonctionnalite`)
-3. Commit vos changements (`git commit -am 'Ajouter nouvelle fonctionnalité'`)
-4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
-5. Ouvrir une Pull Request
+### Contenu
+Les cours et données sont stockés dans `script.js` dans la variable `coursesData`.
 
 ## 📄 Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
-## 👥 Auteur
-
-Développé avec ❤️ par [Votre Nom]
-
-## 📞 Support
-
-Pour toute question ou problème, n'hésitez pas à :
-- Ouvrir une issue sur GitHub
-- Me contacter directement
+## 👨‍💻 Auteur
+Développé par EduLearn Team
 
 ---
 
-**EduLearn** - Apprenez de nouvelles compétences, où que vous soyez ! 🚀
+*Projet réalisé dans le cadre d'un cours de développement web moderne.*

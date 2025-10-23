@@ -275,6 +275,150 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* ===== Responsive Design ===== */
+
+/* Mobile Styles (max-width: 768px) */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .nav-desktop {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .search-container {
+    order: 3;
+    width: 100%;
+  }
+  
+  .user-menu {
+    order: 2;
+  }
+  
+  .course-header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .course-hero video {
+    height: 250px;
+  }
+  
+  .burger-menu-overlay {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .burger-menu-content {
+    padding: 1rem;
+  }
+  
+  .burger-menu-items {
+    gap: 0.5rem;
+  }
+  
+  .burger-menu-item {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .auth-page-container {
+    padding: 1rem;
+  }
+  
+  .auth-page-card {
+    padding: 1.5rem;
+  }
+  
+  .hero-content {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .featured-courses {
+    grid-template-columns: 1fr;
+  }
+  
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header-container {
+    padding: 1rem 2rem;
+  }
+  
+  .course-header {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .course-hero video {
+    height: 300px;
+  }
+  
+  .featured-courses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .auth-page-container {
+    padding: 2rem;
+  }
+  
+  .auth-page-card {
+    max-width: 400px;
+  }
+}
+
+/* Desktop Styles (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .header-container {
+    padding: 1rem 3rem;
+  }
+  
+  .course-header {
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
+  
+  .course-hero video {
+    height: 400px;
+  }
+  
+  .featured-courses {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .categories {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .auth-page-card {
+    max-width: 450px;
+  }
+  
+  .burger-menu-overlay {
+    width: 300px;
+  }
+}
+
 /* ===== Main Content ===== */
 .main-content {
   max-width: 1400px;

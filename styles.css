@@ -1951,7 +1951,7 @@ body {
 .auth-form {
   display: none;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 2rem;
   opacity: 0;
   transform: translateY(20px);
@@ -1962,6 +1962,18 @@ body {
   display: flex;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Organiser les éléments : inputs en haut, bouton en bas */
+.auth-form .form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form .form-button {
+  margin-top: auto;
 }
 
 .auth-form input {
@@ -1988,8 +2000,9 @@ body {
   font-weight: 500;
 }
 
-.auth-form .btn {
-  margin-top: 0.5rem;
+.auth-form .btn,
+.auth-form .form-button {
+  margin-top: 1rem;
   padding: 1rem 2rem;
   border-radius: 12px;
   font-size: 1.1rem;
@@ -2000,6 +2013,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  width: 100%;
 }
 
 .auth-form .btn:hover {

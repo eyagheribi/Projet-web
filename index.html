@@ -67,7 +67,14 @@
             
             <!-- User Menu -->
             <div class="user-menu">
-                <button class="menu-burger" id="menuBurger">☰</button>
+                <button class="cart-btn" id="cartBtn">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="wishlist-btn" id="wishlistBtn">
+                    ❤️ <span class="wishlist-count" id="wishlistCount">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle" title="Mode sombre/clair">🌙</button>
+                <button class="settings-btn" id="settingsBtn" title="Paramètres">⚙️</button>
             </div>
             
             <!-- Mobile Menu Toggle -->
@@ -83,47 +90,6 @@
             <a href="#" class="nav-link" data-page="signup">S'inscrire</a>
         </nav>
 
-        <!-- Burger Menu -->
-        <div class="burger-menu" id="burgerMenu">
-            <div class="burger-menu-content">
-                <button class="burger-close" id="burgerClose">✕</button>
-                <h3>Menu</h3>
-                <div class="burger-options">
-                    <!-- Shopping Section -->
-                    <div class="burger-section">
-                        <div class="burger-section-title">Achats</div>
-                        <button class="burger-option" id="burgerCart">
-                            🛒 Panier <span class="cart-count" id="cartCount">0</span>
-                        </button>
-                        <button class="burger-option" id="burgerWishlist">
-                            ❤️ Favoris <span class="wishlist-count" id="wishlistCount">0</span>
-                        </button>
-                    </div>
-
-                    <!-- Account Section -->
-                    <div class="burger-section">
-                        <div class="burger-section-title">Compte</div>
-                        <button class="burger-option" id="burgerLogin">
-                            🔐 Se Connecter
-                        </button>
-                        <button class="burger-option" id="burgerSignup">
-                            📝 S'inscrire
-                        </button>
-                    </div>
-
-                    <!-- Settings Section -->
-                    <div class="burger-section">
-                        <div class="burger-section-title">Paramètres</div>
-                        <button class="burger-option" id="burgerTheme">
-                            🌙 Mode Sombre
-                        </button>
-                        <button class="burger-option" id="burgerSettings">
-                            ⚙️ Réglages
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <!-- Progress Bar -->

@@ -728,8 +728,6 @@ function setupEventListeners() {
     openModal("authModal")
   })
 
-  // Setup Burger Menu
-  setupBurgerMenu()
 
   // Search
   document.getElementById("searchInput").addEventListener("input", (e) => {
@@ -1634,92 +1632,3 @@ function setupLanguageListeners() {
   })
 }
 
-// ===== Burger Menu Functions =====
-function setupBurgerMenu() {
-  // Wait for DOM to be ready
-  setTimeout(() => {
-    const menuBurger = document.getElementById("menuBurger")
-    const burgerMenu = document.getElementById("burgerMenu")
-    const burgerClose = document.getElementById("burgerClose")
-    
-    if (menuBurger) {
-      menuBurger.addEventListener("click", () => {
-        if (burgerMenu) {
-          burgerMenu.classList.add("active")
-          console.log("Burger menu opened")
-        }
-      })
-    }
-    
-    if (burgerClose) {
-      burgerClose.addEventListener("click", () => {
-        if (burgerMenu) {
-          burgerMenu.classList.remove("active")
-          console.log("Burger menu closed")
-        }
-      })
-    }
-    
-    // Burger Menu Options
-    const burgerCart = document.getElementById("burgerCart")
-    if (burgerCart) {
-      burgerCart.addEventListener("click", () => {
-        navigateTo("cart")
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    const burgerWishlist = document.getElementById("burgerWishlist")
-    if (burgerWishlist) {
-      burgerWishlist.addEventListener("click", () => {
-        navigateTo("dashboard")
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    const burgerLogin = document.getElementById("burgerLogin")
-    if (burgerLogin) {
-      burgerLogin.addEventListener("click", () => {
-        navigateTo("login")
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    const burgerSignup = document.getElementById("burgerSignup")
-    if (burgerSignup) {
-      burgerSignup.addEventListener("click", () => {
-        navigateTo("signup")
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    const burgerTheme = document.getElementById("burgerTheme")
-    if (burgerTheme) {
-      burgerTheme.addEventListener("click", () => {
-        currentTheme = currentTheme === "light" ? "dark" : "light"
-        localStorage.setItem("theme", currentTheme)
-        document.documentElement.setAttribute("data-theme", currentTheme)
-        updateThemeToggle()
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    const burgerSettings = document.getElementById("burgerSettings")
-    if (burgerSettings) {
-      burgerSettings.addEventListener("click", () => {
-        openModal("settingsModal")
-        burgerMenu.classList.remove("active")
-      })
-    }
-    
-    // Close burger menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (burgerMenu && burgerMenu.classList.contains("active") && 
-          !burgerMenu.contains(e.target) && 
-          !menuBurger.contains(e.target)) {
-        burgerMenu.classList.remove("active")
-      }
-    })
-    
-  }, 100) // Small delay to ensure DOM is ready
-}

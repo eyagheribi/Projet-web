@@ -65,15 +65,9 @@
             
             <!-- User Menu -->
             <div class="user-menu">
-                <button class="cart-btn" id="cartBtn">
-                    🛒 <span class="cart-count" id="cartCount">0</span>
+                <button class="burger-menu-btn" id="burgerMenuBtn">
+                    ☰
                 </button>
-                <button class="wishlist-btn" id="wishlistBtn">
-                    ❤️ <span class="wishlist-count" id="wishlistCount">0</span>
-                </button>
-                <button class="theme-toggle" id="themeToggle" title="Mode sombre/clair">🌙</button>
-                <button class="settings-btn" id="settingsBtn" title="Paramètres">⚙️</button>
-                <button class="profile-btn" id="profileBtn" title="Profil">👤</button>
             </div>
             
             <!-- Mobile Menu Toggle -->
@@ -86,6 +80,45 @@
             <a href="#" class="nav-link" data-page="courses">Cours</a>
             <a href="#" class="nav-link" data-page="dashboard">Mon Tableau de Bord</a>
         </nav>
+
+        <!-- Burger Menu -->
+        <div class="burger-menu-overlay" id="burgerMenuOverlay">
+            <div class="burger-menu-content">
+                <div class="burger-menu-header">
+                    <h3>Menu</h3>
+                    <button class="burger-menu-close" id="burgerMenuClose">✕</button>
+                </div>
+                
+                <div class="burger-menu-items">
+                    <button class="burger-menu-item" id="burgerCart">
+                        <span class="burger-icon">🛒</span>
+                        <span class="burger-text">Panier</span>
+                        <span class="burger-count" id="burgerCartCount">0</span>
+                    </button>
+                    
+                    <button class="burger-menu-item" id="burgerWishlist">
+                        <span class="burger-icon">❤️</span>
+                        <span class="burger-text">Favoris</span>
+                        <span class="burger-count" id="burgerWishlistCount">0</span>
+                    </button>
+                    
+                    <button class="burger-menu-item" id="burgerTheme">
+                        <span class="burger-icon">🌙</span>
+                        <span class="burger-text">Mode Sombre</span>
+                    </button>
+                    
+                    <button class="burger-menu-item" id="burgerSettings">
+                        <span class="burger-icon">⚙️</span>
+                        <span class="burger-text">Paramètres</span>
+                    </button>
+                    
+                    <button class="burger-menu-item" id="burgerProfile">
+                        <span class="burger-icon">👤</span>
+                        <span class="burger-text">Profil</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Profile Dropdown Menu -->
         <div class="profile-dropdown" id="profileDropdown">

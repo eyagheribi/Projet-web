@@ -723,6 +723,53 @@ function setupEventListeners() {
     navigateTo("dashboard")
   })
 
+  // Burger Menu Button
+  document.getElementById("burgerMenuBtn").addEventListener("click", (e) => {
+    e.stopPropagation()
+    document.getElementById("burgerMenuOverlay").classList.add("active")
+  })
+
+  // Burger Menu Close
+  document.getElementById("burgerMenuClose").addEventListener("click", () => {
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  // Close burger menu when clicking outside
+  document.getElementById("burgerMenuOverlay").addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      document.getElementById("burgerMenuOverlay").classList.remove("active")
+    }
+  })
+
+  // Burger Menu Items
+  document.getElementById("burgerCart").addEventListener("click", () => {
+    navigateTo("cart")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerWishlist").addEventListener("click", () => {
+    navigateTo("dashboard")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerTheme").addEventListener("click", () => {
+    currentTheme = currentTheme === "light" ? "dark" : "light"
+    localStorage.setItem("theme", currentTheme)
+    document.documentElement.setAttribute("data-theme", currentTheme)
+    updateThemeToggle()
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerSettings").addEventListener("click", () => {
+    openModal("settingsModal")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
+  document.getElementById("burgerProfile").addEventListener("click", () => {
+    document.getElementById("profileDropdown").classList.toggle("active")
+    document.getElementById("burgerMenuOverlay").classList.remove("active")
+  })
+
   // Profile Button - Toggle dropdown
   document.getElementById("profileBtn").addEventListener("click", (e) => {
     e.stopPropagation()
@@ -1250,7 +1297,13 @@ function saveCart() {
 }
 
 function updateCartCount() {
-  document.getElementById("cartCount").textContent = cart.length
+  const count = cart.length
+  document.getElementById("cartCount").textContent = count
+  // Update burger menu cart count
+  const burgerCartCount = document.getElementById("burgerCartCount")
+  if (burgerCartCount) {
+    burgerCartCount.textContent = count
+  }
 }
 
 function renderCartPage() {
@@ -1358,7 +1411,13 @@ function saveWishlist() {
 }
 
 function updateWishlistCount() {
-  document.getElementById("wishlistCount").textContent = wishlist.length
+  const count = wishlist.length
+  document.getElementById("wishlistCount").textContent = count
+  // Update burger menu wishlist count
+  const burgerWishlistCount = document.getElementById("burgerWishlistCount")
+  if (burgerWishlistCount) {
+    burgerWishlistCount.textContent = count
+  }
 }
 
 // ===== Dashboard =====

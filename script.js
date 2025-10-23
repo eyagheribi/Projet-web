@@ -574,7 +574,49 @@ function t(key) {
   return translations[currentLanguage]?.[key] || translations["en"]?.[key] || key
 }
 
-// ===== Progress Management =====
+// ===== Progress Bar Management =====
+function updateProgressBar(percentage) {
+  const progressBar = document.getElementById('progressBar')
+  if (progressBar) {
+    progressBar.style.width = `${Math.min(Math.max(percentage, 0), 100)}%`
+  }
+}
+
+function showProgressBar() {
+  const progressBar = document.getElementById('progressBar')
+  if (progressBar) {
+    progressBar.style.opacity = '1'
+  }
+}
+
+function hideProgressBar() {
+  const progressBar = document.getElementById('progressBar')
+  if (progressBar) {
+    progressBar.style.opacity = '0'
+    setTimeout(() => {
+      progressBar.style.width = '0%'
+    }, 300)
+  }
+}
+
+function simulateProgress() {
+  let progress = 0
+  showProgressBar()
+  
+  const interval = setInterval(() => {
+    progress += Math.random() * 15
+    updateProgressBar(progress)
+    
+    if (progress >= 100) {
+      clearInterval(interval)
+      setTimeout(() => {
+        hideProgressBar()
+      }, 500)
+    }
+  }, 200)
+}
+
+// ===== Course Progress Management =====
 function calculateCourseProgress(courseId) {
   const progress = courseProgress[courseId] || { completedLessons: [], totalLessons: 0 }
   const course = coursesData.find(c => c.id === courseId)
@@ -743,6 +785,10 @@ function updateAllTranslations() {
 // ===== Initialization =====
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded")
+  
+  // Show progress bar on initial load
+  simulateProgress()
+  
   currentLanguage = localStorage.getItem("language") || "fr"
   console.log("Current language:", currentLanguage)
   updateAllTranslations()
@@ -930,6 +976,9 @@ function setupEventListeners() {
 
 // ===== Navigation =====
 function navigateTo(page) {
+  // Show progress bar
+  simulateProgress()
+  
   // Hide all pages
   document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"))
 

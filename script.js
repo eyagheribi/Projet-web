@@ -608,30 +608,6 @@ function saveCourseProgress() {
   localStorage.setItem("courseProgress", JSON.stringify(courseProgress))
 }
 
-// ===== Language Switching Functions =====
-function setLanguage(lang) {
-  if (lang !== "fr" && lang !== "en") return
-  console.log("Switching language to:", lang)
-  currentLanguage = lang
-  localStorage.setItem("language", lang)
-  updateAllTranslations()
-  updateLanguageButtons()
-  console.log("Language switched successfully to:", currentLanguage)
-}
-
-function updateLanguageButtons() {
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.classList.remove("active")
-    if (btn.dataset.lang === currentLanguage) {
-      btn.classList.add("active")
-    }
-  })
-}
-
-// Simple language switch function for header buttons
-function switchLanguage(lang) {
-  setLanguage(lang)
-}
 
 function updateAllTranslations() {
   console.log("Updating translations for language:", currentLanguage)
@@ -769,13 +745,11 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded")
   currentLanguage = localStorage.getItem("language") || "fr"
   console.log("Current language:", currentLanguage)
-  updateLanguageButtons()
   updateAllTranslations()
   initializeApp()
   setupAuthListeners()
   setupThemeToggle()
   setupSettingsListeners()
-  setupLanguageListeners()
   applyTheme()
   checkAuthStatus()
 })
@@ -1845,25 +1819,4 @@ function changeSpeed() {
   console.log("[v0] Video speed changed to:", speed)
 }
 
-// ===== Language Button Listeners =====
-function setupLanguageListeners() {
-  console.log("Setting up language listeners")
-  const langButtons = document.querySelectorAll(".lang-btn")
-  console.log("Found language buttons:", langButtons.length)
-  
-  langButtons.forEach((btn) => {
-    console.log("Adding listener to button:", btn.dataset.lang)
-    btn.addEventListener("click", (e) => {
-      e.preventDefault()
-      console.log("Language button clicked:", btn.dataset.lang)
-      setLanguage(btn.dataset.lang)
-    })
-  })
-  
-  // Test function to manually switch language
-  window.testLanguageSwitch = function(lang) {
-    console.log("Manual language switch test to:", lang)
-    setLanguage(lang)
-  }
-}
 

@@ -67,16 +67,7 @@
             
             <!-- User Menu -->
             <div class="user-menu">
-                <button class="cart-btn" id="cartBtn">
-                    🛒 <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <button class="wishlist-btn" id="wishlistBtn">
-                    ❤️ <span class="wishlist-count" id="wishlistCount">0</span>
-                </button>
-                <!-- Added theme toggle and settings button -->
-                <button class="theme-toggle" id="themeToggle" title="Mode sombre/clair">🌙</button>
-                <button class="settings-btn" id="settingsBtn" title="Paramètres">⚙️</button>
-                <button class="profile-btn" id="profileBtn">👤</button>
+                <button class="menu-burger" id="menuBurger">☰</button>
             </div>
             
             <!-- Mobile Menu Toggle -->
@@ -91,6 +82,28 @@
             <a href="#" class="nav-link" data-page="login">Se Connecter</a>
             <a href="#" class="nav-link" data-page="signup">S'inscrire</a>
         </nav>
+
+        <!-- Burger Menu -->
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-menu-content">
+                <button class="burger-close" id="burgerClose">✕</button>
+                <h3>Menu</h3>
+                <div class="burger-options">
+                    <button class="burger-option" id="burgerCart">
+                        🛒 Panier <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="burger-option" id="burgerWishlist">
+                        ❤️ Favoris <span class="wishlist-count" id="wishlistCount">0</span>
+                    </button>
+                    <button class="burger-option" id="burgerTheme">
+                        🌙 Mode Sombre
+                    </button>
+                    <button class="burger-option" id="burgerSettings">
+                        ⚙️ Paramètres
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- Progress Bar -->

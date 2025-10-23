@@ -728,6 +728,62 @@ function setupEventListeners() {
     openModal("authModal")
   })
 
+  // Burger Menu
+  document.getElementById("menuBurger").addEventListener("click", () => {
+    document.getElementById("burgerMenu").classList.add("active")
+  })
+
+  // Burger Menu Close
+  document.getElementById("burgerClose").addEventListener("click", () => {
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  // Burger Menu Options
+  document.getElementById("burgerCart").addEventListener("click", () => {
+    navigateTo("cart")
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  document.getElementById("burgerWishlist").addEventListener("click", () => {
+    navigateTo("dashboard")
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  document.getElementById("burgerLogin").addEventListener("click", () => {
+    navigateTo("login")
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  document.getElementById("burgerSignup").addEventListener("click", () => {
+    navigateTo("signup")
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  document.getElementById("burgerTheme").addEventListener("click", () => {
+    currentTheme = currentTheme === "light" ? "dark" : "light"
+    localStorage.setItem("theme", currentTheme)
+    document.documentElement.setAttribute("data-theme", currentTheme)
+    updateThemeToggle()
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  document.getElementById("burgerSettings").addEventListener("click", () => {
+    openModal("settingsModal")
+    document.getElementById("burgerMenu").classList.remove("active")
+  })
+
+  // Close burger menu when clicking outside
+  document.addEventListener("click", (e) => {
+    const burgerMenu = document.getElementById("burgerMenu")
+    const menuBurger = document.getElementById("menuBurger")
+    
+    if (burgerMenu.classList.contains("active") && 
+        !burgerMenu.contains(e.target) && 
+        !menuBurger.contains(e.target)) {
+      burgerMenu.classList.remove("active")
+    }
+  })
+
   // Search
   document.getElementById("searchInput").addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase()

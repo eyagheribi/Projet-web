@@ -728,61 +728,8 @@ function setupEventListeners() {
     openModal("authModal")
   })
 
-  // Burger Menu
-  document.getElementById("menuBurger").addEventListener("click", () => {
-    document.getElementById("burgerMenu").classList.add("active")
-  })
-
-  // Burger Menu Close
-  document.getElementById("burgerClose").addEventListener("click", () => {
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  // Burger Menu Options
-  document.getElementById("burgerCart").addEventListener("click", () => {
-    navigateTo("cart")
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  document.getElementById("burgerWishlist").addEventListener("click", () => {
-    navigateTo("dashboard")
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  document.getElementById("burgerLogin").addEventListener("click", () => {
-    navigateTo("login")
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  document.getElementById("burgerSignup").addEventListener("click", () => {
-    navigateTo("signup")
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  document.getElementById("burgerTheme").addEventListener("click", () => {
-    currentTheme = currentTheme === "light" ? "dark" : "light"
-    localStorage.setItem("theme", currentTheme)
-    document.documentElement.setAttribute("data-theme", currentTheme)
-    updateThemeToggle()
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  document.getElementById("burgerSettings").addEventListener("click", () => {
-    openModal("settingsModal")
-    document.getElementById("burgerMenu").classList.remove("active")
-  })
-
-  // Close burger menu when clicking outside
-  document.addEventListener("click", (e) => {
-    const burgerMenu = document.getElementById("burgerMenu")
-    const menuBurger = document.getElementById("menuBurger")
-    
-    if (burgerMenu.classList.contains("active") && 
-        !burgerMenu.contains(e.target) && 
-        !menuBurger.contains(e.target)) {
-      burgerMenu.classList.remove("active")
-    }
-  })
+  // Setup Burger Menu
+  setupBurgerMenu()
 
   // Search
   document.getElementById("searchInput").addEventListener("input", (e) => {
@@ -1685,4 +1632,94 @@ function setupLanguageListeners() {
       setLanguage(btn.dataset.lang)
     })
   })
+}
+
+// ===== Burger Menu Functions =====
+function setupBurgerMenu() {
+  // Wait for DOM to be ready
+  setTimeout(() => {
+    const menuBurger = document.getElementById("menuBurger")
+    const burgerMenu = document.getElementById("burgerMenu")
+    const burgerClose = document.getElementById("burgerClose")
+    
+    if (menuBurger) {
+      menuBurger.addEventListener("click", () => {
+        if (burgerMenu) {
+          burgerMenu.classList.add("active")
+          console.log("Burger menu opened")
+        }
+      })
+    }
+    
+    if (burgerClose) {
+      burgerClose.addEventListener("click", () => {
+        if (burgerMenu) {
+          burgerMenu.classList.remove("active")
+          console.log("Burger menu closed")
+        }
+      })
+    }
+    
+    // Burger Menu Options
+    const burgerCart = document.getElementById("burgerCart")
+    if (burgerCart) {
+      burgerCart.addEventListener("click", () => {
+        navigateTo("cart")
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    const burgerWishlist = document.getElementById("burgerWishlist")
+    if (burgerWishlist) {
+      burgerWishlist.addEventListener("click", () => {
+        navigateTo("dashboard")
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    const burgerLogin = document.getElementById("burgerLogin")
+    if (burgerLogin) {
+      burgerLogin.addEventListener("click", () => {
+        navigateTo("login")
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    const burgerSignup = document.getElementById("burgerSignup")
+    if (burgerSignup) {
+      burgerSignup.addEventListener("click", () => {
+        navigateTo("signup")
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    const burgerTheme = document.getElementById("burgerTheme")
+    if (burgerTheme) {
+      burgerTheme.addEventListener("click", () => {
+        currentTheme = currentTheme === "light" ? "dark" : "light"
+        localStorage.setItem("theme", currentTheme)
+        document.documentElement.setAttribute("data-theme", currentTheme)
+        updateThemeToggle()
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    const burgerSettings = document.getElementById("burgerSettings")
+    if (burgerSettings) {
+      burgerSettings.addEventListener("click", () => {
+        openModal("settingsModal")
+        burgerMenu.classList.remove("active")
+      })
+    }
+    
+    // Close burger menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (burgerMenu && burgerMenu.classList.contains("active") && 
+          !burgerMenu.contains(e.target) && 
+          !menuBurger.contains(e.target)) {
+        burgerMenu.classList.remove("active")
+      }
+    })
+    
+  }, 100) // Small delay to ensure DOM is ready
 }

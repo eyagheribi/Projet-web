@@ -723,9 +723,33 @@ function setupEventListeners() {
     navigateTo("dashboard")
   })
 
-  // Profile Button - Redirect to auth modal instead of profile
-  document.getElementById("profileBtn").addEventListener("click", () => {
-    openModal("authModal")
+  // Profile Button - Toggle dropdown
+  document.getElementById("profileBtn").addEventListener("click", (e) => {
+    e.stopPropagation()
+    const dropdown = document.getElementById("profileDropdown")
+    dropdown.classList.toggle("active")
+  })
+
+  // Profile Dropdown Items
+  document.querySelectorAll(".dropdown-item").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.preventDefault()
+      const page = e.target.closest(".dropdown-item").dataset.page
+      navigateTo(page)
+      document.getElementById("profileDropdown").classList.remove("active")
+    })
+  })
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    const dropdown = document.getElementById("profileDropdown")
+    const profileBtn = document.getElementById("profileBtn")
+    
+    if (dropdown.classList.contains("active") && 
+        !dropdown.contains(e.target) && 
+        !profileBtn.contains(e.target)) {
+      dropdown.classList.remove("active")
+    }
   })
 
 

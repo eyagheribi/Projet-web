@@ -752,6 +752,40 @@ function setupEventListeners() {
     }
   })
 
+  // Login Page Form
+  const loginPageForm = document.getElementById("loginPageForm")
+  if (loginPageForm) {
+    loginPageForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const email = document.getElementById("loginEmail").value
+      const password = document.getElementById("loginPassword").value
+      console.log("Login attempt:", email, password)
+      alert("Connexion réussie !")
+      navigateTo("dashboard")
+    })
+  }
+
+  // Signup Page Form
+  const signupPageForm = document.getElementById("signupPageForm")
+  if (signupPageForm) {
+    signupPageForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const name = document.getElementById("signupName").value
+      const email = document.getElementById("signupEmail").value
+      const password = document.getElementById("signupPassword").value
+      const confirmPassword = document.getElementById("signupConfirmPassword").value
+      
+      if (password !== confirmPassword) {
+        alert("Les mots de passe ne correspondent pas !")
+        return
+      }
+      
+      console.log("Signup attempt:", name, email, password)
+      alert("Inscription réussie !")
+      navigateTo("dashboard")
+    })
+  }
+
 
   // Search
   document.getElementById("searchInput").addEventListener("input", (e) => {

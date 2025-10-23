@@ -611,10 +611,12 @@ function saveCourseProgress() {
 // ===== Language Switching Functions =====
 function setLanguage(lang) {
   if (lang !== "fr" && lang !== "en") return
+  console.log("Switching language to:", lang)
   currentLanguage = lang
   localStorage.setItem("language", lang)
   updateAllTranslations()
   updateLanguageButtons()
+  console.log("Language switched successfully to:", currentLanguage)
 }
 
 function updateLanguageButtons() {
@@ -632,11 +634,13 @@ function switchLanguage(lang) {
 }
 
 function updateAllTranslations() {
+  console.log("Updating translations for language:", currentLanguage)
   // Update all elements with data-translate attribute
   document.querySelectorAll("[data-translate]").forEach(element => {
     const key = element.getAttribute("data-translate")
     if (translations[currentLanguage] && translations[currentLanguage][key]) {
       element.textContent = translations[currentLanguage][key]
+      console.log("Updated element with key:", key, "to:", translations[currentLanguage][key])
     }
   })
   
@@ -946,12 +950,6 @@ function setupEventListeners() {
     saveProfile()
   })
 
-  // Language Buttons
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      switchLanguage(btn.dataset.lang)
-    })
-  })
 }
 
 // ===== Navigation =====
@@ -1847,8 +1845,12 @@ function changeSpeed() {
 
 // ===== Language Button Listeners =====
 function setupLanguageListeners() {
+  console.log("Setting up language listeners")
   document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
+    console.log("Adding listener to button:", btn.dataset.lang)
+    btn.addEventListener("click", (e) => {
+      e.preventDefault()
+      console.log("Language button clicked:", btn.dataset.lang)
       setLanguage(btn.dataset.lang)
     })
   })

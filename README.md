@@ -1,148 +1,65 @@
 # EduLearn - Plateforme de Cours en Ligne
 
-## 📚 Description
-EduLearn est une plateforme de cours en ligne moderne et responsive qui permet aux utilisateurs de découvrir, explorer et s'inscrire à des cours de qualité.
+Une plateforme d'apprentissage en ligne moderne, simple et fonctionnelle.
 
-## ✨ Fonctionnalités
+## 🎯 Fonctionnalités
 
-### 🏠 Page d'accueil
-- Hero section attrayante
-- Cours en vedette
-- Catégories de cours
-- Navigation intuitive
+- ✅ **Authentification** : Connexion et inscription
+- ✅ **Catalogue de Cours** : Parcourir et filtrer les cours
+- ✅ **Détail des Cours** : Informations complètes avec vidéo
+- ✅ **Dashboard** : Suivi de progression et certificats
+- ✅ **Notifications** : Système de notifications en temps réel
+- ✅ **Newsletter** : Abonnement aux nouveautés
+- ✅ **Mode Sombre** : Thème clair/sombre
+- ✅ **Responsive** : Design adaptatif mobile/desktop
 
-### 📖 Fiches de cours
-- Lecteur vidéo intégré
-- Informations détaillées du cours
-- Onglets (Aperçu, Curriculum, Avis, Q&A)
-- Boutons d'action (Ajouter au panier, Favoris)
+## 🚀 Démarrage
 
-### 🎯 Interface utilisateur
-- Barre de progression animée avec effet shimmer
-- Menu burger avec options (Thème, Profil)
-- Panier et favoris avec compteurs
-- Pages d'authentification dédiées (Connexion/Inscription)
+```bash
+# Démarrer le serveur local
+python -m http.server 8000
 
-### 📱 Responsive Design
-- **Mobile** (≤768px) : Interface optimisée pour smartphones
-- **Tablette** (769px-1024px) : Layout adapté pour tablettes
-- **Desktop** (≥1025px) : Expérience complète sur ordinateur
+# Ouvrir dans le navigateur
+http://localhost:8000
+```
 
-## 🛠️ Technologies utilisées
-
-### Frontend
-- **HTML5** : Structure sémantique
-- **CSS3** : Styles modernes avec Flexbox/Grid
-- **JavaScript** : Interactivité et gestion d'état
-- **Responsive Design** : Media queries pour tous les écrans
-
-### Fonctionnalités avancées
-- **Animations CSS** : Transitions fluides et effets visuels
-- **Local Storage** : Sauvegarde des préférences utilisateur
-- **Dark Mode** : Support du thème sombre
-- **Progress Bar** : Barre de progression animée
-
-## 📁 Structure du projet
+## 📁 Structure du Projet
 
 ```
 udemy-like-lms/
-├── index.html          # Page principale
+├── index.html          # Structure HTML principale
 ├── styles.css          # Styles CSS
-├── script.js           # Logique JavaScript
-├── public/             # Ressources statiques
-│   ├── *.jpg          # Images des cours
-│   └── *.png          # Icônes et illustrations
+├── script.js           # Fonctionnalités JavaScript
+├── public/            # Images et ressources
 └── README.md          # Documentation
 ```
 
-## 🚀 Installation et utilisation
+## 🎨 Design
 
-### Prérequis
-- Navigateur web moderne (Chrome, Firefox, Safari, Edge)
-- Serveur web local (optionnel)
+- **Couleurs** : Palette bleue professionnelle
+- **Police** : System fonts (optimisé pour la performance)
+- **Icônes** : Emoji pour la simplicité
+- **Responsive** : Mobile-first design
 
-### Lancement
-1. **Cloner le projet** :
-   ```bash
-   git clone https://github.com/eyagheribi/Projet-web.git
-   cd udemy-like-lms
-   ```
+## 📝 Notes
 
-2. **Lancer un serveur local** :
-   ```bash
-   python -m http.server 8000
-   # ou
-   npx serve .
-   ```
-
-3. **Ouvrir dans le navigateur** :
-   ```
-   http://localhost:8000
-   ```
-
-## 🎨 Fonctionnalités détaillées
-
-### Navigation
-- **Header responsive** avec logo, recherche et menu utilisateur
-- **Menu burger** pour mobile avec options essentielles
-- **Navigation fluide** avec barre de progression
-
-### Cours
-- **Galerie de cours** avec filtres par catégorie
-- **Page de détail** avec lecteur vidéo et informations complètes
-- **Système de favoris** et panier d'achat
-
-### Authentification
-- **Pages dédiées** pour connexion et inscription
-- **Design moderne** avec options sociales
-- **Validation de formulaire** côté client
-
-## 📱 Responsive Breakpoints
-
-- **Mobile** : ≤ 768px
-  - Layout en colonne unique
-  - Menu burger en plein écran
-  - Vidéos adaptées (250px)
-
-- **Tablette** : 769px - 1024px
-  - Layout en 2 colonnes
-  - Vidéos moyennes (300px)
-  - Navigation optimisée
-
-- **Desktop** : ≥ 1025px
-  - Layout complet (2fr 1fr)
-  - Vidéos grandes (400px)
-  - Toutes les fonctionnalités
-
-## 🎯 Conformité aux exigences
-
-✅ **Page d'accueil + fiches de cours** : Complètement implémentées  
-✅ **Barre de progression + menu burger** : Fonctionnels et animés  
-✅ **Fichiers HTML/CSS/JS séparés** : Architecture claire  
-✅ **Version mobile, tablette et desktop** : Responsive design complet  
+- Aucune dépendance externe
+- Fonctionne hors ligne
+- Compatible tous navigateurs modernes
+- Optimisé pour la performance
 
 ## 🔧 Personnalisation
 
-### Couleurs
-Les couleurs sont définies dans les variables CSS :
+Modifiez les variables CSS dans `styles.css` pour personnaliser les couleurs :
+
 ```css
 :root {
-  --primary-color: #6366f1;
-  --accent-color: #8b5cf6;
-  --text-dark: #1e293b;
-  --text-light: #64748b;
+  --primary-color: #3b82f6;
+  --text-dark: #0f172a;
+  /* ... */
 }
 ```
 
-### Contenu
-Les cours et données sont stockés dans `script.js` dans la variable `coursesData`.
-
 ## 📄 Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-## 👨‍💻 Auteur
-Développé par EduLearn Team
-
----
-
-*Projet réalisé dans le cadre d'un cours de développement web moderne.*
+MIT License - Libre d'utilisation

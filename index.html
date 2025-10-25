@@ -9,143 +9,6 @@
 </head>
 <body>
     <!-- Added authentication modal and theme toggle -->
-    <!-- Authentication Modal -->
-    <div class="modal" id="authModal">
-        <div class="modal-content auth-modal">
-            <button class="modal-close" onclick="closeModal('authModal')">✕</button>
-            <div class="auth-tabs">
-                <button class="auth-tab-btn active" data-auth-tab="login" data-translate="auth-login">Se Connecter</button>
-                <button class="auth-tab-btn" data-auth-tab="signup" data-translate="auth-signup">S'Inscrire</button>
-            </div>
-            
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form active">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
-                <button type="submit" class="btn btn-primary" data-translate="auth-login">Se Connecter</button>
-            </form>
-            
-            <!-- Signup Form -->
-            <form id="signupForm" class="auth-form">
-                <input type="text" placeholder="Nom complet" data-translate-placeholder="fullname" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
-                <input type="password" placeholder="Confirmer le mot de passe" data-translate-placeholder="confirm-password" required>
-                <button type="submit" class="btn btn-primary" data-translate="auth-signup">S'Inscrire</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Login Page -->
-    <div class="page" id="loginPage" style="display: none;">
-        <div class="auth-page-container">
-            <div class="auth-page-card">
-                <div class="auth-page-header">
-                    <h2 data-translate="auth-login">Se Connecter</h2>
-                    <p data-translate="login-subtitle">Connectez-vous à votre compte EduLearn</p>
-                </div>
-                
-                <form class="auth-page-form" id="loginPageForm">
-                    <div class="input-group">
-                        <input type="email" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
-                    </div>
-                    
-                    <div class="form-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox">
-                            <span data-translate="remember-me">Se souvenir de moi</span>
-                        </label>
-                        <a href="#" class="forgot-password" data-translate="forgot-password">Mot de passe oublié?</a>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-full" data-translate="auth-login">Se Connecter</button>
-                    
-                    <div class="auth-divider">
-                        <span data-translate="or">ou</span>
-                    </div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="btn btn-google">
-                            <span>🔍</span>
-                            <span data-translate="login-google">Continuer avec Google</span>
-                        </button>
-                        <button type="button" class="btn btn-facebook">
-                            <span>📘</span>
-                            <span data-translate="login-facebook">Continuer avec Facebook</span>
-                        </button>
-                    </div>
-                    
-                    <div class="auth-footer">
-                        <p data-translate="dont-have-account">Vous n'avez pas de compte?</p>
-                        <a href="#" class="auth-link" data-translate="auth-signup">S'inscrire</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Signup Page -->
-    <div class="page" id="signupPage" style="display: none;">
-        <div class="auth-page-container">
-            <div class="auth-page-card">
-                <div class="auth-page-header">
-                    <h2 data-translate="auth-signup">S'inscrire</h2>
-                    <p data-translate="signup-subtitle">Créez votre compte EduLearn</p>
-                </div>
-                
-                <form class="auth-page-form" id="signupPageForm">
-                    <div class="input-group">
-                        <input type="text" placeholder="Nom complet" data-translate-placeholder="fullname" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="email" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="password" placeholder="Mot de passe" data-translate-placeholder="password" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="password" placeholder="Confirmer le mot de passe" data-translate-placeholder="confirm-password" required>
-                    </div>
-                    
-                    <div class="form-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox" required>
-                            <span data-translate="terms-agreement">J'accepte les conditions d'utilisation et la politique de confidentialité</span>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-full" data-translate="auth-signup">S'inscrire</button>
-                    
-                    <div class="auth-divider">
-                        <span data-translate="or">ou</span>
-                    </div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="btn btn-google">
-                            <span>🔍</span>
-                            <span data-translate="signup-google">Continuer avec Google</span>
-                        </button>
-                        <button type="button" class="btn btn-facebook">
-                            <span>📘</span>
-                            <span data-translate="signup-facebook">Continuer avec Facebook</span>
-                        </button>
-                    </div>
-                    
-                    <div class="auth-footer">
-                        <p data-translate="already-have-account">Vous avez déjà un compte?</p>
-                        <a href="#" class="auth-link" data-translate="auth-login">Se Connecter</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Progress Bar -->
     <div class="progress-bar-container">
@@ -162,8 +25,21 @@
             
             <!-- Search Bar -->
             <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours..." data-translate-placeholder="search-courses">
-                <button class="search-btn">🔍</button>
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Rechercher des cours, instructeurs..." data-translate-placeholder="search-courses" autocomplete="off">
+                    <button class="search-clear" id="searchClear" style="display: none;">✕</button>
+                </div>
+                <div class="search-suggestions" id="searchSuggestions" style="display: none;">
+                    <div class="suggestion-category">
+                        <h4>Cours populaires</h4>
+                        <div class="suggestion-items" id="courseSuggestions"></div>
+                    </div>
+                    <div class="suggestion-category">
+                        <h4>Catégories</h4>
+                        <div class="suggestion-items" id="categorySuggestions"></div>
+                    </div>
+                </div>
             </div>
             
             <!-- Navigation Links -->
@@ -176,6 +52,38 @@
             
             <!-- User Menu -->
             <div class="user-menu">
+                <!-- Notifications -->
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn" title="Notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-count" id="notificationCount">0</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <div class="header-content">
+                                <h3>Notifications</h3>
+                                <p class="header-subtitle">Vos dernières mises à jour</p>
+                            </div>
+                            <button class="mark-all-read" id="markAllRead">
+                                <span class="btn-icon">✓</span>
+                                Tout marquer comme lu
+                            </button>
+                        </div>
+                        <div class="notification-list" id="notificationList">
+                            <!-- Notifications will be dynamically inserted here -->
+                            <div class="notification-empty">
+                                <span class="empty-icon">🔔</span>
+                                <p>Aucune notification</p>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <button class="btn btn-text" onclick="navigateTo('notifications')">
+                                Voir toutes les notifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
                 <button class="cart-btn" id="cartBtn" title="Panier">
                     <span class="cart-icon">🛒</span>
                     <span class="cart-count" id="cartCount">0</span>
@@ -211,15 +119,26 @@
                 </div>
                 
                 <div class="burger-menu-items">
-                    <button class="burger-menu-item" id="burgerTheme">
-                        <span class="burger-icon">🌙</span>
-                        <span class="burger-text" data-translate="theme-toggle">Mode Sombre</span>
+                    <button class="burger-menu-item" id="burgerLogin">
+                        <span class="burger-icon">🔐</span>
+                        <span class="burger-text" data-translate="burger-login">Se Connecter</span>
                     </button>
                     
-                    <button class="burger-menu-item" id="burgerProfile">
-                        <span class="burger-icon">👤</span>
-                        <span class="burger-text" data-translate="profile">Profil</span>
+                    <button class="burger-menu-item" id="burgerSignup">
+                        <span class="burger-icon">📝</span>
+                        <span class="burger-text" data-translate="burger-signup">S'inscrire</span>
                     </button>
+                    
+                    <button class="burger-menu-item" id="burgerSettings">
+                        <span class="burger-icon">⚙️</span>
+                        <span class="burger-text" data-translate="burger-settings">Paramètres</span>
+                    </button>
+                    
+                    <button class="burger-menu-item" id="burgerTheme">
+                        <span class="burger-icon">🌙</span>
+                        <span class="burger-text" data-translate="burger-theme">Mode Sombre</span>
+                    </button>
+                    
                 </div>
             </div>
         </div>
@@ -227,14 +146,58 @@
         <!-- Profile Dropdown Menu -->
         <div class="profile-dropdown" id="profileDropdown">
             <div class="dropdown-content">
-                <a href="#" class="dropdown-item" id="dropdownLogin">
-                    <span class="dropdown-icon">🔐</span>
-                    Se Connecter
-                </a>
-                <a href="#" class="dropdown-item" id="dropdownSignup">
-                    <span class="dropdown-icon">📝</span>
-                    S'inscrire
-                </a>
+                <!-- Menu pour utilisateur non connecté -->
+                <div id="guestMenu" style="display: none;">
+                </div>
+                
+                <!-- Menu pour utilisateur connecté -->
+                <div id="userMenu" style="display: none;">
+                    <div class="dropdown-header">
+                        <div class="user-info">
+                            <div class="user-avatar">👤</div>
+                            <div class="user-details">
+                                <div class="user-name" id="dropdownUserName">Utilisateur</div>
+                                <div class="user-email" id="dropdownUserEmail">email@example.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-divider"></div>
+                    
+                    <a href="#" class="dropdown-item" id="dropdownDashboard">
+                        <span class="dropdown-icon">📊</span>
+                        Mon Tableau de Bord
+                    </a>
+                    
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <span class="dropdown-icon">⚙️</span>
+                        Modifier le Profil
+                    </a>
+                    
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <span class="dropdown-icon">🔧</span>
+                        Paramètres
+                    </a>
+                    
+                    <a href="#" class="dropdown-item" id="dropdownWishlist">
+                        <span class="dropdown-icon">❤️</span>
+                        Mes Favoris
+                        <span class="dropdown-count" id="dropdownWishlistCount">0</span>
+                    </a>
+                    
+                    <a href="#" class="dropdown-item" id="dropdownCart">
+                        <span class="dropdown-icon">🛒</span>
+                        Mon Panier
+                        <span class="dropdown-count" id="dropdownCartCount">0</span>
+                    </a>
+                    
+                    <div class="dropdown-divider"></div>
+                    
+                    <a href="#" class="dropdown-item dropdown-logout" id="dropdownLogout">
+                        <span class="dropdown-icon">🚪</span>
+                        Se Déconnecter
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -249,26 +212,136 @@
         <section id="homePage" class="page active">
             <!-- Hero Section -->
             <section class="hero">
-                <div class="hero-content">
-                    <h1>Apprenez de Nouvelles Compétences</h1>
-                    <p>Accédez à des milliers de cours en ligne de qualité</p>
-                    <button class="btn btn-primary" onclick="navigateTo('courses')">Explorer les Cours</button>
+                <div class="hero-background">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-pattern"></div>
                 </div>
-                <div class="hero-image">
-                    <img src="public\javascript-programming.png" alt="Apprentissage en ligne">
+                <div class="hero-container">
+                <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-icon">🚀</span>
+                            <span>Plateforme #1 d'apprentissage en ligne</span>
+                </div>
+                        <h1 class="hero-title" data-translate="hero-title">
+                            Transformez votre carrière avec
+                            <span class="hero-highlight">des compétences in-demand</span>
+                        </h1>
+                        <p class="hero-description" data-translate="hero-description">
+                            Rejoignez plus de 500,000 professionnels qui développent leurs compétences 
+                            avec nos cours créés par des experts de l'industrie.
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-large hero-btn" onclick="navigateTo('courses')" data-translate="hero-btn">
+                                <span class="btn-icon">🎯</span>
+                                Commencer l'apprentissage
+                            </button>
+                            <button class="btn btn-outline btn-large hero-btn" onclick="navigateTo('about')">
+                                <span class="btn-icon">📖</span>
+                                En savoir plus
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="stat-number">500K+</span>
+                                <span class="stat-label">Étudiants</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-number">10K+</span>
+                                <span class="stat-label">Cours</span>
+                            </div>
+                            <div class="hero-stat">
+                                <span class="stat-number">4.9/5</span>
+                                <span class="stat-label">Note</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-image-container">
+                            <img src="public/javascript-programming.png" alt="Apprentissage en ligne" class="hero-image">
+                            <div class="hero-floating-card card-1">
+                                <div class="card-icon">📚</div>
+                                <div class="card-content">
+                                    <span class="card-title">Cours Populaires</span>
+                                    <span class="card-subtitle">JavaScript, React, Python</span>
+                                </div>
+                            </div>
+                            <div class="hero-floating-card card-2">
+                                <div class="card-icon">🏆</div>
+                                <div class="card-content">
+                                    <span class="card-title">Certificats</span>
+                                    <span class="card-subtitle">Reconnus par l'industrie</span>
+                                </div>
+                            </div>
+                            <div class="hero-floating-card card-3">
+                                <div class="card-icon">👨‍🏫</div>
+                                <div class="card-content">
+                                    <span class="card-title">Experts</span>
+                                    <span class="card-subtitle">Instructeurs qualifiés</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Featured Courses -->
             <section class="featured-section">
-                <h2>Cours en Vedette</h2>
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 class="section-title">Cours en Vedette</h2>
+                        <p class="section-subtitle">Découvrez nos cours les plus populaires et les mieux notés</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" onclick="navigateTo('courses')">
+                            Voir tous les cours
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="courses-grid" id="featuredCourses"></div>
+                <div class="section-footer">
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <span class="trust-icon">⭐</span>
+                            <span class="trust-text">Cours vérifiés par des experts</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">🔄</span>
+                            <span class="trust-text">Contenu mis à jour régulièrement</span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-icon">💼</span>
+                            <span class="trust-text">Certificats reconnus par l'industrie</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Categories -->
             <section class="categories-section">
-                <h2>Parcourir par Catégorie</h2>
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <h2 class="section-title">Parcourir par Catégorie</h2>
+                        <p class="section-subtitle">Explorez nos domaines d'expertise et trouvez votre passion</p>
+                    </div>
+                </div>
                 <div class="categories-grid" id="categoriesGrid"></div>
+                <div class="categories-footer">
+                    <div class="category-stats">
+                        <div class="category-stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Domaines d'expertise</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Instructeurs experts</span>
+                        </div>
+                        <div class="category-stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support communautaire</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Stats Section -->
@@ -290,49 +363,291 @@
                     <p>Support disponible</p>
                 </div>
             </section>
+
+            <!-- Testimonials Section -->
+            <section class="testimonials-section">
+                <h2>Ce que disent nos étudiants</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"EduLearn a transformé ma carrière. Les cours sont excellents et les instructeurs très compétents."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩‍💼</div>
+                            <div class="author-info">
+                                <h4>Marie Dubois</h4>
+                                <span>Développeuse Full-Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Interface intuitive et contenu de qualité. Je recommande vivement cette plateforme."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨‍💻</div>
+                            <div class="author-info">
+                                <h4>Pierre Martin</h4>
+                                <span>Designer UX/UI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"Les certificats sont reconnus dans l'industrie. Un excellent investissement pour mon avenir."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩‍🎓</div>
+                            <div class="author-info">
+                                <h4>Sophie Laurent</h4>
+                                <span>Chef de Projet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Questions Fréquentes</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Comment fonctionne l'apprentissage en ligne ?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nos cours sont conçus pour être suivis à votre rythme. Vous avez accès à du contenu vidéo, des exercices pratiques, des quiz et des projets. Vous pouvez apprendre quand et où vous voulez.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Les certificats sont-ils reconnus ?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Oui, nos certificats sont reconnus par l'industrie et peuvent être ajoutés à votre CV et profil LinkedIn. Ils attestent de vos compétences acquises.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Puis-je obtenir un remboursement ?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nous offrons une garantie de remboursement de 30 jours si vous n'êtes pas satisfait de votre cours. Contactez notre support pour plus d'informations.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Y a-t-il un support technique ?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Oui, notre équipe de support est disponible 24/7 pour vous aider avec toute question technique ou pédagogique. Contactez-nous via le chat ou email.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Prêt à commencer votre apprentissage ?</h2>
+                    <p>Rejoignez des milliers d'étudiants qui transforment leur carrière avec EduLearn</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary btn-large" onclick="navigateTo('signup')">Commencer Maintenant</button>
+                        <button class="btn btn-outline btn-large" onclick="navigateTo('courses')">Explorer les Cours</button>
+                    </div>
+                </div>
+            </section>
         </section>
 
         <!-- Courses Catalog Page -->
         <section id="coursesPage" class="page">
+            <div class="courses-page-header">
+                <div class="page-header-content">
+                    <h1 class="page-title">Catalogue des Cours</h1>
+                    <p class="page-subtitle">Découvrez notre collection complète de cours créés par des experts</p>
+                    <div class="page-stats">
+                        <div class="page-stat">
+                            <span class="stat-number" id="totalCourses">0</span>
+                            <span class="stat-label">Cours disponibles</span>
+                        </div>
+                        <div class="page-stat">
+                            <span class="stat-number">500K+</span>
+                            <span class="stat-label">Étudiants actifs</span>
+                        </div>
+                        <div class="page-stat">
+                            <span class="stat-number">4.9/5</span>
+                            <span class="stat-label">Note moyenne</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="courses-container">
-                <!-- Filters Sidebar -->
+                <!-- Enhanced Filters Sidebar -->
                 <aside class="filters-sidebar">
+                    <div class="filters-header">
                     <h3>Filtres</h3>
-                    
-                    <div class="filter-group">
-                        <h4>Catégorie</h4>
-                        <div id="categoryFilters"></div>
+                        <button class="btn btn-text" onclick="resetFilters()">
+                            <span class="btn-icon">🔄</span>
+                            Réinitialiser
+                        </button>
                     </div>
                     
                     <div class="filter-group">
-                        <h4>Prix</h4>
-                        <label><input type="checkbox" class="price-filter" value="free"> Gratuit</label>
-                        <label><input type="checkbox" class="price-filter" value="paid"> Payant</label>
+                        <h4 class="filter-title">
+                            <span class="filter-icon">🏷️</span>
+                            Catégorie
+                        </h4>
+                        <div class="filter-content" id="categoryFilters"></div>
                     </div>
                     
                     <div class="filter-group">
-                        <h4>Note</h4>
-                        <label><input type="checkbox" class="rating-filter" value="4"> 4+ étoiles</label>
-                        <label><input type="checkbox" class="rating-filter" value="3"> 3+ étoiles</label>
+                        <h4 class="filter-title">
+                            <span class="filter-icon">💰</span>
+                            Prix
+                        </h4>
+                        <div class="filter-content">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="price-filter" value="free">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Gratuit</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="price-filter" value="paid">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Payant</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                        </div>
                     </div>
                     
-                    <button class="btn btn-secondary" onclick="resetFilters()">Réinitialiser</button>
+                    <div class="filter-group">
+                        <h4 class="filter-title">
+                            <span class="filter-icon">⭐</span>
+                            Note
+                        </h4>
+                        <div class="filter-content">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="rating-filter" value="4">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">4+ étoiles</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="rating-filter" value="3">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">3+ étoiles</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">
+                            <span class="filter-icon">⏱️</span>
+                            Durée
+                        </h4>
+                        <div class="filter-content">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="duration-filter" value="short">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Court (< 3h)</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="duration-filter" value="medium">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Moyen (3-10h)</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="duration-filter" value="long">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Long (> 10h)</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">
+                            <span class="filter-icon">🎓</span>
+                            Niveau
+                        </h4>
+                        <div class="filter-content">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="level-filter" value="beginner">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Débutant</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="level-filter" value="intermediate">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Intermédiaire</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" class="level-filter" value="advanced">
+                                <span class="checkmark"></span>
+                                <span class="filter-label">Avancé</span>
+                                <span class="filter-count">(0)</span>
+                            </label>
+                        </div>
+                    </div>
                 </aside>
 
-                <!-- Courses List -->
+                <!-- Enhanced Courses Main -->
                 <div class="courses-main">
-                    <div class="sort-bar">
-                        <label>Trier par:
-                            <select id="sortSelect">
+                    <div class="courses-toolbar">
+                        <div class="toolbar-left">
+                            <div class="results-info">
+                                <span class="results-count" id="resultsCount">0 cours trouvés</span>
+                                <span class="active-filters" id="activeFilters"></span>
+                            </div>
+                        </div>
+                        <div class="toolbar-right">
+                            <div class="view-options">
+                                <button class="view-btn active" data-view="grid" title="Vue grille">
+                                    <span class="view-icon">⊞</span>
+                                </button>
+                                <button class="view-btn" data-view="list" title="Vue liste">
+                                    <span class="view-icon">☰</span>
+                                </button>
+                            </div>
+                            <div class="sort-options">
+                                <label class="sort-label">Trier par:</label>
+                                <select id="sortSelect" class="sort-select">
                                 <option value="popular">Populaire</option>
                                 <option value="newest">Récent</option>
                                 <option value="rating">Note</option>
                                 <option value="price-low">Prix: Bas à Haut</option>
                                 <option value="price-high">Prix: Haut à Bas</option>
+                                    <option value="duration">Durée</option>
                             </select>
-                        </label>
                     </div>
+                        </div>
+                    </div>
+                    
                     <div class="courses-grid" id="coursesGrid"></div>
+                    
+                    <div class="courses-footer">
+                        <div class="pagination" id="pagination"></div>
+                        <div class="load-more">
+                            <button class="btn btn-outline" id="loadMoreBtn">
+                                <span class="btn-icon">↻</span>
+                                Charger plus de cours
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -340,36 +655,171 @@
         <!-- Course Detail Page -->
         <section id="courseDetailPage" class="page">
             <div class="course-detail-container">
-                <button class="btn-back" onclick="navigateTo('courses')" data-translate="back">← Retour</button>
+                <div class="course-breadcrumb">
+                    <button class="btn-back" onclick="navigateTo('courses')">
+                        <span class="btn-icon">←</span>
+                        Retour aux cours
+                    </button>
+                    <div class="breadcrumb-path">
+                        <span class="breadcrumb-item" onclick="navigateTo('courses')">Cours</span>
+                        <span class="breadcrumb-separator">></span>
+                        <span class="breadcrumb-item" id="courseCategory"></span>
+                        <span class="breadcrumb-separator">></span>
+                        <span class="breadcrumb-item active" id="courseTitleBreadcrumb"></span>
+                    </div>
+                </div>
                 
                 <div class="course-header">
                     <div class="course-hero">
-                        <video id="courseVideo" controls poster="/placeholder.svg">
-                            <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        <div class="video-container">
+                            <video id="courseVideo" controls poster="/placeholder.svg" class="course-video">
+                                <source src="public/sample-video.mp4" type="video/mp4">
                             Votre navigateur ne supporte pas la lecture de vidéos.
                         </video>
+                            <div class="video-overlay">
+                                <div class="video-controls">
+                                    <button class="play-btn" id="playBtn">
+                                        <span class="play-icon">▶️</span>
+                                    </button>
+                                    <div class="video-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill"></div>
                     </div>
-                    <div class="course-info">
-                        <h1 id="courseTitle"></h1>
-                        <div class="course-meta">
-                            <span class="rating" id="courseRating"></span>
-                            <span class="students" id="courseStudents"></span>
-                            <span class="price" id="coursePrice"></span>
+                                        <div class="video-time">
+                                            <span class="current-time">0:00</span>
+                                            <span class="total-time">0:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="course-thumbnails">
+                            <div class="thumbnail-item active">
+                                <img src="public/javascript-programming.png" alt="Chapitre 1">
+                                <span class="thumbnail-title">Introduction</span>
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="public/react-web-development.png" alt="Chapitre 2">
+                                <span class="thumbnail-title">Les Bases</span>
+                            </div>
+                            <div class="thumbnail-item">
+                                <img src="public/nodejs-backend-server.jpg" alt="Chapitre 3">
+                                <span class="thumbnail-title">Avancé</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-info">
+                        <div class="course-header-info">
+                            <div class="course-badges">
+                                <span class="course-badge category" id="courseCategoryBadge"></span>
+                                <span class="course-badge level" id="courseLevelBadge"></span>
+                                <span class="course-badge bestseller">Bestseller</span>
+                            </div>
+                            <h1 class="course-title" id="courseTitle"></h1>
+                        <div class="course-meta">
+                                <div class="meta-item">
+                                    <span class="meta-icon">⭐</span>
+                                    <span class="meta-value" id="courseRating"></span>
+                                    <span class="meta-label">Note</span>
+                        </div>
+                                <div class="meta-item">
+                                    <span class="meta-icon">👥</span>
+                                    <span class="meta-value" id="courseStudents"></span>
+                                    <span class="meta-label">Étudiants</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-icon">⏱️</span>
+                                    <span class="meta-value" id="courseDuration"></span>
+                                    <span class="meta-label">Durée</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-icon">📅</span>
+                                    <span class="meta-value" id="courseLastUpdated"></span>
+                                    <span class="meta-label">Mis à jour</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-description">
                         <p id="courseDescription"></p>
-                        <button class="btn btn-primary btn-large" id="addToCartBtn" data-translate="add-to-cart">Ajouter au Panier</button>
-                        <button class="btn btn-outline" id="addToWishlistBtn" data-translate="add-to-favorites">❤️ Ajouter aux Favoris</button>
+                        </div>
+                        
+                        <div class="course-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">✅</span>
+                                <span class="feature-text">Accès à vie</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📱</span>
+                                <span class="feature-text">Mobile et Desktop</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🏆</span>
+                                <span class="feature-text">Certificat inclus</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🔄</span>
+                                <span class="feature-text">Garantie 30 jours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="course-purchase">
+                            <div class="price-section">
+                                <div class="price-main">
+                                    <span class="price-current" id="coursePrice"></span>
+                                    <span class="price-original" id="courseOriginalPrice"></span>
+                                </div>
+                                <div class="price-discount" id="courseDiscount"></div>
+                            </div>
+                            <div class="purchase-actions">
+                                <button class="btn btn-primary btn-large" id="addToCartBtn">
+                                    <span class="btn-icon">🛒</span>
+                                    Ajouter au Panier
+                                </button>
+                                <button class="btn btn-outline btn-large" id="addToWishlistBtn">
+                                    <span class="btn-icon">❤️</span>
+                                    Ajouter aux Favoris
+                                </button>
+                            </div>
+                            <div class="purchase-info">
+                                <p class="purchase-note">
+                                    <span class="info-icon">ℹ️</span>
+                                    Paiement sécurisé • Support 24/7 • Accès immédiat
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="course-content">
-                    <!-- Tabs -->
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="overview" data-translate="overview">Aperçu</button>
-                        <button class="tab-btn" data-tab="curriculum" data-translate="curriculum">Curriculum</button>
-                        <button class="tab-btn" data-tab="reviews" data-translate="reviews">Avis</button>
-                        <button class="tab-btn" data-tab="qa" data-translate="qa">Q&A</button>
+                    <!-- Enhanced Tabs -->
+                    <div class="course-tabs">
+                        <div class="tabs-nav">
+                            <button class="tab-btn active" data-tab="overview">
+                                <span class="tab-icon">📋</span>
+                                <span class="tab-text">Aperçu</span>
+                            </button>
+                            <button class="tab-btn" data-tab="curriculum">
+                                <span class="tab-icon">📚</span>
+                                <span class="tab-text">Curriculum</span>
+                            </button>
+                            <button class="tab-btn" data-tab="reviews">
+                                <span class="tab-icon">⭐</span>
+                                <span class="tab-text">Avis</span>
+                                <span class="tab-count" id="reviewsCount">(0)</span>
+                            </button>
+                            <button class="tab-btn" data-tab="discussion">
+                                <span class="tab-icon">💬</span>
+                                <span class="tab-text">Discussion</span>
+                                <span class="tab-count" id="discussionsCount">(0)</span>
+                            </button>
+                            <button class="tab-btn" data-tab="qa">
+                                <span class="tab-icon">❓</span>
+                                <span class="tab-text">Q&A</span>
+                                <span class="tab-count" id="qaCount">(0)</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Overview Tab -->
@@ -400,10 +850,79 @@
                         <div class="reviews-list" id="reviewsList"></div>
                     </div>
 
+                    <!-- Discussion Tab -->
+                    <div class="tab-content" id="discussionTab">
+                        <h3>Discussion du Cours</h3>
+                        <div class="discussion-section">
+                            <div class="discussion-form">
+                                <textarea id="discussionInput" placeholder="Partagez vos pensées sur ce cours..." rows="3"></textarea>
+                                <button class="btn btn-primary" onclick="postDiscussion()">Publier</button>
+                            </div>
+                            <div class="discussion-list" id="discussionList">
+                                <div class="discussion-item">
+                                    <div class="discussion-avatar">👤</div>
+                                    <div class="discussion-content">
+                                        <div class="discussion-header">
+                                            <h4>Marie Dubois</h4>
+                                            <span class="discussion-time">Il y a 2 heures</span>
+                                        </div>
+                                        <p>Excellent cours ! Les explications sont très claires et les exercices pratiques sont parfaits pour comprendre les concepts.</p>
+                                        <div class="discussion-actions">
+                                            <button class="btn-like">👍 12</button>
+                                            <button class="btn-reply">Répondre</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="discussion-item">
+                                    <div class="discussion-avatar">👤</div>
+                                    <div class="discussion-content">
+                                        <div class="discussion-header">
+                                            <h4>Pierre Martin</h4>
+                                            <span class="discussion-time">Il y a 5 heures</span>
+                                        </div>
+                                        <p>J'ai une question sur le chapitre 3. Pourriez-vous expliquer plus en détail le concept de closures en JavaScript ?</p>
+                                        <div class="discussion-actions">
+                                            <button class="btn-like">👍 8</button>
+                                            <button class="btn-reply">Répondre</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Q&A Tab -->
                     <div class="tab-content" id="qaTab">
                         <h3>Questions et Réponses</h3>
-                        <div class="qa-section" id="qaSection"></div>
+                        <div class="qa-section">
+                            <div class="qa-form">
+                                <input type="text" id="questionInput" placeholder="Posez votre question..." />
+                                <button class="btn btn-primary" onclick="askQuestion()">Poser une Question</button>
+                            </div>
+                            <div class="qa-list" id="qaList">
+                                <div class="qa-item">
+                                    <div class="qa-question">
+                                        <h4>Comment installer Node.js sur Windows ?</h4>
+                                        <p>Je n'arrive pas à installer Node.js sur mon ordinateur Windows. Quelqu'un peut-il m'aider ?</p>
+                                        <div class="qa-meta">
+                                            <span class="qa-author">Par Jean Dupont</span>
+                                            <span class="qa-time">Il y a 1 jour</span>
+                                            <span class="qa-answers">3 réponses</span>
+                                        </div>
+                                    </div>
+                                    <div class="qa-answers">
+                                        <div class="qa-answer">
+                                            <div class="answer-avatar">👤</div>
+                                            <div class="answer-content">
+                                                <h5>Marie Dubois</h5>
+                                                <p>Voici les étapes : 1) Téléchargez Node.js depuis le site officiel, 2) Exécutez l'installateur, 3) Redémarrez votre terminal.</p>
+                                                <span class="answer-time">Il y a 12 heures</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -457,130 +976,356 @@
                 <!-- Wishlist -->
                 <section class="wishlist-section">
                     <h2>Mes Favoris</h2>
-                    <div class="courses-grid" id="wishlistGrid"></div>
+                    <div class="courses-grid" id="dashboardWishlistGrid"></div>
+                </section>
+
+                <!-- Course Progress Section -->
+                <section class="course-progress-section">
+                    <h2>Mes Cours en Cours</h2>
+                    <div class="course-progress-list" id="courseProgressList">
+                        <div class="progress-item">
+                            <div class="course-thumbnail">📖</div>
+                            <div class="progress-content">
+                                <h4>JavaScript pour Débutants</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span class="progress-text">65% complété</span>
+                                    <span class="progress-time">12h restantes</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Continuer</button>
+                        </div>
+                        <div class="progress-item">
+                            <div class="course-thumbnail">🎨</div>
+                            <div class="progress-content">
+                                <h4>Design Web Moderne</h4>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span class="progress-text">30% complété</span>
+                                    <span class="progress-time">8h restantes</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Continuer</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity Section -->
+                <section class="activity-section">
+                    <h2>Activité Récente</h2>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <div class="activity-icon">📚</div>
+                            <div class="activity-content">
+                                <p><strong>Vous avez terminé le chapitre 3</strong></p>
+                                <p>JavaScript pour Débutants</p>
+                                <span class="activity-time">Il y a 2 heures</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🏆</div>
+                            <div class="activity-content">
+                                <p><strong>Certificat obtenu!</strong></p>
+                                <p>HTML & CSS Basics</p>
+                                <span class="activity-time">Hier</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📝</div>
+                            <div class="activity-content">
+                                <p><strong>Quiz complété</strong></p>
+                                <p>Design Web Moderne - Score: 85%</p>
+                                <span class="activity-time">Il y a 3 jours</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certificates Section -->
+                <section class="certificates-section">
+                    <h2>Mes Certificats</h2>
+                    <div class="certificates-grid" id="certificatesGrid">
+                        <div class="certificate-item">
+                            <div class="certificate-icon">🏆</div>
+                            <div class="certificate-content">
+                                <h4>HTML & CSS Basics</h4>
+                                <p>Certificat de complétion</p>
+                                <span class="certificate-date">Obtenu le 15 Jan 2024</span>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Télécharger</button>
+                        </div>
+                    </div>
                 </section>
             </div>
         </section>
 
-        <!-- Login Page -->
-        <section id="loginPage" class="page">
-            <div class="auth-container">
-                <div class="auth-card">
-                    <div class="auth-header">
-                        <h1>Se Connecter</h1>
-                        <p>Connectez-vous à votre compte EduLearn</p>
+        <!-- About Page -->
+        <section id="aboutPage" class="page">
+            <div class="about-container">
+                <div class="about-hero">
+                    <h1>À Propos d'EduLearn</h1>
+                    <p>Notre mission est de démocratiser l'éducation et de rendre l'apprentissage accessible à tous</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-section">
+                        <h2>Notre Histoire</h2>
+                        <p>EduLearn a été fondé en 2020 avec une vision simple : rendre l'éducation de qualité accessible à tous, partout dans le monde. Depuis nos débuts, nous avons aidé plus de 500,000 étudiants à acquérir de nouvelles compétences et à transformer leur carrière.</p>
                     </div>
                     
-                    <form id="loginPageForm" class="auth-form-page">
-                        <div class="input-group">
-                            <label for="loginEmail">Email</label>
-                            <input type="email" id="loginEmail" placeholder="Votre email" required>
+                    <div class="about-section">
+                        <h2>Notre Mission</h2>
+                        <p>Nous croyons que l'apprentissage ne devrait pas être limité par la géographie, le temps ou les ressources financières. Notre plateforme connecte les meilleurs instructeurs avec des étudiants motivés, créant un écosystème d'apprentissage dynamique et inclusif.</p>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h2>Nos Valeurs</h2>
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <div class="value-icon">🎯</div>
+                                <h3>Excellence</h3>
+                                <p>Nous nous efforçons de fournir le meilleur contenu éducatif possible</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-icon">🤝</div>
+                                <h3>Collaboration</h3>
+                                <p>Nous croyons en la puissance de l'apprentissage communautaire</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-icon">🚀</div>
+                                <h3>Innovation</h3>
+                                <p>Nous adoptons les dernières technologies pour améliorer l'apprentissage</p>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-icon">🌍</div>
+                                <h3>Accessibilité</h3>
+                                <p>L'éducation doit être accessible à tous, partout dans le monde</p>
+                            </div>
                         </div>
-                        
-                        <div class="input-group">
-                            <label for="loginPassword">Mot de passe</label>
-                            <input type="password" id="loginPassword" placeholder="Votre mot de passe" required>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h2>Notre Équipe</h2>
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <div class="member-avatar">👨‍💼</div>
+                                <h4>Jean Dupont</h4>
+                                <span>CEO & Fondateur</span>
+                                <p>Expert en éducation avec 15 ans d'expérience</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">👩‍💻</div>
+                                <h4>Marie Dubois</h4>
+                                <span>CTO</span>
+                                <p>Ingénieure logiciel passionnée par l'EdTech</p>
+                            </div>
+                            <div class="team-member">
+                                <div class="member-avatar">👨‍🎓</div>
+                                <h4>Pierre Martin</h4>
+                                <span>Directeur Pédagogique</span>
+                                <p>Ancien professeur d'université et expert en apprentissage</p>
+                            </div>
                         </div>
-                        
-                        <div class="form-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="rememberMe">
-                                <span>Se souvenir de moi</span>
-                            </label>
-                            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-full">Se Connecter</button>
-                        
-                        <div class="auth-divider">
-                            <span>ou</span>
-                        </div>
-                        
-                        <div class="social-login">
-                            <button type="button" class="btn btn-google">
-                                <span>🔍</span> Continuer avec Google
-                            </button>
-                            <button type="button" class="btn btn-facebook">
-                                <span>📘</span> Continuer avec Facebook
-                            </button>
-                        </div>
-                        
-                        <div class="auth-footer">
-                            <p>Pas encore de compte ? <a href="#" onclick="navigateTo('signup')">S'inscrire</a></p>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Signup Page -->
-        <section id="signupPage" class="page">
-            <div class="auth-container">
-                <div class="auth-card">
-                    <div class="auth-header">
-                        <h1>S'inscrire</h1>
-                        <p>Créez votre compte EduLearn et commencez à apprendre</p>
+        <!-- Contact Page -->
+        <section id="contactPage" class="page">
+            <div class="contact-container">
+                <div class="contact-hero">
+                    <h1>Contactez-Nous</h1>
+                    <p>Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Informations de Contact</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">📧</div>
+                                <div class="method-content">
+                                    <h3>Email</h3>
+                                    <p>support@edulearn.com</p>
+                                    <span>Réponse sous 24h</span>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">📞</div>
+                                <div class="method-content">
+                                    <h3>Téléphone</h3>
+                                    <p>+33 1 23 45 67 89</p>
+                                    <span>Lun-Ven 9h-18h</span>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">💬</div>
+                                <div class="method-content">
+                                    <h3>Chat en Direct</h3>
+                                    <p>Disponible 24/7</p>
+                                    <span>Support instantané</span>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">📍</div>
+                                <div class="method-content">
+                                    <h3>Adresse</h3>
+                                    <p>123 Rue de l'Éducation<br>75001 Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <form id="signupPageForm" class="auth-form-page">
-                        <div class="input-group">
-                            <label for="signupName">Nom complet</label>
-                            <input type="text" id="signupName" placeholder="Votre nom complet" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="signupEmail">Email</label>
-                            <input type="email" id="signupEmail" placeholder="Votre email" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="signupPassword">Mot de passe</label>
-                            <input type="password" id="signupPassword" placeholder="Créez un mot de passe" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="signupConfirmPassword">Confirmer le mot de passe</label>
-                            <input type="password" id="signupConfirmPassword" placeholder="Confirmez votre mot de passe" required>
-                        </div>
-                        
-                        <div class="form-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="acceptTerms" required>
-                                <span>J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a></span>
-                            </label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-full">S'inscrire</button>
-                        
-                        <div class="auth-divider">
-                            <span>ou</span>
-                        </div>
-                        
-                        <div class="social-login">
-                            <button type="button" class="btn btn-google">
-                                <span>🔍</span> Continuer avec Google
-                            </button>
-                            <button type="button" class="btn btn-facebook">
-                                <span>📘</span> Continuer avec Facebook
-                            </button>
-                        </div>
-                        
-                        <div class="auth-footer">
-                            <p>Déjà un compte ? <a href="#" onclick="navigateTo('login')">Se connecter</a></p>
-                        </div>
-                    </form>
+                    <div class="contact-form-section">
+                        <h2>Envoyez-nous un Message</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactName">Nom complet</label>
+                                    <input type="text" id="contactName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactEmail">Email</label>
+                                    <input type="email" id="contactEmail" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject">Sujet</label>
+                                <select id="contactSubject" required>
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="support">Support Technique</option>
+                                    <option value="billing">Facturation</option>
+                                    <option value="course">Question sur un Cours</option>
+                                    <option value="partnership">Partenariat</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-large">Envoyer le Message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- Privacy Policy Page -->
+        <section id="privacyPage" class="page">
+            <div class="legal-container">
+                <h1>Politique de Confidentialité</h1>
+                <div class="legal-content">
+                    <p><strong>Dernière mise à jour :</strong> 15 Janvier 2024</p>
+                    
+                    <h2>1. Collecte d'Informations</h2>
+                    <p>Nous collectons les informations que vous nous fournissez directement, telles que votre nom, adresse email, et informations de profil lorsque vous créez un compte.</p>
+                    
+                    <h2>2. Utilisation des Informations</h2>
+                    <p>Nous utilisons vos informations pour :</p>
+                    <ul>
+                        <li>Fournir et améliorer nos services</li>
+                        <li>Personnaliser votre expérience d'apprentissage</li>
+                        <li>Communiquer avec vous sur nos cours et services</li>
+                        <li>Analyser l'utilisation de notre plateforme</li>
+                    </ul>
+                    
+                    <h2>3. Partage d'Informations</h2>
+                    <p>Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers sans votre consentement explicite.</p>
+                    
+                    <h2>4. Sécurité</h2>
+                    <p>Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations personnelles contre tout accès non autorisé.</p>
+                    
+                    <h2>5. Cookies</h2>
+                    <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. Vous pouvez désactiver les cookies dans les paramètres de votre navigateur.</p>
+                    
+                    <h2>6. Vos Droits</h2>
+                    <p>Vous avez le droit d'accéder, de modifier ou de supprimer vos informations personnelles. Contactez-nous pour exercer ces droits.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms of Service Page -->
+        <section id="termsPage" class="page">
+            <div class="legal-container">
+                <h1>Conditions d'Utilisation</h1>
+                <div class="legal-content">
+                    <p><strong>Dernière mise à jour :</strong> 15 Janvier 2024</p>
+                    
+                    <h2>1. Acceptation des Conditions</h2>
+                    <p>En utilisant EduLearn, vous acceptez d'être lié par ces conditions d'utilisation.</p>
+                    
+                    <h2>2. Utilisation de la Plateforme</h2>
+                    <p>Vous vous engagez à :</p>
+                    <ul>
+                        <li>Fournir des informations exactes et à jour</li>
+                        <li>Respecter les droits de propriété intellectuelle</li>
+                        <li>Ne pas utiliser la plateforme à des fins illégales</li>
+                        <li>Respecter les autres utilisateurs</li>
+                    </ul>
+                    
+                    <h2>3. Contenu des Cours</h2>
+                    <p>Le contenu des cours est protégé par des droits d'auteur. Vous ne pouvez pas le reproduire, distribuer ou modifier sans autorisation.</p>
+                    
+                    <h2>4. Paiements et Remboursements</h2>
+                    <p>Les paiements sont traités de manière sécurisée. Nous offrons une garantie de remboursement de 30 jours.</p>
+                    
+                    <h2>5. Limitation de Responsabilité</h2>
+                    <p>EduLearn ne peut être tenu responsable des dommages indirects résultant de l'utilisation de notre plateforme.</p>
+                    
+                    <h2>6. Modification des Conditions</h2>
+                    <p>Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications prendront effet dès leur publication.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 404 Error Page -->
+        <section id="error404Page" class="page">
+            <div class="error-container">
+                <div class="error-content">
+                    <div class="error-icon">🔍</div>
+                    <h1>404 - Page Non Trouvée</h1>
+                    <p>Désolé, la page que vous recherchez n'existe pas ou a été déplacée.</p>
+                    <div class="error-actions">
+                        <button class="btn btn-primary" onclick="navigateTo('home')">Retour à l'Accueil</button>
+                        <button class="btn btn-outline" onclick="navigateTo('courses')">Explorer les Cours</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Cart Page -->
         <section id="cartPage" class="page">
             <div class="cart-container">
-                <h1>Mon Panier</h1>
+                <div class="page-header">
+                    <h1>Mon Panier</h1>
+                    <p>Retrouvez tous vos cours sélectionnés</p>
+                </div>
+                
                 <div class="cart-content">
-                    <div class="cart-items" id="cartItems"></div>
+                    <div class="cart-items-section">
+                        <div class="cart-items" id="cartItems">
+                            <!-- Cart items will be dynamically inserted here -->
+                        </div>
+                        
+                        <div class="cart-empty" id="cartEmpty" style="display: none;">
+                            <div class="empty-icon">🛒</div>
+                            <h3>Votre panier est vide</h3>
+                            <p>Commencez à ajouter des cours à votre panier pour les acheter</p>
+                            <button class="btn btn-primary" onclick="navigateTo('courses')">
+                                Explorer les Cours
+                            </button>
+                        </div>
+                    </div>
+                    
                     <div class="cart-summary">
-                        <h3>Résumé</h3>
+                        <h3>Résumé de la commande</h3>
                         <div class="summary-row">
                             <span>Sous-total:</span>
                             <span id="subtotal">0 €</span>
@@ -595,6 +1340,31 @@
                         </div>
                         <button class="btn btn-primary btn-large" onclick="checkout()">Procéder au Paiement</button>
                         <button class="btn btn-secondary" onclick="navigateTo('courses')">Continuer les Achats</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wishlist Page -->
+        <section id="wishlistPage" class="page">
+            <div class="wishlist-container">
+                <div class="page-header">
+                    <h1>Mes Favoris</h1>
+                    <p>Retrouvez tous vos cours sauvegardés</p>
+                </div>
+                
+                <div class="wishlist-content">
+                    <div class="wishlist-grid" id="wishlistGrid">
+                        <!-- Wishlist items will be dynamically inserted here -->
+                    </div>
+                    
+                    <div class="wishlist-empty" id="wishlistEmpty" style="display: none;">
+                        <div class="empty-icon">❤️</div>
+                        <h3>Aucun favori</h3>
+                        <p>Commencez à ajouter des cours à vos favoris pour les retrouver facilement</p>
+                        <button class="btn btn-primary" onclick="navigateTo('courses')">
+                            Explorer les Cours
+                        </button>
                     </div>
                 </div>
             </div>
@@ -667,14 +1437,110 @@
 
     <!-- Profile Modal -->
     <div class="modal" id="profileModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
+        <div class="modal-content profile-modal">
+            <div class="modal-header">
             <h2>Mon Profil</h2>
-            <form id="profileForm">
-                <input type="text" id="profileName" placeholder="Nom" required>
-                <input type="email" id="profileEmail" placeholder="Email" required>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
+            </div>
+            
+            <div class="profile-content">
+                <!-- Avatar Section -->
+                <div class="profile-avatar-section">
+                    <div class="avatar-container">
+                        <div class="avatar-circle" id="profileAvatar">
+                            <span class="avatar-text">👤</span>
+                        </div>
+                        <button class="avatar-upload-btn" onclick="uploadAvatar()">
+                            <span class="upload-icon">📷</span>
+                            <span>Changer la photo</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Profile Form -->
+                <form id="profileForm" class="profile-form">
+                    <div class="form-section">
+                        <h3>Informations personnelles</h3>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="profileName" class="input-label">Nom complet</label>
+                                <div class="input-field">
+                                    <span class="field-icon">👤</span>
+                                    <input type="text" id="profileName" placeholder="Votre nom complet" required>
+                                    <div class="field-border"></div>
+                                </div>
+                                <div class="field-error" id="profileNameError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="profileEmail" class="input-label">Email</label>
+                                <div class="input-field">
+                                    <span class="field-icon">📧</span>
+                                    <input type="email" id="profileEmail" placeholder="Votre email" required>
+                                    <div class="field-border"></div>
+                                </div>
+                                <div class="field-error" id="profileEmailError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="profilePhone" class="input-label">Téléphone (optionnel)</label>
+                                <div class="input-field">
+                                    <span class="field-icon">📱</span>
+                                    <input type="tel" id="profilePhone" placeholder="Votre numéro de téléphone">
+                                    <div class="field-border"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Préférences</h3>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="profileBio" class="input-label">Biographie</label>
+                                <div class="input-field">
+                                    <span class="field-icon">📝</span>
+                                    <textarea id="profileBio" placeholder="Parlez-nous de vous..." rows="3"></textarea>
+                                    <div class="field-border"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="input-container">
+                                <label for="profileLanguage" class="input-label">Langue préférée</label>
+                                <div class="input-field">
+                                    <span class="field-icon">🌐</span>
+                                    <select id="profileLanguage">
+                                        <option value="fr">Français</option>
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                    </select>
+                                    <div class="field-border"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('profileModal')">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-content">
+                                <span class="btn-text">Enregistrer</span>
+                                <span class="btn-icon">💾</span>
+                            </span>
+                        </button>
+                    </div>
             </form>
+            </div>
         </div>
     </div>
 
@@ -725,32 +1591,131 @@
         </div>
     </div>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <div class="newsletter-content">
+                <div class="newsletter-icon">📧</div>
+                <h2 class="newsletter-title">Restez informé des nouveautés</h2>
+                <p class="newsletter-description">
+                    Recevez nos dernières offres, nouveaux cours et conseils d'apprentissage directement dans votre boîte mail
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input 
+                                type="email" 
+                                id="newsletterEmail" 
+                                placeholder="Votre adresse email" 
+                                required
+                                class="newsletter-input"
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large newsletter-btn">
+                            <span class="btn-icon">📬</span>
+                            S'abonner
+                        </button>
+                    </div>
+                    <div class="newsletter-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Pas de spam, désabonnement facile</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Offres exclusives réservées aux abonnés</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">Conseils d'experts et ressources gratuites</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>À Propos</h4>
-                <p>EduLearn est une plateforme d'apprentissage en ligne moderne.</p>
+                <div class="footer-logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">EduLearn</span>
             </div>
-            <div class="footer-section">
-                <h4>Liens Utiles</h4>
-                <ul>
-                    <li><a href="#">Conditions d'Utilisation</a></li>
-                    <li><a href="#">Politique de Confidentialité</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Suivez-nous</h4>
-                <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">LinkedIn</a>
+                <p>La plateforme d'apprentissage en ligne qui transforme votre carrière. Apprenez de nouvelles compétences avec les meilleurs instructeurs du monde.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link facebook">📘</a>
+                    <a href="#" class="social-link twitter">🐦</a>
+                    <a href="#" class="social-link linkedin">💼</a>
+                    <a href="#" class="social-link youtube">📺</a>
+                    <a href="#" class="social-link instagram">📷</a>
                 </div>
             </div>
+            
+            <div class="footer-section">
+                <h4>Plateforme</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('courses')">Explorer les Cours</a></li>
+                    <li><a href="#" onclick="navigateTo('dashboard')">Mon Tableau de Bord</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Catégories</h4>
+                <ul>
+                    <li><a href="#">Développement Web</a></li>
+                    <li><a href="#">Data Science</a></li>
+                    <li><a href="#">Design UX/UI</a></li>
+                    <li><a href="#">Marketing Digital</a></li>
+                    <li><a href="#">Business</a></li>
+                </ul>
+                </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('contact')">Contact</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Support Technique</a></li>
+                    <li><a href="#">Statut du Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Entreprise</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('about')">À Propos</a></li>
+                    <li><a href="#">Carrières</a></li>
+                    <li><a href="#">Partenaires</a></li>
+                    <li><a href="#">Presse</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
         </div>
+            
+            <div class="footer-section">
+                <h4>Légal</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('terms')">Conditions d'Utilisation</a></li>
+                    <li><a href="#" onclick="navigateTo('privacy')">Politique de Confidentialité</a></li>
+                    <li><a href="#">Politique de Remboursement</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">RGPD</a></li>
+                </ul>
+            </div>
+        </div>
+        
         <div class="footer-bottom">
+            <div class="footer-bottom-content">
             <p>&copy; 2025 EduLearn. Tous droits réservés.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Français</a>
+                    <a href="#">English</a>
+                    <a href="#">Español</a>
+                </div>
+            </div>
         </div>
     </footer>
 

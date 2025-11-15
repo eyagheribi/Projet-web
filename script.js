@@ -308,7 +308,7 @@ const translations = {
     "theme-toggle-dark": "Mode Clair",
     "nav-courses": "Cours",
     "nav-dashboard": "Mon Tableau de Bord",
-    
+   
     // Burger Menu
     "burger-login": "Se Connecter",
     "burger-signup": "S'inscrire",
@@ -500,7 +500,7 @@ const translations = {
     "theme-toggle-dark": "Light Mode",
     "nav-courses": "Courses",
     "nav-dashboard": "My Dashboard",
-    
+   
     // Burger Menu
     "burger-login": "Sign In",
     "burger-signup": "Sign Up",
@@ -725,11 +725,11 @@ function hideProgressBar() {
 function simulateProgress() {
   let progress = 0
   showProgressBar()
-  
+ 
   const interval = setInterval(() => {
     progress += Math.random() * 15
     updateProgressBar(progress)
-    
+   
     if (progress >= 100) {
       clearInterval(interval)
       setTimeout(() => {
@@ -743,18 +743,18 @@ function simulateProgress() {
 function calculateCourseProgress(courseId) {
   const progress = courseProgress[courseId] || { completedLessons: [], totalLessons: 0 }
   const course = coursesData.find(c => c.id === courseId)
-  
+ 
   if (!course || !course.sections) {
     return 0
   }
-  
+ 
   // Calculer le nombre total de leçons
   const totalLessons = course.sections.reduce((total, section) => total + section.lessons.length, 0)
   progress.totalLessons = totalLessons
-  
+ 
   // Calculer le pourcentage
   const percentage = totalLessons > 0 ? Math.round((progress.completedLessons.length / totalLessons) * 100) : 0
-  
+ 
   return percentage
 }
 
@@ -762,7 +762,7 @@ function markLessonCompleted(courseId, lessonId) {
   if (!courseProgress[courseId]) {
     courseProgress[courseId] = { completedLessons: [], totalLessons: 0 }
   }
-  
+ 
   if (!courseProgress[courseId].completedLessons.includes(lessonId)) {
     courseProgress[courseId].completedLessons.push(lessonId)
     saveCourseProgress()
@@ -784,7 +784,7 @@ function updateAllTranslations() {
       console.log("Updated element with key:", key, "to:", translations[currentLanguage][key])
     }
   })
-  
+ 
   // Update placeholder texts
   document.querySelectorAll("[data-translate-placeholder]").forEach(element => {
     const key = element.getAttribute("data-translate-placeholder")
@@ -792,7 +792,7 @@ function updateAllTranslations() {
       element.placeholder = translations[currentLanguage][key]
     }
   })
-  
+ 
   // Update title attributes
   document.querySelectorAll("[title]").forEach(element => {
     const title = element.getAttribute("title")
@@ -802,14 +802,14 @@ function updateAllTranslations() {
       element.title = translations[currentLanguage]["wishlist"]
     }
   })
-  
+ 
   // Update document language
   document.documentElement.lang = currentLanguage
-  
+ 
   // Header & Navigation
   const searchInput = document.getElementById("searchInput")
   if (searchInput) searchInput.placeholder = t("search-placeholder")
-  
+ 
   document.querySelectorAll(".nav-link").forEach((link) => {
     const page = link.dataset.page
     if (page === "home") link.textContent = t("nav-home")
@@ -854,8 +854,7 @@ function updateAllTranslations() {
         <option value="price-low">${t("sort-price-low")}</option>
         <option value="price-high">${t("sort-price-high")}</option>
       </select>`
-    document.getElementById("sortSelect").addEventListener("change", (e) => sortCourses(e.target.value))
-  }
+}
 
   // Dashboard
   const dashboardTitle = document.querySelector(".dashboard-container h1")
@@ -875,19 +874,19 @@ function updateAllTranslations() {
     const aboutSection = footerSections[0]
     const linksSection = footerSections[1]
     const followSection = footerSections[2]
-    
+   
     if (aboutSection) {
       const aboutTitle = aboutSection.querySelector("h4")
       const aboutText = aboutSection.querySelector("p")
       if (aboutTitle) aboutTitle.textContent = t("footer-about")
       if (aboutText) aboutText.textContent = t("footer-about-text")
     }
-    
+   
     if (linksSection) {
       const linksTitle = linksSection.querySelector("h4")
       if (linksTitle) linksTitle.textContent = t("footer-links")
     }
-    
+   
     if (followSection) {
       const followTitle = followSection.querySelector("h4")
       if (followTitle) followTitle.textContent = t("footer-follow")
@@ -908,10 +907,11 @@ function updateAllTranslations() {
 // ===== Initialization =====
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded")
-  
+  console.log(coursesData); // check if coursesData is populated
+  renderCourses();           // now render courses
   // Show progress bar on initial load
   simulateProgress()
-  
+ 
   currentLanguage = localStorage.getItem("language") || "fr"
   console.log("Current language:", currentLanguage)
   updateAllTranslations()
@@ -929,7 +929,7 @@ function initializeApp() {
   renderCategories()
   loadCart()
   updateWishlistCount()
-  
+ 
   // Initialize new advanced features
   initializeSearch()
   initializeNotifications()
@@ -937,7 +937,7 @@ function initializeApp() {
   initializeCourseProgress()
   renderActivities()
   renderCertificates()
-  
+ 
   // Initialize new page features
   initializeContactForm()
   initializeScrollAnimations()
@@ -945,7 +945,7 @@ function initializeApp() {
   lazyLoadImages()
   initializeCoursesPage()
   initializeNewsletter()
-  
+ 
   // Initialize navigation from URL hash
   initializeFromHash()
 }
@@ -1040,7 +1040,7 @@ function setupEventListeners() {
       }
     })
   })
-  
+ 
   // Navigation from auth pages to other pages
   document.querySelectorAll('a[href="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -1054,7 +1054,7 @@ function setupEventListeners() {
     })
   })
 
-  
+ 
   // Profile Dropdown Items - Menu utilisateur connecté
   document.getElementById("dropdownDashboard").addEventListener("click", (e) => {
     e.preventDefault()
@@ -1095,8 +1095,8 @@ function setupEventListeners() {
   // Close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     const dropdown = document.getElementById("profileDropdown")
-    
-    if (dropdown.classList.contains("active") && 
+   
+    if (dropdown.classList.contains("active") &&
         !dropdown.contains(e.target)) {
       dropdown.classList.remove("active")
     }
@@ -1113,9 +1113,11 @@ function setupEventListeners() {
   })
 
   // Sort
-  document.getElementById("sortSelect").addEventListener("change", (e) => {
-    sortCourses(e.target.value)
-  })
+ document.getElementById("sortSelect").addEventListener("change", (e) => {
+  currentSort = e.target.value;       // save the selected sort type
+  renderCourses();                    // re-render with new sorting
+});
+
 
   // Filters
   document.querySelectorAll(".price-filter, .rating-filter").forEach((filter) => {
@@ -1142,7 +1144,7 @@ function setupEventListeners() {
 function navigateTo(page) {
   // Show progress bar
   simulateProgress()
-  
+ 
   // Hide all pages
   document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"))
 
@@ -1223,10 +1225,10 @@ function renderCategoryFilters() {
       e.preventDefault()
       const email = document.getElementById("loginEmail").value
       const password = document.getElementById("loginPassword").value
-      
+     
       enhancedLogin(email, password)
     })
-    
+   
     // Real-time password strength for login
     const loginPassword = document.getElementById("loginPassword")
     if (loginPassword) {
@@ -1248,10 +1250,10 @@ function renderCategoryFilters() {
       const email = document.getElementById("signupEmail").value
       const password = document.getElementById("signupPassword").value
       const confirmPassword = document.getElementById("signupConfirmPassword").value
-      
+     
       enhancedSignup(name, email, password)
     })
-    
+   
     // Real-time password strength for signup
     const signupPassword = document.getElementById("signupPassword")
     if (signupPassword) {
@@ -1260,7 +1262,7 @@ function renderCategoryFilters() {
         updatePasswordStrength(password)
       })
     }
-    
+   
     // Real-time password match checking
     const signupConfirmPassword = document.getElementById("signupConfirmPassword")
     if (signupConfirmPassword) {
@@ -1280,13 +1282,13 @@ function renderCoursesGrid() {
 }
 
 function createCourseCard(course) {
-  const priceText = course.price === 0 ? t("course-free") : `${course.price}€`
-  const priceClass = course.price === 0 ? "free" : ""
-  
+  const priceText = course.price === 0 ? t("course-free") : `${course.price}€`;
+  const priceClass = course.price === 0 ? "free" : "";
+
   // Vérifier si le cours est inscrit et calculer la progression
-  const isEnrolled = enrolledCourses.some(c => c.id === course.id)
-  const progressPercentage = isEnrolled ? calculateCourseProgress(course.id) : 0
-  
+  const isEnrolled = enrolledCourses.some(c => c.id === course.id);
+  const progressPercentage = isEnrolled ? calculateCourseProgress(course.id) : 0;
+
   // Créer la barre de progression si le cours est inscrit
   const progressBar = isEnrolled ? `
     <div class="course-progress">
@@ -1295,47 +1297,53 @@ function createCourseCard(course) {
       </div>
       <span class="progress-text">${progressPercentage}%</span>
     </div>
-  ` : ''
+  ` : '';
 
   // Afficher la vidéo seulement si le cours est acheté ou gratuit
-  const videoContent = (isEnrolled || course.price === 0) ? 
+  const videoContent = (isEnrolled || course.price === 0) ?
     `<iframe src="${course.video}" frameborder="0" allowfullscreen></iframe>` :
     `<div class="video-locked">
       <div class="lock-icon">🔒</div>
       <p>Achetez le cours pour voir la vidéo</p>
-    </div>`
+    </div>`;
 
   // Créer le bouton ou l'indicateur selon l'état d'achat
-  const buttonOrStatus = isEnrolled ? 
+  const buttonOrStatus = isEnrolled ?
     `<span class="course-purchased">✅ Acheté</span>` :
     `<div class="course-card-actions">
       <button class="course-card-btn btn-outline" onclick="event.stopPropagation(); addToWishlist(${course.id})" title="Ajouter aux favoris">
         <span class="btn-icon">❤️</span>
       </button>
       <button class="course-card-btn btn-primary" onclick="event.stopPropagation(); addToCart(${course.id})">Ajouter au panier</button>
-    </div>`
+    </div>`;
+
+  // Calculate duration and lessons
+  const duration = getCourseDuration(course);
+  const lessons = getCourseLessons(course);
 
   return `
-        <div class="course-card" data-course-id="${course.id}">
-            <div class="course-card-video">
-                ${videoContent}
+    <div class="course-card" data-course-id="${course.id}">
+        <div class="course-card-video">
+            ${videoContent}
+        </div>
+        <div class="course-card-content">
+            <span class="course-card-category">${course.category || 'Inconnu'}</span>
+            <h3 class="course-card-title">${course.title || 'Titre indisponible'}</h3>
+            <p class="course-card-instructor">${course.instructor || 'Instructeur inconnu'}</p>
+            <div class="course-card-meta">
+                <span class="course-card-rating">⭐ ${course.rating ?? 'N/A'}</span>
+                <span class="course-card-students">${(course.students ?? 0).toLocaleString()} ${t("course-students")}</span>
+                <span class="course-card-duration">⏱️ ${duration} h</span>
+                <span class="course-card-lessons">📚 ${lessons} lessons</span>
             </div>
-            <div class="course-card-content">
-                <span class="course-card-category">${course.category}</span>
-                <h3 class="course-card-title">${course.title}</h3>
-                <p class="course-card-instructor">${course.instructor}</p>
-                <div class="course-card-meta">
-                    <span class="course-card-rating">⭐ ${course.rating}</span>
-                    <span class="course-card-students">${course.students.toLocaleString()} ${t("course-students")}</span>
-                </div>
-                ${progressBar}
-                <div class="course-card-footer">
-                    <span class="course-card-price ${priceClass}">${priceText}</span>
-                    ${buttonOrStatus}
-                </div>
+            ${progressBar}
+            <div class="course-card-footer">
+                <span class="course-card-price ${priceClass}">${priceText}</span>
+                ${buttonOrStatus}
             </div>
         </div>
-    `
+    </div>
+  `;
 }
 
 function attachCourseCardListeners() {
@@ -1358,7 +1366,7 @@ function checkVideoAccess(course) {
   const videoPreview = document.getElementById("videoPreview")
   const videoFrame = document.getElementById("videoFrame")
   const lockPrice = document.getElementById("lockPrice")
-  
+ 
   if (isEnrolled || course.price === 0) {
     // User has access - show video
     if (videoLockOverlay) videoLockOverlay.style.display = "none"
@@ -1389,7 +1397,7 @@ function addToCartFromLock() {
     openModal('authModal')
     return
   }
-  
+ 
   if (currentCourse) {
     addToCart(currentCourse.id)
   }
@@ -1412,15 +1420,15 @@ function showCourseDetail(courseId) {
     `⭐ ${currentCourse.rating} (${currentCourse.students.toLocaleString()} avis)`
   document.getElementById("courseStudents").textContent = `${currentCourse.students.toLocaleString()} étudiants`
   document.getElementById("coursePrice").textContent = currentCourse.price === 0 ? "Gratuit" : `${currentCourse.price}€`
-  
+ 
   // Update breadcrumb
   document.getElementById("courseCategory").textContent = currentCourse.category
   document.getElementById("courseTitleBreadcrumb").textContent = currentCourse.title
-  
+ 
   // Update course badges
   document.getElementById("courseCategoryBadge").textContent = currentCourse.category
   document.getElementById("courseLevelBadge").textContent = "Tous niveaux"
-  
+ 
   // Check video access and display appropriate content
   checkVideoAccess(currentCourse)
 
@@ -1454,7 +1462,7 @@ function showCourseDetail(courseId) {
   // Buttons
   const addToCartBtn = document.getElementById("addToCartBtn")
   const addToWishlistBtn = document.getElementById("addToWishlistBtn")
-  
+ 
   if (addToCartBtn) {
     addToCartBtn.onclick = () => addToCart(courseId)
   }
@@ -1465,7 +1473,7 @@ function showCourseDetail(courseId) {
   navigateTo("courseDetail")
 }
 
-function renderCurriculumEnhanced() {
+function renderCurricuolumEnhanced() {
   const curriculumList = document.getElementById("curriculumList")
 
   if (!currentCourse.sections || currentCourse.sections.length === 0) {
@@ -1516,14 +1524,14 @@ function playLesson(courseId, sectionIndex, lessonIndex) {
     const lesson = course.sections[sectionIndex].lessons[lessonIndex]
     document.getElementById("videoFrame").src = lesson.videoUrl + "?autoplay=1"
     document.getElementById("videoTitle").textContent = lesson.title
-    
+   
     // Marquer la leçon comme terminée après 5 secondes (simulation)
     setTimeout(() => {
       markLessonCompleted(courseId, lesson.id)
       // Mettre à jour l'affichage de la progression
       updateProgressDisplay(courseId)
     }, 5000)
-    
+   
     console.log("[v0] Playing lesson:", lesson.title)
   }
 }
@@ -1614,6 +1622,7 @@ function renderQA() {
     .join("")
 }
 
+
 // ===== Cart Management =====
 function addToCart(courseId) {
   const course = coursesData.find((c) => c.id == courseId)
@@ -1648,13 +1657,13 @@ function addToCart(courseId) {
     rating: course.rating,
     students: course.students
   })
-  
+ 
   saveCart()
   updateCartCount()
-  
+ 
   // Notification de succès
   showNotification(`"${course.title}" ajouté au panier!`, 'success')
-  
+ 
   // Mettre à jour l'affichage des cartes de cours
   renderCoursesGrid()
   renderFeaturedCourses()
@@ -1674,12 +1683,16 @@ function loadCart() {
     updateCartCount()
   }
 }
+//added cause it was missing
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 function updateCartCount() {
   const count = cart.length
   const cartCountElement = document.getElementById("cartCount")
   const dropdownCartCount = document.getElementById("dropdownCartCount")
-  
+ 
   if (cartCountElement) cartCountElement.textContent = count
   if (dropdownCartCount) dropdownCartCount.textContent = count
 }
@@ -1763,15 +1776,15 @@ function checkout() {
   cart = []
   saveCart()
   updateCartCount()
-  
+ 
   // Mettre à jour l'affichage des cartes de cours pour déverrouiller les vidéos
   renderCoursesGrid()
-  
+ 
   // Si nous sommes sur la page de détail d'un cours, vérifier à nouveau l'accès à la vidéo
   if (currentCourse) {
     checkVideoAccess(currentCourse)
   }
-  
+ 
   alert(t("msg-checkout-success"))
   navigateTo("dashboard")
 }
@@ -1781,7 +1794,7 @@ function addToWishlist(courseId) {
   console.log("addToWishlist called with courseId:", courseId)
   const course = coursesData.find((c) => c.id == courseId)
   console.log("Course found:", course)
-  
+ 
   if (!course) {
     console.error("Course not found!")
     return
@@ -1789,7 +1802,7 @@ function addToWishlist(courseId) {
 
   const existingItem = wishlist.find((item) => item.id === courseId)
   console.log("Existing item:", existingItem)
-  
+ 
   if (!existingItem) {
     console.log("Adding course to wishlist")
     wishlist.push({
@@ -1807,7 +1820,7 @@ function addToWishlist(courseId) {
     saveWishlist()
     updateWishlistCount()
     showNotification(`${course.title} ajouté aux favoris!`, 'success')
-    
+   
     // Update the button to show it's been added
     updateWishlistButton(courseId, true)
   } else {
@@ -1824,7 +1837,7 @@ function removeFromWishlist(courseId) {
     saveWishlist()
     updateWishlistCount()
     showNotification(`${course.title} retiré des favoris`, 'info')
-    
+   
     // Update the button to show it's been removed
     updateWishlistButton(courseId, false)
   }
@@ -1859,15 +1872,15 @@ function renderWishlist() {
   console.log("renderWishlist called, wishlist length:", wishlist.length)
   const wishlistGrid = document.getElementById('wishlistGrid')
   const wishlistEmpty = document.getElementById('wishlistEmpty')
-  
+ 
   console.log("wishlistGrid found:", !!wishlistGrid)
   console.log("wishlistEmpty found:", !!wishlistEmpty)
-  
+ 
   if (!wishlistGrid) {
     console.error("wishlistGrid element not found!")
     return
   }
-  
+ 
   if (wishlist.length === 0) {
     console.log("Wishlist is empty, showing empty state")
     wishlistGrid.style.display = 'none'
@@ -1876,7 +1889,7 @@ function renderWishlist() {
     console.log("Wishlist has items, rendering grid")
     wishlistGrid.style.display = 'grid'
     if (wishlistEmpty) wishlistEmpty.style.display = 'none'
-    
+   
     wishlistGrid.innerHTML = wishlist.map(item => `
       <div class="wishlist-card" data-course-id="${item.id}">
         <div class="wishlist-card-image">
@@ -1915,7 +1928,7 @@ function updateWishlistCount() {
   const count = wishlist.length
   const wishlistCountElement = document.getElementById("wishlistCount")
   const dropdownWishlistCount = document.getElementById("dropdownWishlistCount")
-  
+ 
   if (wishlistCountElement) wishlistCountElement.textContent = count
   if (dropdownWishlistCount) dropdownWishlistCount.textContent = count
 }
@@ -1985,7 +1998,7 @@ function filterByCategory(categoryId) {
   }, 100)
 }
 
-// ===== Filters & Sorting =====
+/* ===== Filters & Sorting =====
 function applyFilters() {
   const selectedCategories = Array.from(document.querySelectorAll(".category-filter:checked")).map((f) =>
     Number.parseInt(f.value),
@@ -2007,7 +2020,38 @@ function applyFilters() {
   })
 
   renderCoursesGrid()
+}*/
+
+function applyFilters() {
+  const selectedCategories = Array.from(document.querySelectorAll(".category-filter:checked"))
+    .map(f => f.value)  // FIXED
+
+  const priceFilters = Array.from(document.querySelectorAll(".price-filter:checked"))
+    .map(f => f.value)
+
+  const ratingFilters = Array.from(document.querySelectorAll(".rating-filter:checked"))
+    .map(f => Number.parseInt(f.value))
+
+  filteredCourses = coursesData.filter(course => {
+    const categoryMatch =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(course.category)
+
+    const priceMatch =
+      priceFilters.length === 0 ||
+      (priceFilters.includes("free") && course.price === 0) ||
+      (priceFilters.includes("paid") && course.price > 0)
+
+    const ratingMatch =
+      ratingFilters.length === 0 ||
+      ratingFilters.some(r => course.rating >= r)
+
+    return categoryMatch && priceMatch && ratingMatch
+  })
+
+  renderCoursesGrid(filteredCourses)
 }
+
 
 function resetFilters() {
   document.querySelectorAll(".category-filter, .price-filter, .rating-filter").forEach((f) => (f.checked = false))
@@ -2015,26 +2059,6 @@ function resetFilters() {
   renderCoursesGrid()
 }
 
-function sortCourses(sortType) {
-  switch (sortType) {
-    case "popular":
-      filteredCourses.sort((a, b) => b.students - a.students)
-      break
-    case "newest":
-      filteredCourses.sort((a, b) => b.id - a.id)
-      break
-    case "rating":
-      filteredCourses.sort((a, b) => b.rating - a.rating)
-      break
-    case "price-low":
-      filteredCourses.sort((a, b) => a.price - b.price)
-      break
-    case "price-high":
-      filteredCourses.sort((a, b) => b.price - a.price)
-      break
-  }
-  renderCoursesGrid()
-}
 
 // ===== Tabs =====
 function switchTab(tabName) {
@@ -2065,13 +2089,13 @@ function editProfile() {
   document.getElementById("profilePhone").value = userProfile.phone || ''
   document.getElementById("profileBio").value = userProfile.bio || ''
   document.getElementById("profileLanguage").value = userProfile.language || 'fr'
-  
+ 
   // Update avatar display
   const avatarElement = document.getElementById("profileAvatar")
   if (avatarElement) {
     avatarElement.textContent = userProfile.avatar || '👤'
   }
-  
+ 
   openModal("profileModal")
 }
 
@@ -2080,7 +2104,7 @@ function uploadAvatar() {
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = 'image/*'
-  
+ 
   input.onchange = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -2090,13 +2114,13 @@ function uploadAvatar() {
       reader.onload = (e) => {
         // Update avatar in profile
         userProfile.avatar = e.target.result
-        
+       
         // Update avatar display
         const avatarElement = document.getElementById("profileAvatar")
         if (avatarElement) {
           avatarElement.innerHTML = `<img src="${e.target.result}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`
         }
-        
+       
         // Update user in database
         const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
         const currentUser = existingUsers.find(u => u.id === userProfile.id)
@@ -2104,14 +2128,14 @@ function uploadAvatar() {
           currentUser.avatar = e.target.result
           localStorage.setItem('users', JSON.stringify(existingUsers))
         }
-        
+       
         localStorage.setItem("userProfile", JSON.stringify(userProfile))
         showNotification('Photo de profil mise à jour!', 'success')
       }
       reader.readAsDataURL(file)
     }
   }
-  
+ 
   input.click()
 }
 
@@ -2121,37 +2145,37 @@ function saveProfile() {
   const phone = document.getElementById("profilePhone").value
   const bio = document.getElementById("profileBio").value
   const language = document.getElementById("profileLanguage").value
-  
+ 
   // Validate required fields
   if (!name || !email) {
     showNotification('Le nom et l\'email sont obligatoires.', 'error')
     return
   }
-  
+ 
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     showNotification('Veuillez entrer un email valide.', 'error')
     return
   }
-  
+ 
   // Check if email is already taken by another user
   const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
   const currentUser = existingUsers.find(u => u.id === userProfile.id)
   const emailTaken = existingUsers.find(u => u.email === email && u.id !== userProfile.id)
-  
+ 
   if (emailTaken) {
     showNotification('Cet email est déjà utilisé par un autre compte.', 'error')
     return
   }
-  
+ 
   // Update user profile
   userProfile.name = name
   userProfile.email = email
   userProfile.phone = phone
   userProfile.bio = bio
   userProfile.language = language
-  
+ 
   // Update user in database
   if (currentUser) {
     currentUser.name = name
@@ -2161,7 +2185,7 @@ function saveProfile() {
     currentUser.language = language
     localStorage.setItem('users', JSON.stringify(existingUsers))
   }
-  
+ 
   localStorage.setItem("userProfile", JSON.stringify(userProfile))
   updateAuthUI()
   closeModal("profileModal")
@@ -2203,27 +2227,27 @@ function login(email, password) {
     alert("Veuillez remplir tous les champs")
     return false
   }
-  
+ 
   // Validation de l'email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     alert("Veuillez entrer une adresse email valide")
     return false
   }
-  
+ 
   // Validation du mot de passe
   if (password.length < 6) {
     alert("Le mot de passe doit contenir au moins 6 caractères")
     return false
   }
-  
+ 
   // Simulation de connexion réussie
     isLoggedIn = true
     localStorage.setItem("isLoggedIn", JSON.stringify(true))
     userProfile.email = email
   userProfile.name = email.split('@')[0] // Utilise la partie avant @ comme nom par défaut
     localStorage.setItem("userProfile", JSON.stringify(userProfile))
-  
+ 
     closeModal("authModal")
     updateAuthUI()
     alert("Connexion réussie!")
@@ -2236,33 +2260,33 @@ function signup(name, email, password) {
     alert("Veuillez remplir tous les champs")
     return false
   }
-  
+ 
   // Validation de l'email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     alert("Veuillez entrer une adresse email valide")
     return false
   }
-  
+ 
   // Validation du nom
   if (name.length < 2) {
     alert("Le nom doit contenir au moins 2 caractères")
     return false
   }
-  
+ 
   // Validation du mot de passe
   if (password.length < 6) {
     alert("Le mot de passe doit contenir au moins 6 caractères")
     return false
   }
-  
+ 
   // Simulation d'inscription réussie
     isLoggedIn = true
     localStorage.setItem("isLoggedIn", JSON.stringify(true))
     userProfile.name = name
     userProfile.email = email
     localStorage.setItem("userProfile", JSON.stringify(userProfile))
-  
+ 
     closeModal("authModal")
     updateAuthUI()
     alert("Inscription réussie!")
@@ -2274,7 +2298,7 @@ function logout() {
   isLoggedIn = false
   localStorage.setItem("isLoggedIn", JSON.stringify(false))
   localStorage.removeItem("userProfile")
-  
+ 
   // Clear user data
   cart = []
   wishlist = []
@@ -2282,7 +2306,7 @@ function logout() {
   localStorage.removeItem("cart")
   localStorage.removeItem("wishlist")
   localStorage.removeItem("enrolledCourses")
-  
+ 
   // Reset user profile
   userProfile = {
     name: '',
@@ -2292,7 +2316,7 @@ function logout() {
     phone: '',
     language: 'fr'
   }
-  
+ 
   updateAuthUI()
   showNotification('Déconnexion réussie!', 'success')
   navigateTo("home")
@@ -2301,7 +2325,7 @@ function logout() {
 function checkAuthStatus() {
   const profileBtn = document.getElementById("profileBtn")
   if (!profileBtn) return
-  
+ 
   if (!isLoggedIn) {
     profileBtn.textContent = "🔓"
     profileBtn.onclick = () => openModal("authModal")
@@ -2313,12 +2337,12 @@ function checkAuthStatus() {
 function updateAuthUI() {
   const userMenu = document.getElementById("userMenu")
   const guestMenu = document.getElementById("guestMenu")
-  
+ 
   if (isLoggedIn) {
     // Afficher le menu utilisateur et masquer le menu invité
     if (guestMenu) guestMenu.style.display = "none"
     if (userMenu) userMenu.style.display = "block"
-    
+   
     // Mettre à jour les informations utilisateur dans le dropdown
     updateProfileDropdown()
   } else {
@@ -2334,7 +2358,7 @@ function updateProfileDropdown() {
   const userEmail = document.getElementById("dropdownUserEmail")
   const wishlistCount = document.getElementById("dropdownWishlistCount")
   const cartCount = document.getElementById("dropdownCartCount")
-  
+ 
   if (userName) userName.textContent = userProfile.name
   if (userEmail) userEmail.textContent = userProfile.email
   if (wishlistCount) wishlistCount.textContent = wishlist.length
@@ -2347,7 +2371,7 @@ function updateProfileDropdown() {
 function togglePasswordVisibility(inputId) {
   const input = document.getElementById(inputId)
   const toggleIcon = input.parentElement.querySelector('.toggle-icon')
-  
+ 
   if (input.type === 'password') {
     input.type = 'text'
     toggleIcon.textContent = '🙈'
@@ -2362,13 +2386,13 @@ function checkPasswordStrength(password) {
   let strength = 0
   let strengthText = 'Très faible'
   let strengthColor = '#ef4444'
-  
+ 
   if (password.length >= 8) strength += 1
   if (password.match(/[a-z]/)) strength += 1
   if (password.match(/[A-Z]/)) strength += 1
   if (password.match(/[0-9]/)) strength += 1
   if (password.match(/[^a-zA-Z0-9]/)) strength += 1
-  
+ 
   switch (strength) {
     case 0:
     case 1:
@@ -2392,7 +2416,7 @@ function checkPasswordStrength(password) {
       strengthColor = '#10b981'
       break
   }
-  
+ 
   return {
     strength: strength,
     text: strengthText,
@@ -2405,11 +2429,11 @@ function checkPasswordStrength(password) {
 function updatePasswordStrength(password) {
   const strengthFill = document.getElementById('strengthFill')
   const strengthText = document.getElementById('strengthText')
-  
+ 
   if (!strengthFill || !strengthText) return
-  
+ 
   const strength = checkPasswordStrength(password)
-  
+ 
   strengthFill.style.width = `${strength.percentage}%`
   strengthFill.style.background = strength.color
   strengthText.textContent = strength.text
@@ -2419,9 +2443,9 @@ function updatePasswordStrength(password) {
 // Check password match
 function checkPasswordMatch(password, confirmPassword) {
   const passwordMatch = document.getElementById('passwordMatch')
-  
+ 
   if (!passwordMatch) return
-  
+ 
   if (confirmPassword && password === confirmPassword) {
     passwordMatch.style.display = 'flex'
   } else {
@@ -2432,11 +2456,11 @@ function checkPasswordMatch(password, confirmPassword) {
 // Form validation
 function validateForm(formType) {
   let isValid = true
-  
+ 
   if (formType === 'login') {
     const email = document.getElementById('loginEmail').value
     const password = document.getElementById('loginPassword').value
-    
+   
     // Email validation
     const emailError = document.getElementById('emailError')
     if (!email || !isValidEmail(email)) {
@@ -2445,7 +2469,7 @@ function validateForm(formType) {
     } else {
       emailError.textContent = ''
     }
-    
+   
     // Password validation
     const passwordError = document.getElementById('passwordError')
     if (!password || password.length < 6) {
@@ -2455,13 +2479,13 @@ function validateForm(formType) {
       passwordError.textContent = ''
     }
   }
-  
+ 
   if (formType === 'signup') {
     const name = document.getElementById('signupName').value
     const email = document.getElementById('signupEmail').value
     const password = document.getElementById('signupPassword').value
     const confirmPassword = document.getElementById('signupConfirmPassword').value
-    
+   
     // Name validation
     const nameError = document.getElementById('nameError')
     if (!name || name.length < 2) {
@@ -2470,7 +2494,7 @@ function validateForm(formType) {
     } else {
       nameError.textContent = ''
     }
-    
+   
     // Email validation
     const emailError = document.getElementById('signupEmailError')
     if (!email || !isValidEmail(email)) {
@@ -2479,7 +2503,7 @@ function validateForm(formType) {
     } else {
       emailError.textContent = ''
     }
-    
+   
     // Password validation
     const passwordError = document.getElementById('signupPasswordError')
     if (!password || password.length < 8) {
@@ -2488,7 +2512,7 @@ function validateForm(formType) {
     } else {
       passwordError.textContent = ''
     }
-    
+   
     // Confirm password validation
     const confirmPasswordError = document.getElementById('confirmPasswordError')
     if (!confirmPassword || password !== confirmPassword) {
@@ -2498,7 +2522,7 @@ function validateForm(formType) {
       confirmPasswordError.textContent = ''
     }
   }
-  
+ 
   return isValid
 }
 
@@ -2513,7 +2537,7 @@ function showLoading(buttonId) {
   const button = document.getElementById(buttonId)
   const btnContent = button.querySelector('.btn-content')
   const btnLoader = button.querySelector('.btn-loader')
-  
+ 
   if (btnContent && btnLoader) {
     btnContent.style.display = 'none'
     btnLoader.style.display = 'block'
@@ -2526,7 +2550,7 @@ function hideLoading(buttonId) {
   const button = document.getElementById(buttonId)
   const btnContent = button.querySelector('.btn-content')
   const btnLoader = button.querySelector('.btn-loader')
-  
+ 
   if (btnContent && btnLoader) {
     btnContent.style.display = 'flex'
     btnLoader.style.display = 'none'
@@ -2540,7 +2564,7 @@ function uploadAvatar() {
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = 'image/*'
-  
+ 
   input.onchange = function(e) {
     const file = e.target.files[0]
     if (file) {
@@ -2555,7 +2579,7 @@ function uploadAvatar() {
       reader.readAsDataURL(file)
     }
   }
-  
+ 
   input.click()
 }
 
@@ -2564,21 +2588,21 @@ function enhancedLogin(email, password) {
   if (!validateForm('login')) {
     return false
   }
-  
+ 
   showLoading('loginSubmitBtn')
-  
+ 
   // Simulate API call with better validation
   setTimeout(() => {
     // Check if user exists (simulate database check)
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
     const user = existingUsers.find(u => u.email === email)
-    
+   
     if (!user) {
       hideLoading('loginSubmitBtn')
       showNotification('Email non trouvé. Veuillez vous inscrire d\'abord.', 'error')
       return false
     }
-    
+   
     // In a real app, you'd hash the password and compare
     if (user.password !== password) {
       hideLoading('loginSubmitBtn')
@@ -2589,7 +2613,7 @@ function enhancedLogin(email, password) {
     // Store user session data
     isLoggedIn = true
     localStorage.setItem("isLoggedIn", JSON.stringify(true))
-    
+   
     userProfile = {
       id: user.id,
       name: user.name,
@@ -2601,25 +2625,25 @@ function enhancedLogin(email, password) {
       phone: user.phone || '',
       language: user.language || 'fr'
     }
-    
+   
     // Update last login
     user.lastLogin = new Date().toISOString()
     localStorage.setItem('users', JSON.stringify(existingUsers))
     localStorage.setItem("userProfile", JSON.stringify(userProfile))
-    
+   
     hideLoading('loginSubmitBtn')
     closeModal("loginModal")
     updateAuthUI()
-    
+   
     // Show success message
     showNotification(`Bienvenue ${user.name}!`, 'success')
-    
+   
     // Navigate to dashboard after successful login
     setTimeout(() => {
       navigateTo('dashboard')
     }, 1000)
   }, 1500)
-  
+ 
   return true
 }
 
@@ -2628,15 +2652,15 @@ function enhancedSignup(name, email, password) {
   if (!validateForm('signup')) {
     return false
   }
-  
+ 
   showLoading('signupSubmitBtn')
-  
+ 
   // Simulate API call with better validation
   setTimeout(() => {
     // Check if user already exists
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
     const existingUser = existingUsers.find(u => u.email === email)
-    
+   
     if (existingUser) {
       hideLoading('signupSubmitBtn')
       showNotification('Un compte avec cet email existe déjà.', 'error')
@@ -2660,15 +2684,15 @@ function enhancedSignup(name, email, password) {
       completedCourses: [],
       certificates: []
     }
-    
+   
     // Add user to database
     existingUsers.push(newUser)
     localStorage.setItem('users', JSON.stringify(existingUsers))
-    
+   
     // Store user session data
     isLoggedIn = true
     localStorage.setItem("isLoggedIn", JSON.stringify(true))
-    
+   
     userProfile = {
       id: newUser.id,
       name: newUser.name,
@@ -2680,22 +2704,22 @@ function enhancedSignup(name, email, password) {
       phone: newUser.phone,
       language: newUser.language
     }
-    
+   
     localStorage.setItem("userProfile", JSON.stringify(userProfile))
-    
+   
     hideLoading('signupSubmitBtn')
     closeModal("signupModal")
     updateAuthUI()
-    
+   
     // Show success message
     showNotification(`Bienvenue ${name}! Votre compte a été créé avec succès.`, 'success')
-    
+   
     // Navigate to dashboard after successful signup
     setTimeout(() => {
       navigateTo('dashboard')
     }, 1000)
   }, 1500)
-  
+ 
   return true
 }
 
@@ -2705,35 +2729,35 @@ function resetPassword(email) {
     showNotification('Veuillez entrer votre email.', 'error')
     return false
   }
-  
+ 
   // Check if user exists
   const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
   const user = existingUsers.find(u => u.email === email)
-  
+ 
   if (!user) {
     showNotification('Aucun compte trouvé avec cet email.', 'error')
     return false
   }
-  
+ 
   // Simulate sending reset email
   showLoading('resetPasswordBtn')
-  
+ 
   setTimeout(() => {
     hideLoading('resetPasswordBtn')
     closeModal('passwordResetModal')
     showNotification('Un lien de réinitialisation a été envoyé à votre email.', 'success')
-    
+   
     // In a real app, you would send an actual email
     console.log(`Password reset link sent to: ${email}`)
   }, 2000)
-  
+ 
   return true
 }
 
 // Social login function
 function socialLogin(provider) {
   showNotification(`Connexion avec ${provider} en cours...`, 'info')
-  
+ 
   // Simulate social login process
   setTimeout(() => {
     // In a real app, you would integrate with actual OAuth providers
@@ -2746,11 +2770,11 @@ function socialLogin(provider) {
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString()
     }
-    
+   
     // Check if user already exists
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
     let user = existingUsers.find(u => u.email === socialUser.email)
-    
+   
     if (!user) {
       // Create new user
       user = {
@@ -2771,11 +2795,11 @@ function socialLogin(provider) {
       user.lastLogin = new Date().toISOString()
       localStorage.setItem('users', JSON.stringify(existingUsers))
     }
-    
+   
     // Store user session data
     isLoggedIn = true
     localStorage.setItem("isLoggedIn", JSON.stringify(true))
-    
+   
     userProfile = {
       id: user.id,
       name: user.name,
@@ -2787,16 +2811,16 @@ function socialLogin(provider) {
       phone: user.phone,
       language: user.language
     }
-    
+   
     localStorage.setItem("userProfile", JSON.stringify(userProfile))
-    
+   
     updateAuthUI()
     showNotification(`Connexion avec ${provider} réussie!`, 'success')
-    
+   
     // Close any open modals
     closeModal('authModal')
     closeModal('passwordResetModal')
-    
+   
     // Navigate to dashboard
     setTimeout(() => {
       navigateTo('dashboard')
@@ -2814,7 +2838,7 @@ function showNotification(message, type = 'info') {
       <span class="notification-message">${message}</span>
     </div>
   `
-  
+ 
   // Add styles
   notification.style.cssText = `
     position: fixed;
@@ -2828,9 +2852,9 @@ function showNotification(message, type = 'info') {
     z-index: 10000;
     animation: slideInRight 0.3s ease-out;
   `
-  
+ 
   document.body.appendChild(notification)
-  
+ 
   // Auto remove after 3 seconds
   setTimeout(() => {
     notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -2892,9 +2916,9 @@ function initializeSearch() {
   const searchInput = document.getElementById('searchInput')
   const searchClear = document.getElementById('searchClear')
   const searchSuggestions = document.getElementById('searchSuggestions')
-  
+ 
   if (!searchInput) return
-  
+ 
   // Search input events
   searchInput.addEventListener('input', handleSearchInput)
   searchInput.addEventListener('focus', showSearchSuggestions)
@@ -2908,12 +2932,12 @@ function initializeSearch() {
       }
     }
   })
-  
+ 
   // Clear button
   if (searchClear) {
     searchClear.addEventListener('click', clearSearch)
   }
-  
+ 
   // Click outside to close suggestions
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-container')) {
@@ -2925,17 +2949,17 @@ function initializeSearch() {
 function handleSearchInput(e) {
   const query = e.target.value.trim()
   const searchClear = document.getElementById('searchClear')
-  
+ 
   // Show/hide clear button
   if (searchClear) {
     searchClear.style.display = query ? 'block' : 'none'
   }
-  
+ 
   // Clear previous timeout
   if (searchTimeout) {
     clearTimeout(searchTimeout)
   }
-  
+ 
   // Debounce search
   searchTimeout = setTimeout(() => {
     if (query.length >= 2) {
@@ -2948,7 +2972,7 @@ function handleSearchInput(e) {
 
 function performSearch(query) {
   const results = {
-    courses: coursesData.filter(course => 
+    courses: coursesData.filter(course =>
       course.title.toLowerCase().includes(query.toLowerCase()) ||
       course.description.toLowerCase().includes(query.toLowerCase()) ||
       course.instructor.toLowerCase().includes(query.toLowerCase()) ||
@@ -2957,28 +2981,28 @@ function performSearch(query) {
     categories: [...new Set(coursesData.map(course => course.category))]
       .filter(category => category.toLowerCase().includes(query.toLowerCase()))
   }
-  
+ 
   displaySearchSuggestions(results)
 }
 
 function performSearchAndNavigate(query) {
   // Navigate to courses page
   navigateTo('courses')
-  
+ 
   // Filter courses based on search query
-  filteredCourses = coursesData.filter(course => 
+  filteredCourses = coursesData.filter(course =>
     course.title.toLowerCase().includes(query.toLowerCase()) ||
     course.description.toLowerCase().includes(query.toLowerCase()) ||
     course.instructor.toLowerCase().includes(query.toLowerCase()) ||
     course.category.toLowerCase().includes(query.toLowerCase())
   )
-  
+ 
   // Render filtered courses
   renderCoursesGrid()
-  
+ 
   // Hide search suggestions
   hideSearchSuggestions()
-  
+ 
   // Show notification
   showNotification(`${filteredCourses.length} cours trouvé(s) pour "${query}"`, 'success')
 }
@@ -2987,9 +3011,9 @@ function displaySearchSuggestions(results) {
   const courseSuggestions = document.getElementById('courseSuggestions')
   const categorySuggestions = document.getElementById('categorySuggestions')
   const searchSuggestions = document.getElementById('searchSuggestions')
-  
+ 
   if (!courseSuggestions || !categorySuggestions || !searchSuggestions) return
-  
+ 
   // Display course suggestions
   courseSuggestions.innerHTML = results.courses.slice(0, 5).map(course => `
     <div class="suggestion-item" onclick="selectSearchResult('course', ${course.id})">
@@ -2997,7 +3021,7 @@ function displaySearchSuggestions(results) {
       <span class="suggestion-text">${course.title}</span>
     </div>
   `).join('')
-  
+ 
   // Display category suggestions
   categorySuggestions.innerHTML = results.categories.slice(0, 3).map(category => `
     <div class="suggestion-item" onclick="selectSearchResult('category', '${category}')">
@@ -3005,20 +3029,20 @@ function displaySearchSuggestions(results) {
       <span class="suggestion-text">${category}</span>
     </div>
   `).join('')
-  
+ 
   showSearchSuggestions()
 }
 
 function selectSearchResult(type, value) {
   const searchInput = document.getElementById('searchInput')
-  
+ 
   if (type === 'course') {
     // Close search suggestions
     hideSearchSuggestions()
-    
+   
     // Navigate to course detail page
     showCourseDetail(value)
-    
+   
     // Clear search input
     if (searchInput) searchInput.value = ''
     const searchClear = document.getElementById('searchClear')
@@ -3048,7 +3072,7 @@ function hideSearchSuggestions() {
 function clearSearch() {
   const searchInput = document.getElementById('searchInput')
   const searchClear = document.getElementById('searchClear')
-  
+ 
   if (searchInput) searchInput.value = ''
   if (searchClear) searchClear.style.display = 'none'
   hideSearchSuggestions()
@@ -3103,27 +3127,27 @@ function initializeNotifications() {
   const notificationDropdown = document.getElementById('notificationDropdown')
   const notificationContainer = notificationBtn?.closest('.notification-container')
   const markAllRead = document.getElementById('markAllRead')
-  
+ 
   if (!notificationBtn || !notificationDropdown || !notificationContainer) return
-  
+ 
   // Toggle notifications
   notificationBtn.addEventListener('click', (e) => {
     e.stopPropagation()
     notificationContainer.classList.toggle('active')
   })
-  
+ 
   // Mark all as read
   if (markAllRead) {
     markAllRead.addEventListener('click', markAllNotificationsAsRead)
   }
-  
+ 
   // Close on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.notification-container')) {
       notificationContainer.classList.remove('active')
     }
   })
-  
+ 
   updateNotificationCount()
   renderNotifications()
 }
@@ -3131,7 +3155,7 @@ function initializeNotifications() {
 function updateNotificationCount() {
   const notificationCount = document.getElementById('notificationCount')
   const unreadCount = notifications.filter(n => !n.read).length
-  
+ 
   if (notificationCount) {
     notificationCount.textContent = unreadCount
     notificationCount.style.display = unreadCount > 0 ? 'block' : 'none'
@@ -3141,7 +3165,7 @@ function updateNotificationCount() {
 function renderNotifications() {
   const notificationList = document.getElementById('notificationList')
   if (!notificationList) return
-  
+ 
   notificationList.innerHTML = notifications.map(notification => `
     <div class="notification-item ${notification.read ? '' : 'unread'}" onclick="markNotificationAsRead(${notification.id})">
       <div class="notification-icon-small">${getNotificationIcon(notification.type)}</div>
@@ -3192,11 +3216,11 @@ function addNotification(type, title, message) {
     time: 'Maintenant',
     read: false
   }
-  
+ 
   notifications.unshift(newNotification)
   updateNotificationCount()
   renderNotifications()
-  
+ 
   // Show notification toast
   showNotification(message, 'info')
 }
@@ -3245,12 +3269,12 @@ function initializeDiscussionSystem() {
   if (discussionForm) {
     const textarea = discussionForm.querySelector('textarea')
     const button = discussionForm.querySelector('button')
-    
+   
     if (button) {
       button.addEventListener('click', postDiscussion)
     }
   }
-  
+ 
   // Q&A form
   const qaForm = document.querySelector('.qa-form')
   if (qaForm) {
@@ -3259,7 +3283,7 @@ function initializeDiscussionSystem() {
       button.addEventListener('click', askQuestion)
     }
   }
-  
+ 
   // Like buttons
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-like')) {
@@ -3271,7 +3295,7 @@ function initializeDiscussionSystem() {
 function postDiscussion() {
   const textarea = document.getElementById('discussionInput')
   if (!textarea || !textarea.value.trim()) return
-  
+ 
   const newDiscussion = {
     id: Date.now(),
     author: userProfile.name || 'Utilisateur',
@@ -3280,18 +3304,18 @@ function postDiscussion() {
     likes: 0,
     replies: []
   }
-  
+ 
   discussions.unshift(newDiscussion)
   renderDiscussions()
   textarea.value = ''
-  
+ 
   showNotification('Discussion publiée avec succès!', 'success')
 }
 
 function askQuestion() {
   const input = document.getElementById('questionInput')
   if (!input || !input.value.trim()) return
-  
+ 
   const newQuestion = {
     id: Date.now(),
     author: userProfile.name || 'Utilisateur',
@@ -3300,11 +3324,11 @@ function askQuestion() {
     time: 'Maintenant',
     answers: []
   }
-  
+ 
   questions.unshift(newQuestion)
   renderQuestions()
   input.value = ''
-  
+ 
   showNotification('Question posée avec succès!', 'success')
 }
 
@@ -3312,7 +3336,7 @@ function handleLike(button) {
   const currentLikes = parseInt(button.textContent.match(/\d+/)[0])
   const newLikes = currentLikes + 1
   button.textContent = `👍 ${newLikes}`
-  
+ 
   // Add visual feedback
   button.style.transform = 'scale(1.1)'
   setTimeout(() => {
@@ -3323,7 +3347,7 @@ function handleLike(button) {
 function renderDiscussions() {
   const discussionList = document.getElementById('discussionList')
   if (!discussionList) return
-  
+ 
   discussionList.innerHTML = discussions.map(discussion => `
     <div class="discussion-item">
       <div class="discussion-avatar">👤</div>
@@ -3345,7 +3369,7 @@ function renderDiscussions() {
 function renderQuestions() {
   const qaList = document.getElementById('qaList')
   if (!qaList) return
-  
+ 
   qaList.innerHTML = questions.map(qa => `
     <div class="qa-item">
       <div class="qa-question">
@@ -3393,7 +3417,7 @@ let userCourseProgress = [
 
 function initializeCourseProgress() {
   renderCourseProgress()
-  
+ 
   // Add click handlers for continue buttons
   document.addEventListener('click', (e) => {
     if (e.target.textContent === 'Continuer') {
@@ -3409,7 +3433,7 @@ function initializeCourseProgress() {
 function renderCourseProgress() {
   const progressList = document.getElementById('courseProgressList')
   if (!progressList) return
-  
+ 
   progressList.innerHTML = userCourseProgress.map(course => `
     <div class="progress-item">
       <div class="course-thumbnail">${course.thumbnail}</div>
@@ -3430,7 +3454,7 @@ function renderCourseProgress() {
 
 function navigateToCourse(courseTitle) {
   // Find course by title
-  const course = courses.find(c => c.title === courseTitle)
+  const course = coursesData.find(c => c.title === courseTitle)
   if (course) {
     window.currentCourseId = course.id
     navigateTo('course-detail')
@@ -3468,7 +3492,7 @@ let activities = [
 function renderActivities() {
   const activityList = document.getElementById('activityList')
   if (!activityList) return
-  
+ 
   activityList.innerHTML = activities.map(activity => `
     <div class="activity-item">
       <div class="activity-icon">${activity.icon}</div>
@@ -3490,7 +3514,7 @@ function addActivity(type, title, description) {
     time: 'Maintenant',
     icon: getActivityIcon(type)
   }
-  
+ 
   activities.unshift(newActivity)
   renderActivities()
 }
@@ -3520,7 +3544,7 @@ let certificates = [
 function renderCertificates() {
   const certificatesGrid = document.getElementById('certificatesGrid')
   if (!certificatesGrid) return
-  
+ 
   certificatesGrid.innerHTML = certificates.map(certificate => `
     <div class="certificate-item">
       <div class="certificate-icon">${certificate.icon}</div>
@@ -3549,12 +3573,12 @@ function downloadCertificate(certificateId) {
 function toggleFAQ(element) {
   const faqItem = element.parentElement
   const isActive = faqItem.classList.contains('active')
-  
+ 
   // Close all FAQ items
   document.querySelectorAll('.faq-item').forEach(item => {
     item.classList.remove('active')
   })
-  
+ 
   // Open clicked item if it wasn't active
   if (!isActive) {
     faqItem.classList.add('active')
@@ -3565,29 +3589,29 @@ function toggleFAQ(element) {
 function initializeContactForm() {
   const contactForm = document.getElementById('contactForm')
   if (!contactForm) return
-  
+ 
   contactForm.addEventListener('submit', handleContactSubmit)
 }
 
 function handleContactSubmit(e) {
   e.preventDefault()
-  
+ 
   const formData = {
     name: document.getElementById('contactName').value,
     email: document.getElementById('contactEmail').value,
     subject: document.getElementById('contactSubject').value,
     message: document.getElementById('contactMessage').value
   }
-  
+ 
   // Validate form
   if (!formData.name || !formData.email || !formData.subject || !formData.message) {
     showNotification('Veuillez remplir tous les champs', 'error')
     return
   }
-  
+ 
   // Simulate form submission
   showLoading('contactForm')
-  
+ 
   setTimeout(() => {
     hideLoading('contactForm')
     showNotification('Message envoyé avec succès! Nous vous répondrons dans les 24h.', 'success')
@@ -3603,13 +3627,13 @@ function navigateTo(page) {
   if (navigationHistory[navigationHistory.length - 1] !== page) {
     navigationHistory.push(page)
   }
-  
+ 
   // Hide all pages
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active')
     p.style.display = 'none'
   })
-  
+ 
   // Show target page
   const targetPage = document.getElementById(page + 'Page')
   if (targetPage) {
@@ -3711,10 +3735,10 @@ function navigateTo(page) {
         }
     }
   }
-  
+ 
   // Update active navigation
   updateActiveNavigation(page)
-  
+ 
   // Update browser history
   if (history.pushState) {
     history.pushState({ page: page }, '', `#${page}`)
@@ -3773,7 +3797,7 @@ function initializeScrollAnimations() {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   }
-  
+ 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -3781,7 +3805,7 @@ function initializeScrollAnimations() {
       }
     })
   }, observerOptions)
-  
+ 
   // Observe elements for animation
   document.querySelectorAll('.testimonial-card, .value-card, .team-member, .stat-card').forEach(el => {
     observer.observe(el)
@@ -3792,13 +3816,13 @@ function initializeScrollAnimations() {
 function showLoading(formId) {
   const form = document.getElementById(formId)
   if (!form) return
-  
+ 
   const submitBtn = form.querySelector('button[type="submit"]')
   if (submitBtn) {
     submitBtn.disabled = true
     const originalText = submitBtn.innerHTML
     submitBtn.dataset.originalText = originalText
-    
+   
     // Check if it's newsletter form
     if (formId === 'newsletterForm') {
       submitBtn.innerHTML = '<span class="btn-loader"></span> Abonnement...'
@@ -3811,7 +3835,7 @@ function showLoading(formId) {
 function hideLoading(formId) {
   const form = document.getElementById(formId)
   if (!form) return
-  
+ 
   const submitBtn = form.querySelector('button[type="submit"]')
   if (submitBtn && submitBtn.dataset.originalText) {
     submitBtn.disabled = false
@@ -3824,9 +3848,9 @@ function hideLoading(formId) {
 function shareOnSocial(platform, url = window.location.href) {
   const title = 'Découvrez EduLearn - La plateforme d\'apprentissage en ligne'
   const text = 'Apprenez de nouvelles compétences avec les meilleurs instructeurs du monde'
-  
+ 
   let shareUrl = ''
-  
+ 
   switch(platform) {
     case 'facebook':
       shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
@@ -3841,7 +3865,7 @@ function shareOnSocial(platform, url = window.location.href) {
       shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`
       break
   }
-  
+ 
   if (shareUrl) {
     window.open(shareUrl, '_blank', 'width=600,height=400')
   }
@@ -3851,7 +3875,7 @@ function shareOnSocial(platform, url = window.location.href) {
 function trackEvent(eventName, properties = {}) {
   // This would integrate with analytics services like Google Analytics
   console.log('Event tracked:', eventName, properties)
-  
+ 
   // Example implementation for Google Analytics
   if (typeof gtag !== 'undefined') {
     gtag('event', eventName, properties)
@@ -3868,7 +3892,7 @@ function trackPageView(pageName) {
 // ===== PERFORMANCE OPTIMIZATION =====
 function lazyLoadImages() {
   const images = document.querySelectorAll('img[data-src]')
-  
+ 
   const imageObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -3879,7 +3903,7 @@ function lazyLoadImages() {
       }
     })
   })
-  
+ 
   images.forEach(img => imageObserver.observe(img))
 }
 
@@ -3893,7 +3917,7 @@ function initializeAccessibility() {
       hideSearchSuggestions()
     }
   })
-  
+ 
   // Add focus management
   document.addEventListener('focusin', (e) => {
     if (e.target.closest('.modal')) {
@@ -3907,10 +3931,10 @@ function trapFocus(element) {
   const focusableElements = element.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   )
-  
+ 
   const firstElement = focusableElements[0]
   const lastElement = focusableElements[focusableElements.length - 1]
-  
+ 
   element.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
       if (e.shiftKey) {
@@ -3932,7 +3956,7 @@ function closeAllModals() {
   document.querySelectorAll('.modal').forEach(modal => {
     modal.style.display = 'none'
   })
-  
+ 
   document.querySelectorAll('.dropdown').forEach(dropdown => {
     dropdown.classList.remove('active')
   })
@@ -3947,6 +3971,7 @@ let currentFilters = {
   duration: [],
   level: []
 }
+let currentSort = "popular";
 
 function initializeCoursesPage() {
   setupViewToggle()
@@ -3969,16 +3994,16 @@ function setupViewToggle() {
 
 function setupFilterCounts() {
   // Update filter counts based on available courses
-  updateFilterCount('price', 'free', courses.filter(c => c.price === 0).length)
-  updateFilterCount('price', 'paid', courses.filter(c => c.price > 0).length)
-  updateFilterCount('rating', '4', courses.filter(c => c.rating >= 4).length)
-  updateFilterCount('rating', '3', courses.filter(c => c.rating >= 3).length)
-  updateFilterCount('duration', 'short', courses.filter(c => c.duration < 3).length)
-  updateFilterCount('duration', 'medium', courses.filter(c => c.duration >= 3 && c.duration <= 10).length)
-  updateFilterCount('duration', 'long', courses.filter(c => c.duration > 10).length)
-  updateFilterCount('level', 'beginner', courses.filter(c => c.level === 'beginner').length)
-  updateFilterCount('level', 'intermediate', courses.filter(c => c.level === 'intermediate').length)
-  updateFilterCount('level', 'advanced', courses.filter(c => c.level === 'advanced').length)
+  updateFilterCount('price', 'free', coursesData.filter(c => c.price === 0).length)
+  updateFilterCount('price', 'paid', coursesData.filter(c => c.price > 0).length)
+  updateFilterCount('rating', '4', coursesData.filter(c => c.rating >= 4).length)
+  updateFilterCount('rating', '3', coursesData.filter(c => c.rating >= 3).length)
+  updateFilterCount('duration', 'short', coursesData.filter(c => c.duration < 3).length)
+  updateFilterCount('duration', 'medium', coursesData.filter(c => c.duration >= 3 && c.duration <= 10).length)
+  updateFilterCount('duration', 'long', coursesData.filter(c => c.duration > 10).length)
+  updateFilterCount('level', 'beginner', coursesData.filter(c => c.level === 'beginner').length)
+  updateFilterCount('level', 'intermediate', coursesData.filter(c => c.level === 'intermediate').length)
+  updateFilterCount('level', 'advanced', coursesData.filter(c => c.level === 'advanced').length)
 }
 
 function updateFilterCount(filterType, value, count) {
@@ -3994,7 +4019,7 @@ function updateFilterCount(filterType, value, count) {
 function updateCourseCount() {
   const totalCoursesElement = document.getElementById('totalCourses')
   if (totalCoursesElement) {
-    totalCoursesElement.textContent = courses.length
+    totalCoursesElement.textContent = coursesData.length
   }
 }
 
@@ -4008,7 +4033,7 @@ function setupLoadMore() {
 function loadMoreCourses() {
   // Simulate loading more courses
   showLoading('loadMoreBtn')
-  
+ 
   setTimeout(() => {
     hideLoading('loadMoreBtn')
     showNotification('Plus de cours chargés!', 'success')
@@ -4020,7 +4045,7 @@ function resetFilters() {
   document.querySelectorAll('.filter-checkbox input[type="checkbox"]').forEach(checkbox => {
     checkbox.checked = false
   })
-  
+ 
   // Reset current filters
   currentFilters = {
     category: [],
@@ -4029,7 +4054,7 @@ function resetFilters() {
     duration: [],
     level: []
   }
-  
+ 
   // Re-render courses
   renderCourses()
   updateActiveFilters()
@@ -4038,7 +4063,7 @@ function resetFilters() {
 function updateActiveFilters() {
   const activeFiltersElement = document.getElementById('activeFilters')
   if (!activeFiltersElement) return
-  
+ 
   const activeCount = Object.values(currentFilters).flat().length
   if (activeCount > 0) {
     activeFiltersElement.textContent = `${activeCount} filtre(s) actif(s)`
@@ -4051,16 +4076,16 @@ function updateActiveFilters() {
 function renderCourses() {
   const coursesGrid = document.getElementById('coursesGrid')
   if (!coursesGrid) return
-  
+ 
   const filteredCourses = getFilteredCourses()
-  const sortedCourses = sortCourses(filteredCourses)
-  
+  const sortedCourses = sortCourses(filteredCourses,currentSort)
+ 
   // Update results count
   const resultsCountElement = document.getElementById('resultsCount')
   if (resultsCountElement) {
     resultsCountElement.textContent = `${sortedCourses.length} cours trouvé${sortedCourses.length > 1 ? 's' : ''}`
   }
-  
+ 
   if (currentView === 'grid') {
     coursesGrid.className = 'courses-grid'
     coursesGrid.innerHTML = sortedCourses.map(course => createCourseCard(course)).join('')
@@ -4071,6 +4096,27 @@ function renderCourses() {
 }
 
 function createCourseCard(course) {
+  // Compute total lessons
+  const allLessons = course.sections.flatMap(s => s.lessons);
+  const totalLessons = allLessons.length;
+
+  // Compute total duration in minutes
+  const totalMinutes = allLessons.reduce((sum, lesson) => {
+    const minutes = parseInt(lesson.duration);
+    return sum + (isNaN(minutes) ? 0 : minutes);
+  }, 0);
+
+  // Convert to h/min text
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  const durationText =
+    totalLessons === 0
+      ? "Aucune leçon"
+      : hours > 0
+        ? `${hours}h ${minutes}min`
+        : `${minutes}min`;
+
   return `
     <div class="course-card" onclick="viewCourse(${course.id})">
       <div class="course-image">
@@ -4083,6 +4129,7 @@ function createCourseCard(course) {
           </button>
         </div>
       </div>
+
       <div class="course-content">
         <div class="course-header">
           <h3 class="course-title">${course.title}</h3>
@@ -4092,24 +4139,33 @@ function createCourseCard(course) {
             <span class="rating-count">(${course.students})</span>
           </div>
         </div>
+
         <p class="course-description">${course.description}</p>
+
         <div class="course-meta">
           <div class="course-instructor">
             <span class="instructor-icon">👨‍🏫</span>
             <span class="instructor-name">${course.instructor}</span>
           </div>
+
           <div class="course-duration">
             <span class="duration-icon">⏱️</span>
-            <span class="duration-text">${course.duration}h</span>
+            <span class="duration-text">${durationText}</span>
           </div>
-          <div class="course-level">
-            <span class="level-badge level-${course.level}">${course.level}</span>
+
+          <div class="course-lessons">
+            <span class="lessons-icon">📚</span>
+            <span class="lessons-text">${totalLessons} leçons</span>
           </div>
         </div>
+
         <div class="course-footer">
           <div class="course-price">
-            ${course.price === 0 ? '<span class="price-free">Gratuit</span>' : `<span class="price-paid">${course.price}€</span>`}
+            ${course.price === 0
+              ? '<span class="price-free">Gratuit</span>'
+              : `<span class="price-paid">${course.price}€</span>`}
           </div>
+
           <div class="course-actions">
             <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); addToWishlist(${course.id})">
               <span class="btn-icon">❤️</span>
@@ -4121,46 +4177,88 @@ function createCourseCard(course) {
         </div>
       </div>
     </div>
-  `
+  `;
 }
 
+
+// ===== Helpers to calculate duration and lessons =====
+function getCourseDuration(course) {
+  if (!course.sections) return 0;
+
+  let totalMinutes = 0;
+  course.sections.forEach(section => {
+    section.lessons.forEach(lesson => {
+      const match = lesson.duration.match(/(\d+)\s*min/);
+      if (match) {
+        totalMinutes += parseInt(match[1], 10);
+      }
+    });
+  });
+
+  const hours = totalMinutes / 60;
+  return hours.toFixed(2); // e.g., "1.50"
+}
+
+function getCourseLessons(course) {
+  if (!course.sections) return 0;
+
+  let totalLessons = 0;
+  course.sections.forEach(section => {
+    totalLessons += section.lessons.length;
+  });
+
+  return totalLessons;
+}
+
+// ===== Corrected createCourseListItem =====
 function createCourseListItem(course) {
+  console.log('List view course:', course);
+
   return `
     <div class="course-list-item" onclick="viewCourse(${course.id})">
       <div class="course-list-image">
-        <img src="${course.image}" alt="${course.title}" loading="lazy">
+        <img src="${course.image || 'placeholder.jpg'}" alt="${course.title || 'Cours'}" loading="lazy">
       </div>
+
       <div class="course-list-content">
         <div class="course-list-header">
-          <h3 class="course-list-title">${course.title}</h3>
+          <h3 class="course-list-title">${course.title || 'Titre indisponible'}</h3>
           <div class="course-list-rating">
-            <span class="stars">${'⭐'.repeat(Math.floor(course.rating))}</span>
-            <span class="rating-value">${course.rating}</span>
-            <span class="rating-count">(${course.students})</span>
+            <span class="stars">${'⭐'.repeat(Math.floor(course.rating || 0))}</span>
+            <span class="rating-value">${course.rating ?? 'N/A'}</span>
+            <span class="rating-count">(${course.students ?? 0})</span>
           </div>
         </div>
-        <p class="course-list-description">${course.description}</p>
+
+        <p class="course-list-description">${course.description || 'Description manquante'}</p>
+
         <div class="course-list-meta">
           <div class="course-list-instructor">
             <span class="instructor-icon">👨‍🏫</span>
-            <span class="instructor-name">${course.instructor}</span>
+            <span class="instructor-name">${course.instructor || 'Instructeur inconnu'}</span>
           </div>
+
           <div class="course-list-duration">
             <span class="duration-icon">⏱️</span>
-            <span class="duration-text">${course.duration}h</span>
+            <span class="duration-text">${getCourseDuration(course)} h</span>
           </div>
+
           <div class="course-list-level">
-            <span class="level-badge level-${course.level}">${course.level}</span>
+            <span class="level-badge">${getCourseLessons(course)} lessons</span>
           </div>
+
+          ${course.category ? `
           <div class="course-list-category">
             <span class="category-badge">${course.category}</span>
-          </div>
+          </div>` : ''}
         </div>
       </div>
+
       <div class="course-list-actions">
         <div class="course-list-price">
-          ${course.price === 0 ? '<span class="price-free">Gratuit</span>' : `<span class="price-paid">${course.price}€</span>`}
+          ${course.price === 0 ? '<span class="price-free">Gratuit</span>' : `<span class="price-paid">${course.price ?? 'N/A'}€</span>`}
         </div>
+
         <div class="course-list-buttons">
           <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); addToWishlist(${course.id})">
             <span class="btn-icon">❤️</span>
@@ -4172,93 +4270,117 @@ function createCourseListItem(course) {
         </div>
       </div>
     </div>
-  `
+  `;
 }
 
+
 function getFilteredCourses() {
-  return courses.filter(course => {
+  // Ensure currentFilters is initialized
+  const filters = currentFilters || { category: [], price: [], rating: [], duration: [], level: [] }
+
+  // Check if any filter is active
+  const anyFilterActive = filters.category.length > 0
+    || filters.price.length > 0
+    || filters.rating.length > 0
+    || filters.duration.length > 0
+    || filters.level.length > 0
+
+  if (!anyFilterActive) return [...coursesData] // no filters → return all courses
+
+  // Apply filters normally
+  return coursesData.filter(course => {
     // Category filter
-    if (currentFilters.category.length > 0 && !currentFilters.category.includes(course.category)) {
-      return false
-    }
-    
+    if (filters.category.length > 0 && !filters.category.includes(course.category)) return false
+
     // Price filter
-    if (currentFilters.price.length > 0) {
+    if (filters.price.length > 0) {
       const isFree = course.price === 0
       const isPaid = course.price > 0
-      if (currentFilters.price.includes('free') && !isFree) return false
-      if (currentFilters.price.includes('paid') && !isPaid) return false
+      if (filters.price.includes('free') && !isFree) return false
+      if (filters.price.includes('paid') && !isPaid) return false
     }
-    
+
     // Rating filter
-    if (currentFilters.rating.length > 0) {
+    if (filters.rating.length > 0) {
       const hasRating4 = course.rating >= 4
       const hasRating3 = course.rating >= 3
-      if (currentFilters.rating.includes('4') && !hasRating4) return false
-      if (currentFilters.rating.includes('3') && !hasRating3) return false
+      if (filters.rating.includes('4') && !hasRating4) return false
+      if (filters.rating.includes('3') && !hasRating3) return false
     }
-    
+
     // Duration filter
-    if (currentFilters.duration.length > 0) {
+    if (filters.duration.length > 0) {
       const isShort = course.duration < 3
       const isMedium = course.duration >= 3 && course.duration <= 10
       const isLong = course.duration > 10
-      if (currentFilters.duration.includes('short') && !isShort) return false
-      if (currentFilters.duration.includes('medium') && !isMedium) return false
-      if (currentFilters.duration.includes('long') && !isLong) return false
+      if (filters.duration.includes('short') && !isShort) return false
+      if (filters.duration.includes('medium') && !isMedium) return false
+      if (filters.duration.includes('long') && !isLong) return false
     }
-    
+
     // Level filter
-    if (currentFilters.level.length > 0 && !currentFilters.level.includes(course.level)) {
-      return false
-    }
-    
+    if (filters.level.length > 0 && !filters.level.includes(course.level)) return false
+
     return true
   })
 }
 
-function sortCourses(courses) {
-  const sortSelect = document.getElementById('sortSelect')
-  const sortValue = sortSelect ? sortSelect.value : 'popular'
-  
-  switch (sortValue) {
-    case 'newest':
-      return courses.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
-    case 'rating':
-      return courses.sort((a, b) => b.rating - a.rating)
-    case 'price-low':
-      return courses.sort((a, b) => a.price - b.price)
-    case 'price-high':
-      return courses.sort((a, b) => b.price - a.price)
-    case 'duration':
-      return courses.sort((a, b) => a.duration - b.duration)
-    case 'popular':
+function sortCourses(courses, sortType) {
+  if (!Array.isArray(courses)) return courses;
+
+  let sorted = [...courses];
+
+  switch (sortType) {
+    case "newest":
+      sorted.sort((a, b) => (b.dateAdded ? new Date(b.dateAdded) : 0) - (a.dateAdded ? new Date(a.dateAdded) : 0));
+      break;
+
+    case "rating":
+      sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      break;
+
+    case "price-low":
+      sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
+      break;
+
+    case "price-high":
+      sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
+      break;
+
+    case "duration":
+      sorted.sort((a, b) => getCourseDuration(a) - getCourseDuration(b));
+      break;
+
+    case "popular":
     default:
-      return courses.sort((a, b) => b.students - a.students)
+      sorted.sort((a, b) => (b.students || 0) - (a.students || 0));
   }
+
+  return sorted;
 }
+
 
 // ===== NEWSLETTER FUNCTIONALITY =====
 function initializeNewsletter() {
   const newsletterForm = document.getElementById('newsletterForm')
   if (!newsletterForm) return
-  
+ 
   newsletterForm.addEventListener('submit', handleNewsletterSubmit)
 }
 
 function handleNewsletterSubmit(e) {
   e.preventDefault()
-  
+ 
   const email = document.getElementById('newsletterEmail').value
-  
+ 
   if (!email) {
     showNotification('Veuillez entrer une adresse email valide', 'error')
     return
   }
-  
+ 
   // Simulate subscription
   showLoading('newsletterForm')
-  
+ 
   setTimeout(() => {
     hideLoading('newsletterForm')
     showNotification('Merci pour votre abonnement ! Un email de confirmation a été envoyé.', 'success')
@@ -4305,16 +4427,16 @@ function setLanguage(lang) {
   currentLanguage = lang
   localStorage.setItem("language", lang)
   updateAllTranslations()
-  
+ 
   // Update language selector
   const languageSelect = document.getElementById("languageSelect")
   if (languageSelect) {
     languageSelect.value = lang
   }
-  
+ 
   // Update document language attribute
   document.documentElement.lang = lang
-  
+ 
   // Show notification
   showNotification(`Language changed to ${lang === 'en' ? 'English' : 'Français'}`, 'success')
 }
@@ -4344,11 +4466,27 @@ function testWishlist() {
   console.log("Testing wishlist functionality...")
   console.log("Current wishlist:", wishlist)
   console.log("Courses data:", coursesData)
-  
+ 
   // Add first course to wishlist for testing
   if (coursesData.length > 0) {
     addToWishlist(coursesData[0].id)
   }
+}
+// Function to continue course from dashboard
+function continueCourse(courseId) {
+  console.log("Tentative d'accès au cours ID:", courseId);
+  
+  const course = coursesData.find(c => c.id === courseId);
+  
+  if (!course) {
+    console.error("Cours non trouvé avec l'ID:", courseId);
+    alert("Désolé, ce cours n'est pas disponible.");
+    return;
+  }
+  
+  console.log("Cours trouvé:", course.title);
+  currentCourse = course;
+  showCourseDetail(courseId);
 }
 
 

@@ -251,6 +251,109 @@ const categories = [
   { id: 5, name: "Mobile", icon: "📱" },
   { id: 6, name: "Data Science", icon: "📊" },
 ]
+const quizzesData = {
+    1: [ // Cours JavaScript Avancé
+        {
+            question: "Quelle est la différence entre var et let ?",
+            options: [
+                "Var a un scope de fonction, let a un scope de bloc",
+                "Var est constant, let est variable",
+                "Var et let sont identiques",
+                "Let ne peut pas être réassigné"
+            ],
+            answer: 0
+        },
+        {
+            question: "Que fait async/await ?",
+            options: [
+                "Gérer les Promises de façon synchrone",
+                "Créer des variables globales",
+                "Déclarer des fonctions normales",
+                "Rien du tout"
+            ],
+            answer: 0
+        },
+        {
+            question: "Quel type de fonction crée un closure ?",
+            options: [
+                "Une fonction imbriquée qui accède aux variables externes",
+                "Une fonction anonyme",
+                "Une fonction fléchée uniquement",
+                "Une fonction asynchrone"
+            ],
+            answer: 0
+        },
+        {
+            question: "Comment créer un tableau en JavaScript ?",
+            options: [
+                "var arr = []",
+                "var arr = {}",
+                "var arr = ()",
+                "var arr = null"
+            ],
+            answer: 0
+        },
+        {
+            question: "Que retourne typeof null ?",
+            options: [
+                "'null'",
+                "'object'",
+                "'undefined'",
+                "'number'"
+            ],
+            answer: 1
+        }
+    ]
+};
+
+
+function renderQuiz() {
+    const courseId = parseInt(localStorage.getItem("currentCourseId"));
+    const quizContainer = document.getElementById("quizContainer");
+    const quizResult = document.getElementById("quizResult");
+    quizResult.textContent = "";
+    quizContainer.innerHTML = "";
+
+    const quiz = quizzesData[courseId];
+    if (!quiz || quiz.length === 0) {
+        quizContainer.innerHTML = "<p>Aucun quiz disponible.</p>";
+        return;
+    }
+
+    quiz.forEach((q, i) => {
+        const qDiv = document.createElement("div");
+        qDiv.className = "quiz-question";
+        qDiv.innerHTML = `<p>${i+1}. ${q.question}</p>`;
+        q.options.forEach((opt, j) => {
+            const label = document.createElement("label");
+            label.style.display = "block";
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(opt));
+            qDiv.appendChild(label);
+        });
+        quizContainer.appendChild(qDiv);
+    });
+
+    document.getElementById("submitQuizBtn").onclick = () => {
+        let score = 0;
+        quiz.forEach((q, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && parseInt(selected.value) === q.answer) score++;
+        });
+        quizResult.textContent = `Votre score : ${score} / ${quiz.length}`;
+    };
+}
+
+// Appeler après le rendu du cours
+document.addEventListener("DOMContentLoaded", () => {
+    renderCourseDetail();
+    renderQuiz();
+});
+
 
 // ===== State Management =====
 let currentPage = "home"
@@ -909,9 +1012,17 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded")
   console.log(coursesData); // check if coursesData is populated
   renderCourses();           // now render courses
-  // Show progress bar on initial load
   simulateProgress()
- 
+
+  loadCart()         // populate cart from localStorage
+  updateCartCount()  // update cart badge
+  // Navigate to the correct page based on hash
+  initializeFromHash()
+  renderCartPage()
+  loadWishlist()          // <-- add this
+  updateWishlistCount()   // <-- update badge
+  renderWishlist()
+
   currentLanguage = localStorage.getItem("language") || "fr"
   console.log("Current language:", currentLanguage)
   updateAllTranslations()
@@ -922,6 +1033,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme()
   checkAuthStatus()
 })
+
 
 function initializeApp() {
   setupEventListeners()
@@ -1140,53 +1252,6 @@ function setupEventListeners() {
 
 }
 
-// ===== Navigation =====
-function navigateTo(page) {
-  // Show progress bar
-  simulateProgress()
- 
-  // Hide all pages
-  document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"))
-
-  // Show selected page
-  const pageElement = document.getElementById(page + "Page")
-  if (pageElement) {
-    pageElement.classList.add("active")
-  }
-
-  // Update active nav link (only for main navigation pages)
-  if (['home', 'courses', 'dashboard'].includes(page)) {
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      link.classList.remove("active")
-      if (link.dataset.page === page) {
-        link.classList.add("active")
-      }
-    })
-  }
-
-  // Close mobile menu
-  document.getElementById("navMobile").classList.remove("active")
-
-  // Render page content
-  switch (page) {
-    case "home":
-      renderFeaturedCourses()
-      break
-    case "courses":
-      renderCoursesPage()
-      break
-    case "dashboard":
-      renderDashboard()
-      break
-    case "cart":
-      renderCartPage()
-      updateCartCount()
-      break
-  }
-
-  currentPage = page
-  updateProgressBar()
-}
 
 // ===== Course Rendering =====
 function renderFeaturedCourses() {
@@ -1281,70 +1346,6 @@ function renderCoursesGrid() {
   attachCourseCardListeners()
 }
 
-function createCourseCard(course) {
-  const priceText = course.price === 0 ? t("course-free") : `${course.price}€`;
-  const priceClass = course.price === 0 ? "free" : "";
-
-  // Vérifier si le cours est inscrit et calculer la progression
-  const isEnrolled = enrolledCourses.some(c => c.id === course.id);
-  const progressPercentage = isEnrolled ? calculateCourseProgress(course.id) : 0;
-
-  // Créer la barre de progression si le cours est inscrit
-  const progressBar = isEnrolled ? `
-    <div class="course-progress">
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" style="width: ${progressPercentage}%"></div>
-      </div>
-      <span class="progress-text">${progressPercentage}%</span>
-    </div>
-  ` : '';
-
-  // Afficher la vidéo seulement si le cours est acheté ou gratuit
-  const videoContent = (isEnrolled || course.price === 0) ?
-    `<iframe src="${course.video}" frameborder="0" allowfullscreen></iframe>` :
-    `<div class="video-locked">
-      <div class="lock-icon">🔒</div>
-      <p>Achetez le cours pour voir la vidéo</p>
-    </div>`;
-
-  // Créer le bouton ou l'indicateur selon l'état d'achat
-  const buttonOrStatus = isEnrolled ?
-    `<span class="course-purchased">✅ Acheté</span>` :
-    `<div class="course-card-actions">
-      <button class="course-card-btn btn-outline" onclick="event.stopPropagation(); addToWishlist(${course.id})" title="Ajouter aux favoris">
-        <span class="btn-icon">❤️</span>
-      </button>
-      <button class="course-card-btn btn-primary" onclick="event.stopPropagation(); addToCart(${course.id})">Ajouter au panier</button>
-    </div>`;
-
-  // Calculate duration and lessons
-  const duration = getCourseDuration(course);
-  const lessons = getCourseLessons(course);
-
-  return `
-    <div class="course-card" data-course-id="${course.id}">
-        <div class="course-card-video">
-            ${videoContent}
-        </div>
-        <div class="course-card-content">
-            <span class="course-card-category">${course.category || 'Inconnu'}</span>
-            <h3 class="course-card-title">${course.title || 'Titre indisponible'}</h3>
-            <p class="course-card-instructor">${course.instructor || 'Instructeur inconnu'}</p>
-            <div class="course-card-meta">
-                <span class="course-card-rating">⭐ ${course.rating ?? 'N/A'}</span>
-                <span class="course-card-students">${(course.students ?? 0).toLocaleString()} ${t("course-students")}</span>
-                <span class="course-card-duration">⏱️ ${duration} h</span>
-                <span class="course-card-lessons">📚 ${lessons} lessons</span>
-            </div>
-            ${progressBar}
-            <div class="course-card-footer">
-                <span class="course-card-price ${priceClass}">${priceText}</span>
-                ${buttonOrStatus}
-            </div>
-        </div>
-    </div>
-  `;
-}
 
 function attachCourseCardListeners() {
   document.querySelectorAll(".course-card").forEach((card) => {
@@ -1625,6 +1626,8 @@ function renderQA() {
 
 // ===== Cart Management =====
 function addToCart(courseId) {
+  courseId = Number(courseId)
+
   const course = coursesData.find((c) => c.id == courseId)
   if (!course) {
     console.error("Course not found:", courseId)
@@ -1647,34 +1650,51 @@ function addToCart(courseId) {
   }
 
   // Ajouter au panier
-  cart.push({
-    id: course.id,
+ cart.push({
+    id: courseId,
     title: course.title,
+    description: course.description,
     price: course.price,
     image: course.image,
     instructor: course.instructor,
     category: course.category,
     rating: course.rating,
     students: course.students
-  })
+})
+
  
   saveCart()
   updateCartCount()
- 
-  // Notification de succès
+
   showNotification(`"${course.title}" ajouté au panier!`, 'success')
- 
-  // Mettre à jour l'affichage des cartes de cours
+
   renderCoursesGrid()
   renderFeaturedCourses()
+  renderCartPage();
 }
 
+
 function removeFromCart(courseId) {
-  cart = cart.filter((item) => item.id !== courseId)
+  // Remove item from cart in memory
+  cart = cart.filter(item => item.id !== courseId)
+ 
+  // Save updated cart to localStorage
   saveCart()
+ 
+  // Update cart badge
   updateCartCount()
+ 
+  // Refresh the cart page list
   renderCartPage()
+ 
+  // Refresh course grid and featured courses
+  renderCoursesGrid()
+  renderFeaturedCourses()
+ 
+  // Optional: show notification
+  showNotification("Cours retiré du panier", "info")
 }
+
 
 function loadCart() {
   const savedCart = localStorage.getItem("cart")
@@ -1713,33 +1733,28 @@ function renderCartPage() {
   cartItems.style.display = "flex"
   if (cartEmpty) cartEmpty.style.display = "none"
 
-  cartItems.innerHTML = cart
-    .map(
-      (item) => `
-        <div class="cart-item" data-course-id="${item.id}">
-            <div class="cart-item-image">
-                <img src="${item.image}" alt="${item.title}" class="cart-item-img">
-            </div>
-            <div class="cart-item-details">
-                <h3 class="cart-item-title">${item.title}</h3>
-                <p class="cart-item-instructor">Par ${item.instructor}</p>
-                <div class="cart-item-meta">
-                    <span class="cart-item-category">${item.category}</span>
-                    <span class="cart-item-rating">⭐ ${item.rating}</span>
-                    <span class="cart-item-students">👥 ${item.students.toLocaleString()}</span>
-                </div>
-                <div class="cart-item-description">${item.description}</div>
-                <div class="cart-item-price">${item.price === 0 ? "Gratuit" : item.price + "€"}</div>
-            </div>
-            <div class="cart-item-actions">
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Retirer du panier">
-                    ✕
-                </button>
-            </div>
+cartItems.innerHTML = cart
+  .map(item => `
+    <div class="cart-item" data-course-id="${item.id}">
+        <div class="cart-item-image">
+            <img src="${item.image}" alt="${item.title}" class="cart-item-img">
         </div>
-    `,
-    )
-    .join("")
+        <div class="cart-item-details">
+            <h3 class="cart-item-title">${item.title}</h3>
+            <p class="cart-item-instructor">Par ${item.instructor}</p>
+            <div class="cart-item-meta">
+                <span class="cart-item-category">${item.category}</span>
+                <span class="cart-item-rating">⭐ ${item.rating}</span>
+                <span class="cart-item-students">👥 ${item.students.toLocaleString()}</span>
+            </div>
+            <div class="cart-item-price">${item.price === 0 ? "Gratuit" : item.price + "€"}</div>
+        </div>
+        <div class="cart-item-actions">
+            <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Retirer du panier">✕</button>
+        </div>
+    </div>
+  `).join("")
+
 
   updateCartSummary()
 }
@@ -1827,6 +1842,7 @@ function addToWishlist(courseId) {
     console.log("Course already in wishlist")
     showNotification("Ce cours est déjà dans vos favoris", 'info')
   }
+  renderWishlist()
 }
 
 function removeFromWishlist(courseId) {
@@ -1841,6 +1857,7 @@ function removeFromWishlist(courseId) {
     // Update the button to show it's been removed
     updateWishlistButton(courseId, false)
   }
+  renderWishlist()
 }
 
 function updateWishlistButton(courseId, isInWishlist) {
@@ -1932,6 +1949,20 @@ function updateWishlistCount() {
   if (wishlistCountElement) wishlistCountElement.textContent = count
   if (dropdownWishlistCount) dropdownWishlistCount.textContent = count
 }
+function loadWishlist() {
+  const savedWishlist = localStorage.getItem("wishlist")
+  if (savedWishlist) {
+    wishlist = JSON.parse(savedWishlist)
+  }
+  updateWishlistCount()
+}
+
+// Ajouter un cours
+function addToCart(courseId) {
+  cart.push({ id: courseId })
+  localStorage.setItem("cart", JSON.stringify(cart))
+  renderDashboard() // Met à jour le dashboard
+}
 
 // ===== Dashboard =====
 function renderDashboard() {
@@ -1971,7 +2002,22 @@ function renderDashboard() {
       .join("")
     attachCourseCardListeners()
   }
+  // Panier
+const cartGrid = document.getElementById("dashboardCartGrid")
+if (!cart || cart.length === 0) {
+  cartGrid.innerHTML = "<p>Votre panier est vide</p>"
+} else {
+  cartGrid.innerHTML = cart
+    .map((course) => {
+      const fullCourse = coursesData.find((c) => c.id === course.id)
+      return createCourseCard(fullCourse)
+    })
+    .join("")
+  attachCourseCardListeners()
 }
+}
+
+
 
 // ===== Categories =====
 function renderCategories() {
@@ -3397,7 +3443,7 @@ function renderQuestions() {
   `).join('')
 }
 
-// ===== COURSE PROGRESS SYSTEM =====
+// ===== DATA DES COURS EN COURS =====
 let userCourseProgress = [
   {
     courseId: 1,
@@ -3415,51 +3461,149 @@ let userCourseProgress = [
   }
 ]
 
-function initializeCourseProgress() {
-  renderCourseProgress()
- 
-  // Add click handlers for continue buttons
-  document.addEventListener('click', (e) => {
-    if (e.target.textContent === 'Continuer') {
-      const progressItem = e.target.closest('.progress-item')
-      if (progressItem) {
-        const courseTitle = progressItem.querySelector('h4').textContent
-        navigateToCourse(courseTitle)
-      }
-    }
-  })
-}
+// ===== NAVIGATION SPA =====
+function navigateTo(pageId) {
+  // Masquer toutes les pages
+  document.querySelectorAll(".page").forEach(page => page.style.display = "none");
 
-function renderCourseProgress() {
-  const progressList = document.getElementById('courseProgressList')
-  if (!progressList) return
- 
-  progressList.innerHTML = userCourseProgress.map(course => `
-    <div class="progress-item">
-      <div class="course-thumbnail">${course.thumbnail}</div>
-      <div class="progress-content">
-        <h4>${course.courseTitle}</h4>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${course.progress}%"></div>
-        </div>
-        <div class="progress-info">
-          <span class="progress-text">${course.progress}% complété</span>
-          <span class="progress-time">${course.timeRemaining}</span>
-        </div>
-      </div>
-      <button class="btn btn-primary btn-sm">Continuer</button>
-    </div>
-  `).join('')
-}
+  // Afficher la page demandée
+  const page = document.getElementById(pageId);
+  if (page) page.style.display = "block";
 
-function navigateToCourse(courseTitle) {
-  // Find course by title
-  const course = coursesData.find(c => c.title === courseTitle)
-  if (course) {
-    window.currentCourseId = course.id
-    navigateTo('course-detail')
+  // Actions spécifiques par page
+  if (pageId === "dashboard") {
+    renderDashboard();
+  }
+
+  if (pageId === "courseDetailPage") {
+    const lastCourse = localStorage.getItem("currentCourseId");
+    if (lastCourse) renderCourseDetail(parseInt(lastCourse));
   }
 }
+
+// ===== RENDU DU DASHBOARD =====
+function renderDashboard() {
+  const courseProgressList = document.getElementById("courseProgressList");
+
+  if (userCourseProgress.length === 0) {
+    courseProgressList.innerHTML = "<p>Aucun cours en cours</p>";
+    return;
+  }
+
+  courseProgressList.innerHTML = userCourseProgress
+    .map((item) => {
+      const course = coursesData.find(c => c.id === item.courseId);
+      if (!course) return '';
+
+      return `
+        <div class="progress-item">
+          <div class="course-thumbnail">${item.thumbnail || "📘"}</div>
+          <div class="progress-content">
+            <h4>${course.title}</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${item.progress}%"></div>
+            </div>
+            <div class="progress-info">
+              <span class="progress-text">${item.progress}% complété</span>
+              <span class="progress-time">${item.timeRemaining}</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="continueCourse(${course.id})">Continuer</button>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+// ===== BOUTON CONTINUER =====
+function continueCourse(courseId) {
+  // Sauvegarder l'ID du cours sélectionné
+  localStorage.setItem("currentCourseId", courseId);
+
+  // Afficher la page détail
+  navigateTo("courseDetail");
+}
+function openCourseDetail(courseId) {
+    localStorage.setItem("currentCourseId", courseId);
+    navigateTo('courseDetailPage'); // ou ta fonction qui affiche la page
+}
+
+
+// ===== RENDU DE LA PAGE DETAIL DU COURS =====
+function renderCourseDetail(courseId) {
+  const course = coursesData.find(c => c.id === courseId);
+  if (!course) {
+    console.error("Cours introuvable : " + courseId);
+    return;
+  }
+
+  // Remplir les champs de la page détail
+  document.getElementById("courseTitle").textContent = course.title;
+  document.getElementById("courseTitleBreadcrumb").textContent = course.title;
+  document.getElementById("courseCategory").textContent = course.category;
+  document.getElementById("courseCategoryBadge").textContent = course.category;
+  document.getElementById("courseLevelBadge").textContent = course.level;
+  document.getElementById("courseRating").textContent = course.rating;
+  document.getElementById("courseStudents").textContent = course.students;
+  document.getElementById("courseDuration").textContent = course.duration;
+  document.getElementById("courseLastUpdated").textContent = course.lastUpdated;
+  document.getElementById("courseDescription").textContent = course.description;
+  document.getElementById("coursePrice").textContent = course.price;
+  document.getElementById("courseOriginalPrice").textContent = course.originalPrice || "";
+  document.getElementById("courseDiscount").textContent = course.discount || "";
+
+  if (course.video) {
+    document.getElementById("courseVideo").src = course.video;
+  }
+}
+
+
+
+// function initializeCourseProgress() {
+//   renderCourseProgress()
+ 
+//   // Add click handlers for continue buttons
+//   document.addEventListener('click', (e) => {
+//     if (e.target.textContent === 'Continuer') {
+//       const progressItem = e.target.closest('.progress-item')
+//       if (progressItem) {
+//         const courseTitle = progressItem.querySelector('h4').textContent
+//         navigateToCourse(courseTitle)
+//       }
+//     }
+//   })
+// }
+
+// function renderCourseProgress() {
+//   const progressList = document.getElementById('courseProgressList')
+//   if (!progressList) return
+ 
+//   progressList.innerHTML = userCourseProgress.map(course => `
+//     <div class="progress-item">
+//       <div class="course-thumbnail">${course.thumbnail}</div>
+//       <div class="progress-content">
+//         <h4>${course.courseTitle}</h4>
+//         <div class="progress-bar">
+//           <div class="progress-fill" style="width: ${course.progress}%"></div>
+//         </div>
+//         <div class="progress-info">
+//           <span class="progress-text">${course.progress}% complété</span>
+//           <span class="progress-time">${course.timeRemaining}</span>
+//         </div>
+//       </div>
+//       <button class="btn btn-primary btn-sm">Continuer</button>
+//     </div>
+//   `).join('')
+// }
+
+// function navigateToCourse(courseTitle) {
+//   // Find course by title
+//   const course = coursesData.find(c => c.title === courseTitle)
+//   if (course) {
+//     window.currentCourseId = course.id
+//     navigateTo('course-detail')
+//   }
+// }
 
 // ===== ACTIVITY SYSTEM =====
 let activities = [
@@ -4095,6 +4239,72 @@ function renderCourses() {
   }
 }
 
+function viewCourse(courseId) {
+  courseId = Number(courseId)
+  const course = coursesData.find(c => c.id === courseId)
+  if (!course) return
+
+  currentCourse = course // store globally if needed
+
+  // ==== Fill main info ====
+  const titleEl = document.getElementById("courseTitle")
+  const descEl = document.getElementById("courseDescription")
+  const categoryBadge = document.getElementById("courseCategoryBadge")
+  const levelBadge = document.getElementById("courseLevelBadge")
+  const ratingEl = document.getElementById("courseRating")
+  const studentsEl = document.getElementById("courseStudents")
+  const durationEl = document.getElementById("courseDuration")
+  const lastUpdatedEl = document.getElementById("courseLastUpdated")
+  const priceEl = document.getElementById("coursePrice")
+  const originalPriceEl = document.getElementById("courseOriginalPrice")
+  const discountEl = document.getElementById("courseDiscount")
+
+  if (titleEl) titleEl.textContent = course.title
+  if (descEl) descEl.textContent = course.description
+  if (categoryBadge) categoryBadge.textContent = course.category
+  if (levelBadge) levelBadge.textContent = course.level
+  if (ratingEl) ratingEl.textContent = course.rating
+  if (studentsEl) studentsEl.textContent = course.students.toLocaleString()
+
+  // Duration
+  const allLessons = course.sections.flatMap(s => s.lessons)
+  const totalMinutes = allLessons.reduce((sum, lesson) => sum + (parseInt(lesson.duration) || 0), 0)
+  const hours = Math.floor(totalMinutes / 60)
+  const minutes = totalMinutes % 60
+  if (durationEl) durationEl.textContent = hours > 0 ? `${hours}h ${minutes}min` : `${minutes}min`
+
+  // Last updated
+  if (lastUpdatedEl) lastUpdatedEl.textContent = course.lastUpdated || "—"
+
+  // Price
+  if (priceEl) priceEl.textContent = course.price === 0 ? "Gratuit" : `${course.price}€`
+  if (originalPriceEl) originalPriceEl.textContent = course.originalPrice ? `${course.originalPrice}€` : ""
+  if (discountEl) discountEl.textContent = course.discount ? `-${course.discount}%` : ""
+
+  // Bestseller badge (show only if true)
+  const bestsellerBadge = document.querySelector(".course-badge.bestseller")
+  if (bestsellerBadge) {
+    bestsellerBadge.style.display = course.bestseller ? "inline-block" : "none"
+  }
+
+  // ==== Add to Cart / Wishlist buttons ====
+  const addToCartBtn = document.getElementById("addToCartBtn")
+  const addToWishlistBtn = document.getElementById("addToWishlistBtn")
+
+  if (addToCartBtn) {
+    addToCartBtn.onclick = () => addToCart(courseId)
+  }
+
+  if (addToWishlistBtn) {
+    addToWishlistBtn.onclick = () => addToWishlist(courseId)
+  }
+
+  // Navigate to course detail page
+  navigateTo("courseDetail")
+}
+
+
+
 function createCourseCard(course) {
   // Compute total lessons
   const allLessons = course.sections.flatMap(s => s.lessons);
@@ -4472,21 +4682,3 @@ function testWishlist() {
     addToWishlist(coursesData[0].id)
   }
 }
-// Function to continue course from dashboard
-function continueCourse(courseId) {
-  console.log("Tentative d'accès au cours ID:", courseId);
-  
-  const course = coursesData.find(c => c.id === courseId);
-  
-  if (!course) {
-    console.error("Cours non trouvé avec l'ID:", courseId);
-    alert("Désolé, ce cours n'est pas disponible.");
-    return;
-  }
-  
-  console.log("Cours trouvé:", course.title);
-  currentCourse = course;
-  showCourseDetail(courseId);
-}
-
-
